@@ -30,3 +30,24 @@ export const getWeatherInfoName = (cityName, lang = "en", unit = "celsius") => {
     .catch((err) => console.log(err));
   return result;
 };
+
+export const getWeatherInfoHourly = (lat, lon) => {
+  const result = axios
+    .get(
+      `https://api.openweathermap.org/data/2.5/onecall?&lat=${lat}&lon=${lon}&exclude=current,minutely,daily,alerts&appid=1fa9ff4126d95b8db54f3897a208e91c&units=metric`,
+      { headers: { accept: "Application/json" } }
+    )
+    .catch((err) => console.log(err));
+  return result;
+};
+
+export const getWeatherInfoDaily = (lat, lon) => {
+  const result = axios
+    .get(
+      `https://api.openweathermap.org/data/2.5/onecall?&lat=${lat}&lon=${lon}&exclude=current,minutely,hourly,alerts&appid=1fa9ff4126d95b8db54f3897a208e91c&units=metric`,
+      { headers: { accept: "Application/json" } }
+    )
+    .then((res) => res.data)
+    .catch((err) => console.log(err));
+  return result;
+};
