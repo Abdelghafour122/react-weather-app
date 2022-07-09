@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { getWeatherInfo } from "../Api/requests";
+import { getWeatherInfoCreds, getWeatherInfoName } from "../Api/requests";
 
 const Random = () => {
   const [weather, setWeather] = useState({});
-  const val = 0;
   const getInfo = async () => {
-    const result = await getWeatherInfo(20, 29);
+    // const result = await getWeatherInfoCreds(20, 29, "de", "fahrenheit");
+    const result = await getWeatherInfoName("Vienna", "de", "fahrenheit");
     setWeather(result);
   };
 
   useEffect(() => {
     getInfo();
-  }, [val]);
+    // console.log(weather);
+  }, []);
 
   console.log("first");
   return <pre>{JSON.stringify(weather, null, 2)}</pre>;
