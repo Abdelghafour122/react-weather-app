@@ -1,3 +1,11 @@
 Github-pages is installed
 Axios is installed
 React-router is installed
+
+i18-next, mui mui-icons are installed
+
+10/7:
+Make the navbar [Logo, input-field, theme-switcher & language-switch]
+Make dark/light themes [Files ready in Github]
+Make The input field (just begin, finish later)
+Find a way to write responsive styles
