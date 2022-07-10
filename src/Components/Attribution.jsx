@@ -1,13 +1,24 @@
-import { Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import React from "react";
 
 const Attribution = () => {
   return (
     <Box>
-      <Typography variant="p" component="p" fontFamily="ROBOTO">
-        Coded with <FavoriteIcon color="error" /> By
+      <Typography
+        variant="p"
+        component="p"
+        fontFamily="Roboto"
+        color="text.primary"
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        Coded with &nbsp; <FavoriteIcon color="error" />
+        &nbsp; By &nbsp;
         <Typography
           variant="a"
           component="a"

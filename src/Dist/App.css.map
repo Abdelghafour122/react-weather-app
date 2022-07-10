@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"App.css"}
+{"version":3,"sources":["../Scss/utils/_Globals.scss","App.css"],"names":[],"mappings":"AAAA;EACE,SAAA;ACCF","file":"App.css"}
