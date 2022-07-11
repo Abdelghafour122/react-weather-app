@@ -17,17 +17,17 @@ const lightTheme = createTheme({
       fontSize: "18px",
     },
     h1: {
-      fontFamily: "PT serif",
+      fontFamily: "Playfair Display",
       fontSize: "50px",
     },
     h2: {
-      fontFamily: "PT serif",
+      fontFamily: "Playfair Display",
     },
     h3: {
-      fontFamily: "PT serif",
+      fontFamily: "Playfair Display",
     },
     h4: {
-      fontFamily: "PT serif",
+      fontFamily: "Playfair Display",
     },
     a: {
       fontFamily: "Roboto",

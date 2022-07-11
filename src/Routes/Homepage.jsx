@@ -15,7 +15,7 @@ const Homepage = () => {
         color="text.primary"
         component="h1"
         variant="h1"
-        fontFamily="PT serif"
+        fontFamily="Playfair"
         fontWeight="700"
       >
         Welcome to W-Weather

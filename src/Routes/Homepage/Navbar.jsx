@@ -25,7 +25,7 @@ const Navbar = () => {
         variant="p"
         color="text.primary"
         fontWeight="700"
-        fontFamily="PT serif"
+        fontFamily="Playfair"
       >
         W-Weather
       </Typography>
