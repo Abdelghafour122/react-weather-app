@@ -32,7 +32,12 @@ function App() {
 
   return (
     <ThemeProvider theme={customTheme}>
-      <Box component="main" className="App" bgcolor="custom.firstBgColor">
+      <Box
+        component="main"
+        className="App"
+        bgcolor="custom.firstBgColor"
+        sx={{ minHeight: "100vh" }}
+      >
         <Homepage handleChangeTheme={handleChangeTheme} />
         <Random />
         {/* <Attribution /> */}

@@ -57,7 +57,7 @@ const ThemeSwitch = ({ handleChangeTheme }) => {
             <ToggleButton
               key={ind}
               value={theme.name}
-              sx={{ flex: 1 }}
+              sx={{ flex: 1, gap: "5px" }}
               aria-label={`${theme.name}-mode`}
             >
               {theme.name}

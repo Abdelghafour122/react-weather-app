@@ -45,7 +45,7 @@ const SettingsDrawer = ({ openDrawer, setOpenDrawer, handleChangeTheme }) => {
                 setOpenDrawer(false);
               }}
             >
-              <ClearIcon />
+              <ClearIcon color="primary" />
             </IconButton>
           </Tooltip>
         </Box>
