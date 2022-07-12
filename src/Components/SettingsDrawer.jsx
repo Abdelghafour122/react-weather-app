@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
@@ -10,7 +10,12 @@ import LanguageSwitch from "./Switchers/LanguageSwitch";
 import ThemeSwitch from "./Switchers/ThemeSwitch";
 import Tooltip from "@mui/material/Tooltip";
 
-const SettingsDrawer = ({ openDrawer, setOpenDrawer, handleChangeTheme }) => {
+const SettingsDrawer = ({
+  openDrawer,
+  setOpenDrawer,
+  handleChangeTheme,
+  handleChangeLanguage,
+}) => {
   return (
     <Drawer
       anchor="right"
@@ -52,7 +57,7 @@ const SettingsDrawer = ({ openDrawer, setOpenDrawer, handleChangeTheme }) => {
         <Divider variant="fullWidth" />
         <ThemeSwitch handleChangeTheme={handleChangeTheme} />
         <Divider variant="fullWidth" />
-        <LanguageSwitch />
+        <LanguageSwitch handleChangeLanguage={handleChangeLanguage} />
       </Box>
     </Drawer>
   );

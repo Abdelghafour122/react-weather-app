@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import ToggleButton from "@mui/material/ToggleButton";
@@ -7,7 +7,6 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import SettingsBrightnessRoundedIcon from "@mui/icons-material/SettingsBrightnessRounded";
-import { useState } from "react";
 
 const THEMES = [
   {
@@ -22,11 +21,16 @@ const THEMES = [
 ];
 
 const ThemeSwitch = ({ handleChangeTheme }) => {
-  const [mode, setMode] = useState("System");
+  const theme = localStorage.getItem("color-theme");
+  const [mode, setMode] = useState(theme);
   const handleChange = (e, mode) => {
-    setMode(mode);
-    handleChangeTheme(mode);
+    if (mode !== null) {
+      setMode(mode);
+      handleChangeTheme(mode);
+      localStorage.setItem("color-theme", `${mode}`);
+    }
   };
+  console.log("the component has just rendered");
   return (
     <Box
       sx={{

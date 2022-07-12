@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
@@ -8,7 +7,7 @@ import TuneRoundedIcon from "@mui/icons-material/TuneRounded";
 import Search from "../../Components/Search";
 import SettingsDrawer from "../../Components/SettingsDrawer";
 
-const Navbar = ({ handleChangeTheme }) => {
+const Navbar = ({ handleChangeTheme, handleChangeLanguage }) => {
   const [openDrawer, setOpenDrawer] = useState(false);
   return (
     <Stack
@@ -43,6 +42,7 @@ const Navbar = ({ handleChangeTheme }) => {
       </Tooltip>
       <SettingsDrawer
         handleChangeTheme={handleChangeTheme}
+        handleChangeLanguage={handleChangeLanguage}
         openDrawer={openDrawer}
         setOpenDrawer={setOpenDrawer}
       />

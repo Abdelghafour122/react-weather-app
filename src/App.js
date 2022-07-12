@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Dist/App.css";
 import ThemeProvider from "@mui/system/ThemeProvider";
 import Box from "@mui/material/Box";
@@ -13,14 +13,15 @@ import IntroPage from "./Routes/IntroPage";
 
 function App() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  useEffect(() => {
+    localStorage.setItem("color-theme", "System");
+    localStorage.setItem("i18nextLng", "en");
+  }, []);
+
   const [customTheme, setCustomTheme] = useState(
     prefersDarkMode ? darkThemeStyle : lightThemeStyle
   );
   const handleChangeTheme = (choice) => {
-    // customTheme === darkThemeStyle
-    //   ? setCustomTheme(lightThemeStyle)
-    //   : setCustomTheme(darkThemeStyle);
-
     choice === "System"
       ? prefersDarkMode
         ? setCustomTheme(darkThemeStyle)
@@ -29,7 +30,6 @@ function App() {
       ? setCustomTheme(darkThemeStyle)
       : setCustomTheme(lightThemeStyle);
   };
-
   return (
     <ThemeProvider theme={customTheme}>
       <Box
@@ -39,7 +39,7 @@ function App() {
         sx={{ minHeight: "100vh" }}
       >
         <Homepage handleChangeTheme={handleChangeTheme} />
-        <Random />
+        {/* <Random /> */}
         {/* <Attribution /> */}
         {/* <IntroPage theme={customTheme} /> */}
       </Box>

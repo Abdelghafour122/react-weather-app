@@ -3,18 +3,24 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ToggleButton from "@mui/material/ToggleButton";
+import Flag from "react-world-flags";
 
 const LANGUAGES = [
-  { name: "English", code: "gb" },
-  { name: "Deutsch", code: "de" },
-  { name: "Français", code: "fr" },
-  { name: "العربية", code: "ksa" },
+  { name: "English", flagCode: "gb", code: "en" },
+  { name: "Deutsch", flagCode: "de", code: "de" },
+  { name: "Français", flagCode: "fr", code: "fr" },
+  { name: "العربية", flagCode: "sa", code: "ar" },
 ];
 
-const LanguageSwitch = () => {
-  const [lang, setLang] = useState("english");
-  const handleChangeLanguage = (e, lang) => {
-    setLang(lang);
+const LanguageSwitch = ({ handleChangeLanguage }) => {
+  const language = localStorage.getItem("i18nextLng");
+  const [lang, setLang] = useState(language);
+  const handleChange = (e, lang) => {
+    if (lang !== null) {
+      setLang(lang);
+      handleChangeLanguage(lang);
+      localStorage.setItem("i18nextLng", `${lang}`);
+    }
   };
   return (
     <Box
@@ -37,20 +43,21 @@ const LanguageSwitch = () => {
       </Typography>
       <ToggleButtonGroup
         exclusive
+        orientation="vertical"
         value={lang}
-        onChange={handleChangeLanguage}
+        onChange={handleChange}
         sx={{ width: "100%", justifyContent: "center" }}
       >
         {LANGUAGES.map((language, ind) => {
           return (
             <ToggleButton
               key={ind}
-              value={language.name}
-              sx={{ flex: 1, gap: "5px" }}
-              aria-label={`${language.name}-mode`}
+              value={language.code}
+              sx={{ flex: 1, gap: "5px", justifyContent: "flex-start" }}
+              aria-label={`${language.name}`}
             >
               {language.name}
-              {/* HERE COMES THE FLAG */}
+              <Flag code={language.flagCode} height="20px" width="24px" />
             </ToggleButton>
           );
         })}
