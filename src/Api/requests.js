@@ -50,3 +50,11 @@ export const getWeatherInfoDaily = (lat, lon) => {
     .catch((err) => console.log(err));
   return result;
 };
+
+export const getCurrentLocationInfo = () => {
+  const result = axios
+    .get("http://ip-api.com/json/", { headers: { accept: "Application/json" } })
+    .then((res) => res.data)
+    .catch((err) => console.log(err));
+  return result;
+};

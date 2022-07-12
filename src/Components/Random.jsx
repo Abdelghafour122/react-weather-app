@@ -5,6 +5,7 @@ import {
   getWeatherInfoDaily,
   getWeatherInfoHourly,
   getWeatherInfoName,
+  getCurrentLocationInfo,
 } from "../Api/requests";
 
 // "lon": 16.3721,
@@ -13,13 +14,20 @@ import {
 const Random = () => {
   const [weather, setWeather] = useState({});
   const [icon, setIcon] = useState(Number);
+
+  const [location, setLocation] = useState({});
+
   const getInfo = async () => {
     // const result = await getWeatherInfoCoor(20, 29, "de", "fahrenheit");
-    const result = await getWeatherInfoName("alaska", "de", "");
+    const resulta = await getWeatherInfoName("Blida", "de", "");
     // const result = await getWeatherInfoDaily(48.2085, 16.3721);
     // const result = await getWeatherInfoHourly(48.2085, 16.3721);
-    setWeather(result);
-    setIcon(result.weather[0].icon);
+    const result = await getCurrentLocationInfo();
+
+    setLocation(result);
+
+    setWeather(resulta);
+    // setIcon(result.weather[0].icon);
 
     // console.log(weather.daily.length);
   };
@@ -32,6 +40,11 @@ const Random = () => {
   return (
     <>
       <pre>{JSON.stringify(weather, null, 2)}</pre>;
+      <br />
+      <br />
+      <br />
+      <br />
+      <pre>{JSON.stringify(location, null, 2)}</pre>;
       <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="" />
     </>
   );
