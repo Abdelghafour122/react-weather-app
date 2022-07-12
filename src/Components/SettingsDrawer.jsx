@@ -10,7 +10,7 @@ import LanguageSwitch from "./Switchers/LanguageSwitch";
 import ThemeSwitch from "./Switchers/ThemeSwitch";
 import Tooltip from "@mui/material/Tooltip";
 
-const SettingsDrawer = ({ openDrawer, setOpenDrawer }) => {
+const SettingsDrawer = ({ openDrawer, setOpenDrawer, handleChangeTheme }) => {
   return (
     <Drawer
       anchor="right"
@@ -26,7 +26,6 @@ const SettingsDrawer = ({ openDrawer, setOpenDrawer }) => {
           height: "100%",
         }}
       >
-        {/* TOP */}
         <Box
           component="div"
           sx={{
@@ -51,7 +50,7 @@ const SettingsDrawer = ({ openDrawer, setOpenDrawer }) => {
           </Tooltip>
         </Box>
         <Divider variant="fullWidth" />
-        <ThemeSwitch />
+        <ThemeSwitch handleChangeTheme={handleChangeTheme} />
         <Divider variant="fullWidth" />
         <LanguageSwitch />
       </Box>
