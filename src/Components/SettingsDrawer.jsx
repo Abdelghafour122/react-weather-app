@@ -9,6 +9,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import LanguageSwitch from "./Switchers/LanguageSwitch";
 import ThemeSwitch from "./Switchers/ThemeSwitch";
 import Tooltip from "@mui/material/Tooltip";
+import TemperatureSwitch from "./Switchers/TemperatureSwitch";
 
 const SettingsDrawer = ({
   openDrawer,
@@ -58,6 +59,8 @@ const SettingsDrawer = ({
         <ThemeSwitch handleChangeTheme={handleChangeTheme} />
         <Divider variant="fullWidth" />
         <LanguageSwitch handleChangeLanguage={handleChangeLanguage} />
+        <Divider variant="fullWidth" />
+        <TemperatureSwitch />
       </Box>
     </Drawer>
   );
