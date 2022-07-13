@@ -3,8 +3,12 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import Divider from "@mui/material/Divider";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import InputLabel from "@mui/material/InputLabel";
 import ClearIcon from "@mui/icons-material/Clear";
+import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
+import SearchOffRoundedIcon from "@mui/icons-material/SearchOffRounded";
 
 const NameBackdrop = ({ onOpen, handleCloseName }) => {
   return (
@@ -14,22 +18,24 @@ const NameBackdrop = ({ onOpen, handleCloseName }) => {
         zIndex: (theme) => theme.zIndex.drawer + 1,
       }}
       open={onOpen}
-      onClick={handleCloseName}
     >
       <Box
         bgcolor="custom.firstBgColor"
         sx={{
-          padding: "10px",
+          padding: "20px",
+          borderRadius: "5px",
+          width: "500px",
           display: "flex",
           flexDirection: "column",
-          alignItems: "flex-start",
-          justifyContent: "space-between",
-          borderRadius: "5px",
-          width: "300px",
+          gap: "30px",
         }}
       >
         <Box
-          sx={{ display: "flex", justifyContent: "flex-end", width: "100%" }}
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            width: "100%",
+          }}
         >
           <Tooltip title="Close" enterDelay={500} leaveDelay={200}>
             <IconButton color="primary" onClick={handleCloseName}>
@@ -37,8 +43,40 @@ const NameBackdrop = ({ onOpen, handleCloseName }) => {
             </IconButton>
           </Tooltip>
         </Box>
-        <Divider />
-        <Box></Box>
+        <Box sx={{ width: "100%" }}>
+          <InputLabel htmlFor="name-input">CITY NAME:</InputLabel>
+          <TextField
+            id="name-input"
+            variant="outlined"
+            placeholder="Enter a city name..."
+            helperText="The search will fail if the name is incorrect..."
+            aria-describedby="search by city name"
+            fullWidth
+          />
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-around",
+          }}
+        >
+          <Button
+            variant="contained"
+            //   disabled={true}
+            endIcon={<SearchRoundedIcon />}
+            disableElevation
+          >
+            Search
+          </Button>
+          <Button
+            variant="contained"
+            color="error"
+            endIcon={<SearchOffRoundedIcon />}
+            disableElevation
+          >
+            Cancel
+          </Button>
+        </Box>
       </Box>
     </Backdrop>
   );

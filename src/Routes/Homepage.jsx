@@ -15,6 +15,7 @@ const Homepage = ({ handleChangeTheme }) => {
   const [currentCityName, setCurrentCityName] = useState(String);
   const [coordinates, setCoordinates] = useState({});
   const [currentWeather, setCurrentWeather] = useState({});
+
   useEffect(() => {
     const getCurrentCity = async () => {
       const currentLocation = await getCurrentLocationInfo();

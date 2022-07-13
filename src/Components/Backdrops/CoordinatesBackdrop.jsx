@@ -14,7 +14,6 @@ const CoordinatesBackdrop = ({ onOpen, handleCloseCoordinates }) => {
         zIndex: (theme) => theme.zIndex.drawer + 1,
       }}
       open={onOpen}
-      onClick={handleCloseCoordinates}
     >
       <Box
         bgcolor="custom.firstBgColor"
