@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import SearchMethod from "./SearchMethod";
 import LocationCityRoundedIcon from "@mui/icons-material/LocationCityRounded";
 import EditLocationAltRoundedIcon from "@mui/icons-material/EditLocationAltRounded";
+import NameBackdrop from "./Backdrops/NameBackdrop";
+import CoordinatesBackdrop from "./Backdrops/CoordinatesBackdrop";
 
 const SEARCH_METHODS = [
   {
@@ -17,6 +19,23 @@ const SEARCH_METHODS = [
 ];
 
 const Search = () => {
+  const [openNameBackdrop, setOpenNameBackdrop] = useState(true);
+  const [openCoordinatesBackdrop, setOpenCoordinatesBackdrop] = useState(false);
+
+  const handleCloseName = () => {
+    setOpenNameBackdrop(false);
+  };
+  const handleToggleName = () => {
+    setOpenNameBackdrop(true);
+  };
+
+  const handleCloseCoordinates = () => {
+    setOpenCoordinatesBackdrop(false);
+  };
+  const handleToggleCoordinates = () => {
+    setOpenCoordinatesBackdrop(true);
+  };
+
   return (
     <Box
       sx={{
@@ -34,10 +53,28 @@ const Search = () => {
       >
         {SEARCH_METHODS.map((method, ind) => {
           return (
-            <SearchMethod key={ind} name={method.name} Icon={method.icon} />
+            <SearchMethod
+              key={ind}
+              name={method.name}
+              Icon={method.icon}
+              openBackdrop={
+                method.name === "Coordinates"
+                  ? handleToggleCoordinates
+                  : handleToggleName
+              }
+            />
           );
         })}
       </Box>
+
+      <NameBackdrop
+        handleCloseName={handleCloseName}
+        onOpen={openNameBackdrop}
+      />
+      <CoordinatesBackdrop
+        handleCloseCoordinates={handleCloseCoordinates}
+        onOpen={openCoordinatesBackdrop}
+      />
     </Box>
   );
 };
