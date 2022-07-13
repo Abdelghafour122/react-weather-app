@@ -30,7 +30,7 @@ const ThemeSwitch = ({ handleChangeTheme }) => {
       localStorage.setItem("color-theme", `${mode}`);
     }
   };
-  console.log("the component has just rendered");
+  // console.log("the component has just rendered");
   return (
     <Box
       sx={{

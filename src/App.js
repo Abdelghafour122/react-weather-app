@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./Dist/App.css";
 import ThemeProvider from "@mui/system/ThemeProvider";
 import Box from "@mui/material/Box";
@@ -13,23 +13,32 @@ import IntroPage from "./Routes/IntroPage";
 
 function App() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-  useEffect(() => {
-    localStorage.setItem("color-theme", "System");
-    localStorage.setItem("i18nextLng", "en");
-  }, []);
-
   const [customTheme, setCustomTheme] = useState(
     prefersDarkMode ? darkThemeStyle : lightThemeStyle
   );
-  const handleChangeTheme = (choice) => {
-    choice === "System"
-      ? prefersDarkMode
+
+  const handleChangeTheme = useCallback(
+    (choice) => {
+      choice === "System"
+        ? prefersDarkMode
+          ? setCustomTheme(darkThemeStyle)
+          : setCustomTheme(lightThemeStyle)
+        : choice === "Dark"
         ? setCustomTheme(darkThemeStyle)
-        : setCustomTheme(lightThemeStyle)
-      : choice === "Dark"
-      ? setCustomTheme(darkThemeStyle)
-      : setCustomTheme(lightThemeStyle);
-  };
+        : setCustomTheme(lightThemeStyle);
+    },
+    [prefersDarkMode]
+  );
+
+  useEffect(() => {
+    const localThemePref = localStorage.getItem("color-theme");
+    localThemePref === null
+      ? localStorage.setItem("color-theme", "System")
+      : handleChangeTheme(localThemePref);
+    localStorage.setItem("i18nextLng", "en");
+    console.log("the App.js's useEffect just ran");
+  }, [handleChangeTheme]);
+
   return (
     <ThemeProvider theme={customTheme}>
       <Box
