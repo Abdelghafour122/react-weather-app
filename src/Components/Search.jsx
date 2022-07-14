@@ -19,8 +19,8 @@ const SEARCH_METHODS = [
 ];
 
 const Search = () => {
-  const [openNameBackdrop, setOpenNameBackdrop] = useState(true);
-  const [openCoordinatesBackdrop, setOpenCoordinatesBackdrop] = useState(false);
+  const [openNameBackdrop, setOpenNameBackdrop] = useState(false);
+  const [openCoordinatesBackdrop, setOpenCoordinatesBackdrop] = useState(true);
 
   const handleCloseName = () => {
     setOpenNameBackdrop(false);

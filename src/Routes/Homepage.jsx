@@ -5,6 +5,8 @@ import { getCurrentLocationInfo, getWeatherInfoName } from "../Api/requests";
 import Forecast from "./Homepage/Forecast";
 import Attribution from "../Components/Attribution";
 
+import Random from "../Components/Random";
+
 const Homepage = ({ handleChangeTheme }) => {
   const [language, setLanguage] = useState("en");
   const [currentCityName, setCurrentCityName] = useState(String);
@@ -70,11 +72,12 @@ const Homepage = ({ handleChangeTheme }) => {
         handleChangeLanguage={handleChangeLanguage}
         handleChangeTemperature={handleChangeTemperature}
       />
-      <Forecast
+      {/* <Forecast
         loading={loading}
         currentCityName={currentCityName}
         currentWeather={currentWeather}
-      />
+      /> */}
+      <Random />
       <Attribution />
     </Box>
   );

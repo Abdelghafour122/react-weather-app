@@ -12,6 +12,10 @@ import SearchOffRoundedIcon from "@mui/icons-material/SearchOffRounded";
 
 const NameBackdrop = ({ onOpen, handleCloseName }) => {
   const [localCityName, setLocalCityName] = useState(String);
+
+  // USE THE CITIES API FOR AUTOCOMPLETE (FLEX BRO)
+
+  // MAKE THE SUCCESS SNACKBAR APPEAR IF THE REQUEST IS VALID
   const handleCancelSearch = () => {
     setLocalCityName("");
     handleCloseName();
@@ -77,7 +81,7 @@ const NameBackdrop = ({ onOpen, handleCloseName }) => {
         >
           <Button
             variant="contained"
-            //   disabled={true}
+            disabled={localCityName === "" ? true : false}
             endIcon={<SearchRoundedIcon />}
             disableElevation
           >

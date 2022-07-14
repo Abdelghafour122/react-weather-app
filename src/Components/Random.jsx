@@ -14,12 +14,13 @@ import {
 const Random = () => {
   const [weather, setWeather] = useState({});
   const [icon, setIcon] = useState(Number);
+  const [name, setName] = useState("");
 
   const [location, setLocation] = useState({});
 
   const getInfo = async () => {
     // const result = await getWeatherInfoCoor(20, 29, "de", "fahrenheit");
-    const resulta = await getWeatherInfoName("Blida", "de", "");
+    const resulta = await getWeatherInfoName("bonn", "en", "");
     // const result = await getWeatherInfoDaily(48.2085, 16.3721);
     // const result = await getWeatherInfoHourly(48.2085, 16.3721);
     const result = await getCurrentLocationInfo();
@@ -27,7 +28,10 @@ const Random = () => {
     setLocation(result);
 
     setWeather(resulta);
-    // setIcon(result.weather[0].icon);
+    const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
+
+    setName(regionNames.of(resulta.sys.country));
+    setIcon(resulta.weather[0].icon);
 
     // console.log(weather.daily.length);
   };
@@ -42,6 +46,7 @@ const Random = () => {
       <pre>{JSON.stringify(weather, null, 2)}</pre>;
       <br />
       <br />
+      <h1 style={{ color: "white" }}>{name}</h1>
       <br />
       <br />
       <pre>{JSON.stringify(location, null, 2)}</pre>;
