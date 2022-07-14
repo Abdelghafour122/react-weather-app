@@ -8,7 +8,11 @@ import TuneRoundedIcon from "@mui/icons-material/TuneRounded";
 import Search from "../../Components/Search";
 import SettingsDrawer from "../../Components/SettingsDrawer";
 
-const Navbar = ({ handleChangeTheme, handleChangeLanguage }) => {
+const Navbar = ({
+  handleChangeTheme,
+  handleChangeLanguage,
+  handleChangeTemperature,
+}) => {
   const [openDrawer, setOpenDrawer] = useState(false);
   return (
     <Box
@@ -48,6 +52,7 @@ const Navbar = ({ handleChangeTheme, handleChangeLanguage }) => {
         <SettingsDrawer
           handleChangeTheme={handleChangeTheme}
           handleChangeLanguage={handleChangeLanguage}
+          handleChangeTemperature={handleChangeTemperature}
           openDrawer={openDrawer}
           setOpenDrawer={setOpenDrawer}
         />

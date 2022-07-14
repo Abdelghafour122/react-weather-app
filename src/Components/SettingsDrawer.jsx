@@ -16,6 +16,7 @@ const SettingsDrawer = ({
   setOpenDrawer,
   handleChangeTheme,
   handleChangeLanguage,
+  handleChangeTemperature,
 }) => {
   return (
     <Drawer
@@ -60,7 +61,7 @@ const SettingsDrawer = ({
         <Divider variant="fullWidth" />
         <LanguageSwitch handleChangeLanguage={handleChangeLanguage} />
         <Divider variant="fullWidth" />
-        <TemperatureSwitch />
+        <TemperatureSwitch handleChangeTemperature={handleChangeTemperature} />
       </Box>
     </Drawer>
   );

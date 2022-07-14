@@ -6,9 +6,15 @@ import ToggleButton from "@mui/material/ToggleButton";
 
 const TEMPERATURES = ["Celcius", "Fahrenheit", "Kelvin"];
 
-const TemperatureSwitch = () => {
-  // LOOK UP THE THEMESWITCH, YOU ALREADY HAVE MADE THIS!!
+const TemperatureSwitch = ({ handleChangeTemperature }) => {
   const [temp, setTemp] = useState("Celcius");
+  const handleChange = (e, temp) => {
+    if (temp !== null) {
+      setTemp(temp);
+      handleChangeTemperature(temp);
+      localStorage.setItem("temp-unit", `${temp}`);
+    }
+  };
   return (
     <Box
       sx={{
@@ -30,8 +36,8 @@ const TemperatureSwitch = () => {
       </Typography>
       <ToggleButtonGroup
         exclusive
-        //  value={lang}
-        //  onChange={handleChange}
+        value={temp}
+        onChange={handleChange}
         sx={{ width: "100%", justifyContent: "center" }}
       >
         {TEMPERATURES.map((temperature, ind) => (
