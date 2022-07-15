@@ -17,7 +17,7 @@ const CoordinatesBackdrop = ({ onOpen, handleCloseCoordinates }) => {
   const [lat, setLat] = useState(Number);
   const [lon, setLon] = useState(Number);
   const [validCoords, setValidCoords] = useState(false);
-  const [openNote, setOpenNote] = useState(true); //false
+  const [openNote, setOpenNote] = useState(false); //false
 
   const handleClose = () => {
     setOpenNote(false);

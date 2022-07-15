@@ -20,7 +20,7 @@ const SEARCH_METHODS = [
 
 const Search = () => {
   const [openNameBackdrop, setOpenNameBackdrop] = useState(false);
-  const [openCoordinatesBackdrop, setOpenCoordinatesBackdrop] = useState(true);
+  const [openCoordinatesBackdrop, setOpenCoordinatesBackdrop] = useState(false);
 
   const handleCloseName = () => {
     setOpenNameBackdrop(false);
@@ -46,7 +46,7 @@ const Search = () => {
       }}
     >
       <Typography component="p" variant="p" color="text.primary">
-        Search By:{" "}
+        Search By:&nbsp;
       </Typography>
       <Box
         sx={{ display: "flex", justifyContent: "space-between", gap: "10px" }}

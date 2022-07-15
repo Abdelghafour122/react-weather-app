@@ -6,6 +6,7 @@ import {
   getWeatherInfoHourly,
   getWeatherInfoName,
   getCurrentLocationInfo,
+  getCities,
 } from "../Api/requests";
 
 // "lon": 16.3721,
@@ -25,13 +26,15 @@ const Random = () => {
     // const result = await getWeatherInfoHourly(48.2085, 16.3721);
     const result = await getCurrentLocationInfo();
 
-    setLocation(result);
+    // setLocation(result);
 
     setWeather(resulta);
     const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
 
     setName(regionNames.of(resulta.sys.country));
     setIcon(resulta.weather[0].icon);
+
+    // setLocation(await getCities("boston", "en"));
 
     // console.log(weather.daily.length);
   };
@@ -40,16 +43,20 @@ const Random = () => {
     getInfo();
   }, []);
 
-  console.log("first");
+  // console.log("first");
+
   return (
     <>
-      <pre>{JSON.stringify(weather, null, 2)}</pre>;
+      {/* <pre>{JSON.stringify(weather, null, 2)}</pre>;
       <br />
       <br />
       <h1 style={{ color: "white" }}>{name}</h1>
       <br />
       <br />
-      <pre>{JSON.stringify(location, null, 2)}</pre>;
+      <pre>{JSON.stringify(location, null, 2)}</pre>; */}
+
+      <pre>{JSON.stringify(location, null, 2)}</pre>
+
       <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="" />
     </>
   );
