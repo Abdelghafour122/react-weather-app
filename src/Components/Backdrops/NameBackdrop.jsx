@@ -13,7 +13,7 @@ import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import SearchOffRoundedIcon from "@mui/icons-material/SearchOffRounded";
 
 import DefaultSnackbar from "../Snackbars/DefaultSnackbar";
-import { getCities } from "../../Api/requests";
+import { getCities, getWeatherInfoName } from "../../Api/requests";
 
 const NameBackdrop = ({ onOpen, handleCloseName, setCurrentCityName }) => {
   const [localCityName, setLocalCityName] = useState(""); //String
@@ -31,36 +31,7 @@ const NameBackdrop = ({ onOpen, handleCloseName, setCurrentCityName }) => {
       cityName,
       localStorage.getItem("i18nextLng")
     );
-    // console.log(rawData.data);
-    // console.log(
-    //   rawData.data.map((opt) => ({
-    //     id: opt.id,
-    //     city: opt.city,
-    //     region: opt.region,
-    //     country: opt.country,
-    //   }))
-    // );
-
     return rawData;
-
-    // setCitiesList([
-    //   ...rawData.data.map((opt) => ({
-    //     id: opt.id,
-    //     city: opt.city,
-    //     region: opt.region,
-    //     country: opt.country,
-    //   })),
-    // ]);
-
-    // rawData.data.map((opt) =>
-    //   // console.log({ city: opt.city, region: opt.region, country: opt.country })
-    //   setCitiesList([
-    //     ...citiesList,
-    //     { city: opt.city, region: opt.region, country: opt.country },
-    //   ])
-    // );
-
-    // setCitiesList();
   }, []);
 
   useEffect(() => {
@@ -68,22 +39,29 @@ const NameBackdrop = ({ onOpen, handleCloseName, setCurrentCityName }) => {
       setShowHelperText(true);
     } else {
       setShowHelperText(false);
-      handleFetchCities(localCityName).then((resultData) =>
-        setCitiesList([
-          ...resultData.data.map((opt) => ({
-            id: opt.id,
-            city: opt.city,
-            region: opt.region,
-            country: opt.country,
-          })),
-        ])
-      );
+      handleFetchCities(localCityName)
+        .then((resultData) =>
+          resultData
+            ? setCitiesList([
+                ...resultData.data.map((opt) => ({
+                  id: opt.id,
+                  city: opt.city,
+                  region: opt.region,
+                  country: opt.country,
+                })),
+              ])
+            : // : setCitiesList([])
+              null
+        )
+        .catch((error) => console.log("resultData was undefined"));
     }
   }, [localCityName, handleFetchCities]);
 
   // MAKE THE SUCCESS SNACKBAR APPEAR IF THE REQUEST IS VALID
-  const handleSubmit = () => {
-    handleFetchCities(localCityName);
+  const handleSubmit = async () => {
+    console.log(localCityName);
+    const res = await getWeatherInfoName(localCityName);
+    console.log(res);
     setLocalCityName("");
     setOpenNote(true);
   };
@@ -92,6 +70,7 @@ const NameBackdrop = ({ onOpen, handleCloseName, setCurrentCityName }) => {
     setLocalCityName("");
     handleCloseName();
   };
+
   return (
     <Backdrop
       sx={{
@@ -134,19 +113,17 @@ const NameBackdrop = ({ onOpen, handleCloseName, setCurrentCityName }) => {
           </Tooltip>
         </Box>
         <Box sx={{ width: "100%" }}>
-          {/* <TextField
-            variant="outlined"
-            placeholder="Enter a city name..."
-            aria-describedby="search by city name"
-            fullWidth
-            value={localCityName === "" ? "" : localCityName}
-            onChange={(e) => {
-              setLocalCityName(e.target.value);
-            }}
-          /> */}
           <Autocomplete
+            // open={true}
             options={citiesList}
+            isOptionEqualToValue={(option, value) => option.city === value.city}
             getOptionLabel={(option) => option.city}
+            // inputValue={localCityName === "" ? "" : localCityName}
+            inputValue={localCityName}
+            onInputChange={(event, newInputValue) => {
+              console.log(newInputValue);
+              setLocalCityName(newInputValue);
+            }}
             renderOption={(props, option) => {
               return (
                 <Box
@@ -168,10 +145,9 @@ const NameBackdrop = ({ onOpen, handleCloseName, setCurrentCityName }) => {
               return (
                 <TextField
                   {...params}
-                  onChange={(e) => setLocalCityName(e.target.value)}
-                  value={localCityName === "" ? "" : localCityName}
-                  label="City name..."
+                  placeholder="City name..."
                   helperText={showHelperText ? "Type something" : ""}
+                  value={localCityName}
                   InputProps={{
                     ...params.InputProps,
                     endAdornment: (

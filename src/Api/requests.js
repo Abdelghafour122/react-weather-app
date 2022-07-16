@@ -60,29 +60,10 @@ export const getCurrentLocationInfo = () => {
   return result;
 };
 
-// const options = {
-//   method: "GET",
-//   url: "https://wft-geo-db.p.rapidapi.com/v1/geo/cities",
-//   headers: {
-//     "X-RapidAPI-Key": "ef4bc9b50dmsh41b50c5102fa3e0p1a5eb8jsnc0cfeee72f02",
-//     "X-RapidAPI-Host": "wft-geo-db.p.rapidapi.com",
-//   },
-// };
-
-// axios
-//   .request(options)
-//   .then(function (response) {
-//     console.log(response.data);
-//   })
-//   .catch(function (error) {
-//     console.error(error);
-//   });
-
 export const getCities = (value, lang) => {
   const result = axios
     .get(
-      //minPopulation=10000&namePrefix=london
-      `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&minPopulation=100000&namePrefix=${value}&namePrefixDefaultLangResults=true&languageCode=${lang}`,
+      `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&minPopulation=500000&namePrefix=${value}&namePrefixDefaultLangResults=true&languageCode=${lang}`,
       {
         headers: {
           "X-RapidAPI-Key":
