@@ -49,7 +49,7 @@ function App() {
       >
         <Homepage handleChangeTheme={handleChangeTheme} />
         {/* <Random /> */}
-        {/* <Attribution /> */}
+        <Attribution />
         {/* <IntroPage theme={customTheme} /> */}
       </Box>
     </ThemeProvider>

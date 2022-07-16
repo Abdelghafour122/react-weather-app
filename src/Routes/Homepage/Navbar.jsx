@@ -12,6 +12,7 @@ const Navbar = ({
   handleChangeTheme,
   handleChangeLanguage,
   handleChangeTemperature,
+  handleChangeCurrentName,
 }) => {
   const [openDrawer, setOpenDrawer] = useState(false);
   return (
@@ -39,7 +40,7 @@ const Navbar = ({
         >
           W-Weather
         </Typography>
-        <Search />
+        <Search handleChangeCurrentName={handleChangeCurrentName} />
         <Tooltip title="Settings" enterDelay={500} leaveDelay={200}>
           <IconButton
             onClick={() => {

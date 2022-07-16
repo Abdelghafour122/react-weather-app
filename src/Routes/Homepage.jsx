@@ -34,11 +34,15 @@ const Homepage = ({ handleChangeTheme }) => {
     setLanguage(choice);
   };
 
+  const handleChangeCurrentName = (newCityName) => {
+    setCurrentCityName(newCityName);
+  };
+
   // FETCHING THE CURRENT LOCATION ON PAGELOAD, WITHOUT SEARCHING
   useEffect(() => {
     const getCurrentCity = async () => {
       const currentLocation = await getCurrentLocationInfo();
-      setCurrentCityName(currentLocation.city);
+      handleChangeCurrentName(currentLocation.city);
     };
     getCurrentCity();
     setLoading(true);
@@ -49,7 +53,9 @@ const Homepage = ({ handleChangeTheme }) => {
     const getWeatherByName = async () => {
       setCurrentWeather(await getWeatherInfoName(currentCityName));
     };
-    currentCityName !== "" && getWeatherByName();
+    currentCityName !== ""
+      ? getWeatherByName()
+      : getWeatherInfoName(currentCityName);
   }, [currentCityName]);
 
   // GET WEATHER WHENEVER THE COORDINATES CHANGE
@@ -71,14 +77,14 @@ const Homepage = ({ handleChangeTheme }) => {
         handleChangeTheme={handleChangeTheme}
         handleChangeLanguage={handleChangeLanguage}
         handleChangeTemperature={handleChangeTemperature}
+        handleChangeCurrentName={handleChangeCurrentName}
       />
-      {/* <Forecast
+      <Forecast
         loading={loading}
         currentCityName={currentCityName}
         currentWeather={currentWeather}
-      /> */}
-      <Random />
-      <Attribution />
+      />
+      {/* <Random /> */}
     </Box>
   );
 };

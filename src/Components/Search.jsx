@@ -18,7 +18,7 @@ const SEARCH_METHODS = [
   },
 ];
 
-const Search = () => {
+const Search = ({ handleChangeCurrentName }) => {
   const [openNameBackdrop, setOpenNameBackdrop] = useState(false);
   const [openCoordinatesBackdrop, setOpenCoordinatesBackdrop] = useState(false);
 
@@ -70,6 +70,7 @@ const Search = () => {
       <NameBackdrop
         handleCloseName={handleCloseName}
         onOpen={openNameBackdrop}
+        handleChangeCurrentName={handleChangeCurrentName}
       />
       <CoordinatesBackdrop
         handleCloseCoordinates={handleCloseCoordinates}

@@ -15,7 +15,7 @@ import SearchOffRoundedIcon from "@mui/icons-material/SearchOffRounded";
 import DefaultSnackbar from "../Snackbars/DefaultSnackbar";
 import { getCities, getWeatherInfoName } from "../../Api/requests";
 
-const NameBackdrop = ({ onOpen, handleCloseName, setCurrentCityName }) => {
+const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
   const [localCityName, setLocalCityName] = useState(""); //String
   const [openNote, setOpenNote] = useState(false); //false
   const [citiesList, setCitiesList] = useState([]);
@@ -40,18 +40,18 @@ const NameBackdrop = ({ onOpen, handleCloseName, setCurrentCityName }) => {
     } else {
       setShowHelperText(false);
       handleFetchCities(localCityName)
-        .then((resultData) =>
-          resultData
-            ? setCitiesList([
-                ...resultData.data.map((opt) => ({
-                  id: opt.id,
-                  city: opt.city,
-                  region: opt.region,
-                  country: opt.country,
-                })),
-              ])
-            : // : setCitiesList([])
-              null
+        .then(
+          (resultData) =>
+            resultData &&
+            setCitiesList([
+              ...resultData.data.map((opt) => ({
+                id: opt.id,
+                city: opt.city,
+                region: opt.region,
+                country: opt.country,
+              })),
+            ])
+          // : setCitiesList([])
         )
         .catch((error) => console.log("resultData was undefined"));
     }
@@ -59,9 +59,10 @@ const NameBackdrop = ({ onOpen, handleCloseName, setCurrentCityName }) => {
 
   // MAKE THE SUCCESS SNACKBAR APPEAR IF THE REQUEST IS VALID
   const handleSubmit = async () => {
-    console.log(localCityName);
-    const res = await getWeatherInfoName(localCityName);
-    console.log(res);
+    handleChangeCurrentName(localCityName);
+    // console.log(localCityName);
+    // const res = await getWeatherInfoName(localCityName);
+    // console.log(res);
     setLocalCityName("");
     setOpenNote(true);
   };
