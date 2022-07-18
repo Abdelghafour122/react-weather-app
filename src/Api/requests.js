@@ -14,13 +14,20 @@ export const getWeatherInfoCoor = (lat, lon, lang = "en", unit = "celsius") => {
   return result;
 };
 
+// DETERMINE TEMPERATURE
+const determineTemp = (value) => {
+  if (value.toString().toLowerCase() === "fahrenheit") return "imperial";
+  else if (value.toString().toLowerCase() === "celcius") return "metric";
+  else return "default";
+};
+
 // FETCH BY NAME
 export const getWeatherInfoName = (cityName, lang = "en", unit = "celsius") => {
   const result = axios
     .get(
       `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${
         process.env.REACT_APP_API_KEY
-      }&units=${unit === "fahrenheit" ? "imperial" : "metric"}&lang=${lang}`,
+      }&units=${determineTemp(unit)}&lang=${lang}`,
       { headers: { accept: "Application/json" } }
     )
     .then((res) => res.data)

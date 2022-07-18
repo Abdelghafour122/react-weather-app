@@ -12,10 +12,14 @@ import SearchOffRoundedIcon from "@mui/icons-material/SearchOffRounded";
 
 import DefaultSnackbar from "../Snackbars/DefaultSnackbar";
 
-const CoordinatesBackdrop = ({ onOpen, handleCloseCoordinates }) => {
-  const [localCoordinates, setLocalCoordinates] = useState({});
-  const [lat, setLat] = useState(Number);
-  const [lon, setLon] = useState(Number);
+const CoordinatesBackdrop = ({
+  onOpen,
+  handleCloseCoordinates,
+  handleChangeCoordinates,
+}) => {
+  const [lat, setLat] = useState(0);
+  const [lon, setLon] = useState(0);
+  const [localCoordinates, setLocalCoordinates] = useState({ lon, lat });
   const [validCoords, setValidCoords] = useState(false);
   const [openNote, setOpenNote] = useState(false); //false
 
@@ -27,7 +31,7 @@ const CoordinatesBackdrop = ({ onOpen, handleCloseCoordinates }) => {
     lat < -90 || lat > 90 || lon < -180 || lon > 180
       ? setValidCoords(false)
       : setValidCoords(true);
-
+    setLocalCoordinates({ lon, lat });
     console.log({ lon, lat });
   }, [lon, lat]);
 
@@ -38,17 +42,12 @@ const CoordinatesBackdrop = ({ onOpen, handleCloseCoordinates }) => {
   // FIX THIS FUNC, THE INFO SACKBAR MUST APPEAR IF lat === lon === 0
   // REQUEST VALID && SUCCESS SNACKBAR
   const handleSubmit = () => {
-    console.log(localCoordinates);
-    console.log(validCoords);
-    // if (validCoords) {
-    //   setLocalCoordinates({ lon, lat });
-    //   setLat(0);
-    //   setLon(0);
-    // } else {
-    //   setOpenNote(true);
-    // }
-    console.log(openNote);
+    console.log("coords are: ", lat, lon);
+    setOpenNote(true);
+    console.log("from the backdrop", localCoordinates);
+    handleChangeCoordinates(localCoordinates);
   };
+
   const handleCancelSearch = () => {
     setLocalCoordinates({});
     setLat(0);
@@ -108,6 +107,7 @@ const CoordinatesBackdrop = ({ onOpen, handleCloseCoordinates }) => {
             variant="outlined"
             placeholder="Longtitude"
             type="number"
+            helperText="Longtitude between -180 and 180"
             value={lon === 0 ? "" : lon}
             inputProps={{ min: -180, max: 180 }}
             onChange={(e) => setLon(Number(e.target.value))}
@@ -117,7 +117,8 @@ const CoordinatesBackdrop = ({ onOpen, handleCloseCoordinates }) => {
             variant="outlined"
             placeholder="Latitude"
             type="number"
-            value={lat === 0 ? null : lat}
+            helperText="Latitude between -90 and 90"
+            value={lat === 0 ? "" : lat}
             inputProps={{ min: -90, max: 90 }}
             onChange={(e) => setLat(Number(e.target.value))}
             sx={{ flex: 1 }}
@@ -150,15 +151,20 @@ const CoordinatesBackdrop = ({ onOpen, handleCloseCoordinates }) => {
         </Box>
       </Box>
       {
-        // (lon === lat) === 0
-        // openNote && (
         <DefaultSnackbar
           handleClose={handleClose}
           open={openNote}
-          severity={"warning"}
-          text={"That's null island, a floating piece of metal. "}
+          severity={
+            localCoordinates.lat === 0 && localCoordinates.lon === 0
+              ? "warning"
+              : "success"
+          }
+          text={
+            localCoordinates.lat === 0 && localCoordinates.lon === 0
+              ? "That's null island, a floating piece of metal. "
+              : "Request issued. "
+          }
         />
-        // )
       }
     </Backdrop>
   );

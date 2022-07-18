@@ -13,7 +13,7 @@ import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import SearchOffRoundedIcon from "@mui/icons-material/SearchOffRounded";
 
 import DefaultSnackbar from "../Snackbars/DefaultSnackbar";
-import { getCities, getWeatherInfoName } from "../../Api/requests";
+import { getCities } from "../../Api/requests";
 
 const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
   const [localCityName, setLocalCityName] = useState(""); //String
@@ -24,7 +24,6 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
   const handleClose = () => {
     setOpenNote(false);
   };
-  // USE THE CITIES API FOR AUTOCOMPLETE (FLEX BRO)
   // FIX THE FETCH, AVOID THE UNDEFINED rawData BUG
   const handleFetchCities = useCallback(async (cityName) => {
     const rawData = await getCities(
@@ -60,9 +59,6 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
   // MAKE THE SUCCESS SNACKBAR APPEAR IF THE REQUEST IS VALID
   const handleSubmit = async () => {
     handleChangeCurrentName(localCityName);
-    // console.log(localCityName);
-    // const res = await getWeatherInfoName(localCityName);
-    // console.log(res);
     setLocalCityName("");
     setOpenNote(true);
   };

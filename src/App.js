@@ -16,6 +16,14 @@ function App() {
   const [customTheme, setCustomTheme] = useState(
     prefersDarkMode ? darkThemeStyle : lightThemeStyle
   );
+  const [language, setLanguage] = useState("en");
+
+  useEffect(() => {
+    const localLanguage = localStorage.getItem("i18nextLng");
+    localLanguage === null
+      ? localStorage.setItem("i18nextLng", "en")
+      : handleChangeLanguage(localLanguage);
+  }, []);
 
   const handleChangeTheme = useCallback(
     (choice) => {
@@ -30,13 +38,18 @@ function App() {
     [prefersDarkMode]
   );
 
+  // CHANGE LANGUAGE FUNCTION
+  const handleChangeLanguage = (choice) => {
+    setLanguage(choice);
+  };
+
   useEffect(() => {
     const localThemePref = localStorage.getItem("color-theme");
     localThemePref === null
       ? localStorage.setItem("color-theme", "System")
       : handleChangeTheme(localThemePref);
-    localStorage.setItem("i18nextLng", "en");
-    console.log("the App.js's useEffect just ran");
+    // localStorage.setItem("i18nextLng", "en");
+    // console.log("the App.js's useEffect just ran")
   }, [handleChangeTheme]);
 
   return (
@@ -47,7 +60,11 @@ function App() {
         bgcolor="custom.firstBgColor"
         sx={{ minHeight: "100vh" }}
       >
-        <Homepage handleChangeTheme={handleChangeTheme} />
+        <Homepage
+          handleChangeTheme={handleChangeTheme}
+          handleChangeLanguage={handleChangeLanguage}
+          language={language}
+        />
         {/* <Random /> */}
         <Attribution />
         {/* <IntroPage theme={customTheme} /> */}

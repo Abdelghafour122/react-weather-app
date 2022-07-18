@@ -7,8 +7,7 @@ import Attribution from "../Components/Attribution";
 
 import Random from "../Components/Random";
 
-const Homepage = ({ handleChangeTheme }) => {
-  const [language, setLanguage] = useState("en");
+const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
   const [currentCityName, setCurrentCityName] = useState(String);
   const [coordinates, setCoordinates] = useState({});
   const [currentWeather, setCurrentWeather] = useState({});
@@ -29,13 +28,14 @@ const Homepage = ({ handleChangeTheme }) => {
       : handleChangeTemperature(localTemperature);
   }, []);
 
-  // CHANGE LANGUAGE FUNCTION
-  const handleChangeLanguage = (choice) => {
-    setLanguage(choice);
-  };
-
+  // CHANGE COUNTRY NAME
   const handleChangeCurrentName = (newCityName) => {
     setCurrentCityName(newCityName);
+  };
+
+  // CHANGE COORDINATES
+  const handleChangeCoordinates = (newCoordinates) => {
+    setCoordinates(newCoordinates);
   };
 
   // FETCHING THE CURRENT LOCATION ON PAGELOAD, WITHOUT SEARCHING
@@ -51,15 +51,23 @@ const Homepage = ({ handleChangeTheme }) => {
   // GET WEATHER WHENEVER THE NAME CHANGES, ALSO ON PAGELOAD WITH CURRENT LOCATION
   useEffect(() => {
     const getWeatherByName = async () => {
-      setCurrentWeather(await getWeatherInfoName(currentCityName));
+      setCurrentWeather(
+        await getWeatherInfoName(currentCityName, language, temperature)
+      );
     };
     currentCityName !== ""
       ? getWeatherByName()
-      : getWeatherInfoName(currentCityName);
-  }, [currentCityName]);
+      : getWeatherInfoName(currentCityName, language, temperature);
+  }, [currentCityName, language, temperature]);
+
+  // useEffect(()=>{
+  //   getWeatherInfoName(currentCityName, language, temperature);
+  // }, [language, temperature])
 
   // GET WEATHER WHENEVER THE COORDINATES CHANGE
-  useEffect(() => {}, [coordinates]);
+  useEffect(() => {
+    console.log("new coordinates", coordinates);
+  }, [coordinates]);
 
   // SET LOADING TO TRUE WHENEVER THE COORDINATES OR NAME CHANGE
   useEffect(() => {
@@ -78,6 +86,7 @@ const Homepage = ({ handleChangeTheme }) => {
         handleChangeLanguage={handleChangeLanguage}
         handleChangeTemperature={handleChangeTemperature}
         handleChangeCurrentName={handleChangeCurrentName}
+        handleChangeCoordinates={handleChangeCoordinates}
       />
       <Forecast
         loading={loading}
