@@ -83,7 +83,7 @@ export const getCities = (value, lang) => {
       }
     )
     .then((res) => res.data)
-    .catch((err) => console.log(err));
+    .catch(() => console.log("The city name is invalid"));
 
   return result;
 };

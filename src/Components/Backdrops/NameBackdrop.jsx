@@ -16,8 +16,10 @@ import DefaultSnackbar from "../Snackbars/DefaultSnackbar";
 import { getCities } from "../../Api/requests";
 
 const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
-  const [localCityName, setLocalCityName] = useState(""); //String
-  const [openNote, setOpenNote] = useState(false); //false
+  const [localCityName, setLocalCityName] = useState(String);
+  const [openNote, setOpenNote] = useState(false);
+  const [openList, setOpenList] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [citiesList, setCitiesList] = useState([]);
   const [showHelperText, setShowHelperText] = useState(true);
 
@@ -37,6 +39,7 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
     if (localCityName === "") {
       setShowHelperText(true);
     } else {
+      setLoading(true);
       setShowHelperText(false);
       handleFetchCities(localCityName)
         .then(
@@ -50,21 +53,19 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
                 country: opt.country,
               })),
             ])
-          // : setCitiesList([])
         )
-        .catch((error) => console.log("resultData was undefined"));
+        .then(() => setLoading(false))
+        .catch(() => console.log("resultData was undefined"));
     }
   }, [localCityName, handleFetchCities]);
 
   // MAKE THE SUCCESS SNACKBAR APPEAR IF THE REQUEST IS VALID
   const handleSubmit = async () => {
     handleChangeCurrentName(localCityName);
-    setLocalCityName("");
     setOpenNote(true);
   };
 
   const handleCancelSearch = () => {
-    setLocalCityName("");
     handleCloseName();
   };
 
@@ -111,7 +112,9 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
         </Box>
         <Box sx={{ width: "100%" }}>
           <Autocomplete
-            // open={true}
+            open={openList}
+            onOpen={() => setOpenList(true)}
+            onClose={() => setOpenList(false)}
             options={citiesList}
             isOptionEqualToValue={(option, value) => option.city === value.city}
             getOptionLabel={(option) => option.city}
@@ -149,8 +152,10 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
                     ...params.InputProps,
                     endAdornment: (
                       <React.Fragment>
-                        {/* {loading ? <CircularProgress color="inherit" size={20} /> : null} */}
-                        <CircularProgress color="inherit" size={20} />
+                        {loading ? (
+                          <CircularProgress color="inherit" size={20} />
+                        ) : null}
+                        {/* <CircularProgress color="inherit" size={20} /> */}
                         {params.InputProps.endAdornment}
                       </React.Fragment>
                     ),
