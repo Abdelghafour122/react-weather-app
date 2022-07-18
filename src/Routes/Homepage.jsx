@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Navbar from "./Homepage/Navbar";
-import { getCurrentLocationInfo, getWeatherInfoName } from "../Api/requests";
+import {
+  getCurrentLocationInfo,
+  getWeatherInfoCoor,
+  getWeatherInfoName,
+} from "../Api/requests";
 import Forecast from "./Homepage/Forecast";
-import Attribution from "../Components/Attribution";
-
-import Random from "../Components/Random";
 
 const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
   const [currentCityName, setCurrentCityName] = useState(String);
@@ -60,14 +61,15 @@ const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
       : getWeatherInfoName(currentCityName, language, temperature);
   }, [currentCityName, language, temperature]);
 
-  // useEffect(()=>{
-  //   getWeatherInfoName(currentCityName, language, temperature);
-  // }, [language, temperature])
-
   // GET WEATHER WHENEVER THE COORDINATES CHANGE
   useEffect(() => {
-    console.log("new coordinates", coordinates);
-  }, [coordinates]);
+    const getWeatherByCoordinates = async () => {
+      setCurrentWeather(
+        await getWeatherInfoCoor(coordinates, language, temperature)
+      );
+    };
+    Object.keys(coordinates).length !== 0 && getWeatherByCoordinates();
+  }, [coordinates, language, temperature]);
 
   // SET LOADING TO TRUE WHENEVER THE COORDINATES OR NAME CHANGE
   useEffect(() => {

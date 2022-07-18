@@ -42,9 +42,7 @@ const CoordinatesBackdrop = ({
   // FIX THIS FUNC, THE INFO SACKBAR MUST APPEAR IF lat === lon === 0
   // REQUEST VALID && SUCCESS SNACKBAR
   const handleSubmit = () => {
-    console.log("coords are: ", lat, lon);
     setOpenNote(true);
-    console.log("from the backdrop", localCoordinates);
     handleChangeCoordinates(localCoordinates);
   };
 
