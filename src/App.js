@@ -9,7 +9,6 @@ import Homepage from "./Routes/Homepage";
 
 import lightThemeStyle from "./Themes/lightThemeStyle";
 import darkThemeStyle from "./Themes/darkThemeStyle";
-import IntroPage from "./Routes/IntroPage";
 
 function App() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -67,7 +66,6 @@ function App() {
         />
         {/* <Random /> */}
         <Attribution />
-        {/* <IntroPage theme={customTheme} /> */}
       </Box>
     </ThemeProvider>
   );

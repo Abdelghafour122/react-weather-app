@@ -1,20 +1,23 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
+import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
-import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import Tooltip from "@mui/material/Tooltip";
+import Badge from "@mui/material/Badge";
 import PlaceIcon from "@mui/icons-material/Place";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import OpacityIcon from "@mui/icons-material/Opacity";
 import AirIcon from "@mui/icons-material/Air";
 import CompressIcon from "@mui/icons-material/Compress";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import sunrise from "../../Assets/sunrise.png";
-import sunset from "../../Assets/sunset.png";
+import NightsStayIcon from "@mui/icons-material/NightsStay";
+import WbTwilightIcon from "@mui/icons-material/WbTwilight";
+import EastIcon from "@mui/icons-material/East";
 import { ThreeDots } from "react-loader-spinner";
 
 import tempIcon from "../../Assets/cloud-moon-rain-solid.svg";
@@ -25,11 +28,16 @@ const Forecast = ({ currentWeather, loading }) => {
   return (
     <Box
       bgcolor="custom.firstBgColor"
-      sx={{ minHeight: "100vh", marginTop: "50px" }}
+      sx={{ minHeight: "100vh", marginTop: "30px" }}
     >
       <Container
         maxWidth="xl"
-        sx={{ display: "flex", flexDirection: "column" }}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
       >
         {loading ? (
           <ThreeDots width="100" />
@@ -42,6 +50,7 @@ const Forecast = ({ currentWeather, loading }) => {
                 flexDirection: "column",
                 alignItems: "center",
                 width: "100%",
+                gap: "20px",
               }}
             >
               <Card
@@ -121,14 +130,21 @@ const Forecast = ({ currentWeather, loading }) => {
                         height="190px"
                         alt="Weather icon"
                       />
-                      <Typography
-                        component="p"
-                        variant="p"
-                        color="text.primary"
-                        sx={{ fontSize: "90px" }}
+                      <Tooltip
+                        placement="top"
+                        title="Temperature unit can be changed in Settings! 👉"
                       >
-                        25°C
-                      </Typography>
+                        <Badge badgeContent={"i"} color="warning">
+                          <Typography
+                            component="p"
+                            variant="p"
+                            color="text.primary"
+                            sx={{ fontSize: "90px" }}
+                          >
+                            25°C
+                          </Typography>
+                        </Badge>
+                      </Tooltip>
                     </Box>
                     <Box className="description-holder">
                       <Typography
@@ -162,34 +178,78 @@ const Forecast = ({ currentWeather, loading }) => {
                     <Grid item xs={2} sm={3} lg={3}>
                       <InfoBox
                         unit={"WIND"}
+                        IconName={AirIcon}
                         info={
                           <>
-                            4 km/h
-                            <NavigationIcon
-                              sx={{ transform: `rotate(${120}deg)` }}
-                            />
+                            4 km/h &nbsp; &nbsp;
+                            <Tooltip
+                              title="Wind Angle 33°"
+                              enterDelay={500}
+                              leaveDelay={200}
+                            >
+                              <NavigationIcon
+                                sx={{
+                                  transform: `rotate(${120}deg)`,
+                                }}
+                              />
+                            </Tooltip>
                           </>
                         }
                       />
                     </Grid>
                     <Grid item xs={2} sm={3} lg={3}>
-                      <InfoBox unit={"HUMIDITY"} info={"89%"} />
+                      <InfoBox
+                        unit={"HUMIDITY"}
+                        info={"89%"}
+                        IconName={OpacityIcon}
+                      />
                     </Grid>
                     <Grid item xs={2} sm={3} lg={3}>
-                      <InfoBox unit={"VISIBILITY"} info={"10km"} />
+                      <InfoBox
+                        unit={"VISIBILITY"}
+                        info={"10km"}
+                        IconName={VisibilityIcon}
+                      />
                     </Grid>
                     <Grid item xs={2} sm={3} lg={3}>
-                      <InfoBox unit={"PRESSURE"} info={"1016mb"} />
+                      <InfoBox
+                        unit={"PRESSURE"}
+                        info={"1016mb"}
+                        IconName={CompressIcon}
+                      />
                     </Grid>
                     <Grid item xs={2} sm={3} lg={3}>
-                      <InfoBox unit={"SUNRISE"} info={"5:53"} />
+                      <InfoBox
+                        unit={"SUNRISE"}
+                        info={"5:53"}
+                        IconName={WbTwilightIcon}
+                      />
                     </Grid>
                     <Grid item xs={2} sm={3} lg={3}>
-                      <InfoBox unit={"SUNSET"} info={"20:14"} />
+                      <InfoBox
+                        unit={"SUNSET"}
+                        info={"20:14"}
+                        IconName={NightsStayIcon}
+                      />
                     </Grid>
                   </Grid>
                 </CardContent>
               </Card>
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-evenly",
+                }}
+              >
+                <Button variant="outlined" color="info" endIcon={<EastIcon />}>
+                  See Hourly
+                </Button>
+                <Button variant="outlined" color="info" endIcon={<EastIcon />}>
+                  See Daily
+                </Button>
+              </Box>
             </Box>
             <pre>{JSON.stringify(currentWeather, null, 2)}</pre>
           </React.Fragment>
