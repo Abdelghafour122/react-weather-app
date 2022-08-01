@@ -47,8 +47,6 @@ function App() {
     localThemePref === null
       ? localStorage.setItem("color-theme", "System")
       : handleChangeTheme(localThemePref);
-    // localStorage.setItem("i18nextLng", "en");
-    // console.log("the App.js's useEffect just ran")
   }, [handleChangeTheme]);
 
   return (
@@ -64,7 +62,7 @@ function App() {
           handleChangeLanguage={handleChangeLanguage}
           language={language}
         />
-        {/* <Random /> */}
+        <Random />
         <Attribution />
       </Box>
     </ThemeProvider>

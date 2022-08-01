@@ -239,16 +239,27 @@ const Forecast = ({ currentWeather, loading }) => {
                 sx={{
                   width: "100%",
                   display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-evenly",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  justifyContent: "space-between",
+                  gap: "20px",
                 }}
               >
-                <Button variant="outlined" color="info" endIcon={<EastIcon />}>
-                  See Hourly
-                </Button>
-                <Button variant="outlined" color="info" endIcon={<EastIcon />}>
-                  See Daily
-                </Button>
+                <Typography
+                  component="p"
+                  variant="p"
+                  color="text.primary"
+                  sx={{ fontWeight: 700 }}
+                >
+                  Hourly Forecast:
+                </Typography>
+                <Card
+                  sx={{
+                    width: "100%",
+                    backgroundColor: (theme) =>
+                      theme.palette.custom.secondBgColor,
+                  }}
+                ></Card>
               </Box>
             </Box>
             <pre>{JSON.stringify(currentWeather, null, 2)}</pre>

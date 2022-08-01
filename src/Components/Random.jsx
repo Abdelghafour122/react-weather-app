@@ -23,12 +23,12 @@ const Random = () => {
     // const result = await getWeatherInfoCoor(20, 29, "de", "fahrenheit");
     const resulta = await getWeatherInfoName("london", "en", "");
     // const result = await getWeatherInfoDaily(48.2085, 16.3721);
-    // const result = await getWeatherInfoHourly(48.2085, 16.3721);
-    const result = await getCurrentLocationInfo();
+    const result = await getWeatherInfoHourly(48.2085, 16.3721);
+    // const result = await getCurrentLocationInfo();
 
     // setLocation(result);
 
-    setWeather(resulta);
+    setWeather(result);
     const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
 
     setName(regionNames.of(resulta.sys.country));
