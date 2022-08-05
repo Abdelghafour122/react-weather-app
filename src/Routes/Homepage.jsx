@@ -11,7 +11,7 @@ import Forecast from "./Homepage/Forecast";
 const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
   const [currentCityName, setCurrentCityName] = useState(String);
   const [coordinates, setCoordinates] = useState({});
-  const [currentWeather, setCurrentWeather] = useState({});
+  const [currentWeather, setCurrentWeather] = useState(Object);
   const [temperature, setTemperature] = useState("Celcius");
   const [loading, setLoading] = useState(true);
 
@@ -42,11 +42,9 @@ const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
   // FETCHING THE CURRENT LOCATION ON PAGELOAD, WITHOUT SEARCHING
   useEffect(() => {
     const getCurrentCity = async () => {
-      const currentLocation = await getCurrentLocationInfo();
-      handleChangeCurrentName(currentLocation.city);
+      handleChangeCurrentName(await getCurrentLocationInfo());
     };
     getCurrentCity();
-    setLoading(true);
   }, []);
 
   // GET WEATHER WHENEVER THE NAME CHANGES, ALSO ON PAGELOAD WITH CURRENT LOCATION
@@ -56,9 +54,7 @@ const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
         await getWeatherInfoName(currentCityName, language, temperature)
       );
     };
-    currentCityName !== ""
-      ? getWeatherByName()
-      : getWeatherInfoName(currentCityName, language, temperature);
+    currentCityName && getWeatherByName();
   }, [currentCityName, language, temperature]);
 
   // GET WEATHER WHENEVER THE COORDINATES CHANGE
@@ -76,9 +72,9 @@ const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
     setLoading(true);
   }, [coordinates, currentCityName]);
 
-  // SET LOADING TO TRUE WHENEVER THE CURRENTWEATHER CHANGES "WHEN THE FETCH IS FINISHED"
+  // SET LOADING TO FALSE WHENEVER THE CURRENTWEATHER CHANGES "WHEN THE FETCH IS FINISHED"
   useEffect(() => {
-    setLoading(false);
+    if (Object.keys(currentWeather).length !== 0) setLoading(false);
   }, [currentWeather]);
 
   return (
@@ -92,8 +88,9 @@ const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
       />
       <Forecast
         loading={loading}
-        currentCityName={currentCityName}
         currentWeather={currentWeather}
+        temperature={temperature}
+        language={language}
       />
       {/* <Random /> */}
     </Box>

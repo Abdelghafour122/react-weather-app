@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
@@ -17,14 +17,53 @@ import CompressIcon from "@mui/icons-material/Compress";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
 import WbTwilightIcon from "@mui/icons-material/WbTwilight";
-import EastIcon from "@mui/icons-material/East";
 import { ThreeDots } from "react-loader-spinner";
 
 import tempIcon from "../../Assets/cloud-moon-rain-solid.svg";
 import InfoBox from "./Forecast/InfoBox";
 
-const Forecast = ({ currentWeather, loading }) => {
+const Forecast = ({ currentWeather, loading, temperature, language }) => {
   console.log(currentWeather);
+
+  // const countryName = new Intl.DisplayNames(["de"], { type: "region" });
+  const countryName = new Intl.DisplayNames([`${language}`], {
+    type: "region",
+  });
+
+  let time = new Date();
+
+  const [currentHour, setCurrentHour] = useState(
+    time.getHours().toLocaleString("en-US", { minimumIntegerDigits: 2 })
+  );
+  const [currentMinute, setCurrentMinute] = useState(
+    time.getMinutes().toLocaleString("en-US", { minimumIntegerDigits: 2 })
+  );
+  const getTempUnit = () => {
+    if (temperature === "Celcius") return "C";
+    else if (temperature === "Fahrenheit") return "F";
+    else if (temperature === "Kelvin") return "K";
+  };
+  const convertToTime = (timeStamp, offset) => {
+    const now = new Date(timeStamp * 1000);
+    const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+    const nd = new Date(utc + 3600000 * (offset / 3600));
+    console.log(nd);
+    return `${nd
+      .getHours()
+      .toLocaleString("en-US", { minimumIntegerDigits: 2 })}:${nd
+      .getMinutes()
+      .toLocaleString("en-US", { minimumIntegerDigits: 2 })}`;
+  };
+
+  setInterval(() => {
+    let time = new Date();
+    setCurrentHour(
+      time.getHours().toLocaleString("en-US", { minimumIntegerDigits: 2 })
+    );
+    setCurrentMinute(
+      time.getMinutes().toLocaleString("en-US", { minimumIntegerDigits: 2 })
+    );
+  }, 60000);
   return (
     <Box
       bgcolor="custom.firstBgColor"
@@ -91,7 +130,7 @@ const Forecast = ({ currentWeather, loading }) => {
                         variant="p"
                         color="text.secondary"
                       >
-                        23:23
+                        {`${currentHour}:${currentMinute}`}
                       </Typography>
                     </Box>
                     <Box
@@ -108,7 +147,15 @@ const Forecast = ({ currentWeather, loading }) => {
                         component="p"
                         color="text.secondary"
                       >
-                        Ahmer El Aïn, Tipaza, Algeria
+                        {`${
+                          currentWeather?.name !== ""
+                            ? currentWeather?.name
+                            : "Unknown Location"
+                        }, ${
+                          currentWeather?.sys?.hasOwnProperty("country")
+                            ? countryName.of(currentWeather?.sys?.country)
+                            : "Unknown country"
+                        }.`}
                       </Typography>
                     </Box>
                   </Box>
@@ -126,7 +173,8 @@ const Forecast = ({ currentWeather, loading }) => {
                     >
                       <CardMedia
                         component="img"
-                        image={tempIcon}
+                        // image={tempIcon}
+                        src={`http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`}
                         height="190px"
                         alt="Weather icon"
                       />
@@ -141,7 +189,10 @@ const Forecast = ({ currentWeather, loading }) => {
                             color="text.primary"
                             sx={{ fontSize: "90px" }}
                           >
-                            25°C
+                            {/* 25°C */}
+                            {`${Math.floor(
+                              currentWeather?.main?.temp
+                            )}°${getTempUnit()}`}
                           </Typography>
                         </Badge>
                       </Tooltip>
@@ -152,28 +203,39 @@ const Forecast = ({ currentWeather, loading }) => {
                         variant="p"
                         color="text.primary"
                       >
-                        Mostly cloudy
+                        {/* Mostly cloudy */}
+                        {currentWeather?.weather[0]?.main}
                       </Typography>
                       <Typography
                         component="p"
                         variant="subtitle1"
                         color="text.secondary"
                       >
-                        FEELS LIKE 24°{" "}
+                        {/* FEELS LIKE 24°{" "} */}
+                        {`FEELS LIKE ${Math.floor(
+                          currentWeather?.main?.feels_like
+                        )}°`}
                       </Typography>
                     </Box>
                   </Box>
                   <Box className="sub-description">
                     <Typography component="p" variant="p" color="text.primary">
-                      Clear sky, the highest temperature will be 32°, and the
-                      lowest 25°.
+                      {`${
+                        currentWeather.weather[0].description
+                      }, the highest temperature will be ${Math.ceil(
+                        currentWeather?.main?.temp_max
+                      )}°, and the lowest will be ${Math.floor(
+                        currentWeather?.main?.temp_min
+                      )}°.`}
+                      {/* Clear sky, the highest temperature will be 32°, and the
+                      lowest 25°. */}
                     </Typography>
                   </Box>
                   <Grid
                     container
                     spacing={3}
                     columns={{ xs: 2, sm: 9, lg: 18 }}
-                    sx={{ width: "100%" }}
+                    sx={{ width: "100%", alignSelf: "center" }}
                   >
                     <Grid item xs={2} sm={3} lg={3}>
                       <InfoBox
@@ -181,15 +243,17 @@ const Forecast = ({ currentWeather, loading }) => {
                         IconName={AirIcon}
                         info={
                           <>
-                            4 km/h &nbsp; &nbsp;
+                            {`${Math.ceil(currentWeather?.wind?.speed)}km/h`}{" "}
+                            &nbsp; &nbsp;
                             <Tooltip
-                              title="Wind Angle 33°"
+                              // title="Wind Angle 33°"
+                              title={`Wind Angle ${currentWeather?.wind?.deg}°`}
                               enterDelay={500}
                               leaveDelay={200}
                             >
                               <NavigationIcon
                                 sx={{
-                                  transform: `rotate(${120}deg)`,
+                                  transform: `rotate(${currentWeather?.wind?.deg}deg)`,
                                 }}
                               />
                             </Tooltip>
@@ -200,35 +264,43 @@ const Forecast = ({ currentWeather, loading }) => {
                     <Grid item xs={2} sm={3} lg={3}>
                       <InfoBox
                         unit={"HUMIDITY"}
-                        info={"89%"}
+                        info={`${Math.floor(currentWeather?.main?.humidity)}%`}
                         IconName={OpacityIcon}
                       />
                     </Grid>
                     <Grid item xs={2} sm={3} lg={3}>
                       <InfoBox
                         unit={"VISIBILITY"}
-                        info={"10km"}
+                        info={`${Math.floor(
+                          currentWeather?.visibility / 1000
+                        )}km`}
                         IconName={VisibilityIcon}
                       />
                     </Grid>
                     <Grid item xs={2} sm={3} lg={3}>
                       <InfoBox
                         unit={"PRESSURE"}
-                        info={"1016mb"}
+                        info={`${Math.floor(currentWeather?.main?.pressure)}mb`}
                         IconName={CompressIcon}
                       />
                     </Grid>
                     <Grid item xs={2} sm={3} lg={3}>
                       <InfoBox
                         unit={"SUNRISE"}
-                        info={"5:53"}
+                        info={`${convertToTime(
+                          currentWeather?.sys?.sunrise,
+                          currentWeather?.timezone
+                        )}`}
                         IconName={WbTwilightIcon}
                       />
                     </Grid>
                     <Grid item xs={2} sm={3} lg={3}>
                       <InfoBox
                         unit={"SUNSET"}
-                        info={"20:14"}
+                        info={`${convertToTime(
+                          currentWeather?.sys?.sunset,
+                          currentWeather?.timezone
+                        )}`}
                         IconName={NightsStayIcon}
                       />
                     </Grid>

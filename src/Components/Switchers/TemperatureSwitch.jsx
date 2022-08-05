@@ -7,7 +7,8 @@ import ToggleButton from "@mui/material/ToggleButton";
 const TEMPERATURES = ["Celcius", "Fahrenheit", "Kelvin"];
 
 const TemperatureSwitch = ({ handleChangeTemperature }) => {
-  const [temp, setTemp] = useState("Celcius");
+  const temperature = localStorage.getItem("temp-unit");
+  const [temp, setTemp] = useState(temperature);
   const handleChange = (e, temp) => {
     if (temp !== null) {
       setTemp(temp);

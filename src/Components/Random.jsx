@@ -23,7 +23,7 @@ const Random = () => {
     // const result = await getWeatherInfoCoor(20, 29, "de", "fahrenheit");
     const resulta = await getWeatherInfoName("london", "en", "");
     // const result = await getWeatherInfoDaily(48.2085, 16.3721);
-    const result = await getWeatherInfoHourly(48.2085, 16.3721);
+    const result = await getWeatherInfoHourly(48.2085, 16.3721, "de");
     // const result = await getCurrentLocationInfo();
 
     // setLocation(result);
@@ -55,7 +55,7 @@ const Random = () => {
       <br />
       <pre>{JSON.stringify(location, null, 2)}</pre>; */}
 
-      <pre>{JSON.stringify(weather, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(weather, null, 2)}</pre> */}
 
       {/* <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="" /> */}
     </>
