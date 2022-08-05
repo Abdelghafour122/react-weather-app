@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -19,7 +18,6 @@ import NightsStayIcon from "@mui/icons-material/NightsStay";
 import WbTwilightIcon from "@mui/icons-material/WbTwilight";
 import { ThreeDots } from "react-loader-spinner";
 
-import tempIcon from "../../Assets/cloud-moon-rain-solid.svg";
 import InfoBox from "./Forecast/InfoBox";
 
 const Forecast = ({ currentWeather, loading, temperature, language }) => {
@@ -27,14 +25,6 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
     type: "region",
   });
 
-  let time = new Date();
-
-  const [currentHour, setCurrentHour] = useState(
-    time.getHours().toLocaleString("en-US", { minimumIntegerDigits: 2 })
-  );
-  const [currentMinute, setCurrentMinute] = useState(
-    time.getMinutes().toLocaleString("en-US", { minimumIntegerDigits: 2 })
-  );
   const getTempUnit = () => {
     if (temperature === "Celcius") return "C";
     else if (temperature === "Fahrenheit") return "F";
@@ -51,15 +41,27 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
       .toLocaleString("en-US", { minimumIntegerDigits: 2 })}`;
   };
 
+  const time = new Date();
+
+  const [localTime, setLocalTime] = useState(
+    loading
+      ? `${time.getHours()}:${time.getMinutes()}`
+      : convertToTime(currentWeather?.timezone)
+  );
+
+  const handleChangeLocalTime = useCallback(() => {
+    setLocalTime(convertToTime(currentWeather?.timezone));
+  }, [currentWeather?.timezone]);
+
+  useEffect(() => {
+    if (loading === false) handleChangeLocalTime();
+  }, [loading, handleChangeLocalTime]);
+
+  console.log(localTime);
   setInterval(() => {
-    let time = new Date();
-    setCurrentHour(
-      time.getHours().toLocaleString("en-US", { minimumIntegerDigits: 2 })
-    );
-    setCurrentMinute(
-      time.getMinutes().toLocaleString("en-US", { minimumIntegerDigits: 2 })
-    );
+    handleChangeLocalTime();
   }, 60000);
+
   return (
     <Box
       bgcolor="custom.firstBgColor"
@@ -126,9 +128,7 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                         variant="p"
                         color="text.secondary"
                       >
-                        {`Current Local Time: ${convertToTime(
-                          currentWeather?.timezone
-                        )}`}
+                        {`Current Local Time: ${localTime}`}
                       </Typography>
                     </Box>
                     <Box
@@ -171,7 +171,6 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                     >
                       <CardMedia
                         component="img"
-                        // image={tempIcon}
                         src={`http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`}
                         height="190px"
                         alt="Weather icon"
@@ -187,7 +186,6 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                             color="text.primary"
                             sx={{ fontSize: "90px" }}
                           >
-                            {/* 25°C */}
                             {`${Math.floor(
                               currentWeather?.main?.temp
                             )}°${getTempUnit()}`}
@@ -201,7 +199,6 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                         variant="p"
                         color="text.primary"
                       >
-                        {/* Mostly cloudy */}
                         {currentWeather?.weather[0]?.main}
                       </Typography>
                       <Typography
@@ -209,7 +206,6 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                         variant="subtitle1"
                         color="text.secondary"
                       >
-                        {/* FEELS LIKE 24°{" "} */}
                         {`FEELS LIKE ${Math.floor(
                           currentWeather?.main?.feels_like
                         )}°`}
@@ -225,8 +221,6 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                       )}°, and the lowest will be ${Math.floor(
                         currentWeather?.main?.temp_min
                       )}°.`}
-                      {/* Clear sky, the highest temperature will be 32°, and the
-                      lowest 25°. */}
                     </Typography>
                   </Box>
                   <Grid
@@ -244,7 +238,6 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                             {`${Math.ceil(currentWeather?.wind?.speed)}km/h`}{" "}
                             &nbsp; &nbsp;
                             <Tooltip
-                              // title="Wind Angle 33°"
                               title={`Wind Angle ${currentWeather?.wind?.deg}°`}
                               enterDelay={500}
                               leaveDelay={200}

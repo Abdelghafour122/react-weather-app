@@ -74,6 +74,8 @@ const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
 
   // SET LOADING TO FALSE WHENEVER THE CURRENTWEATHER CHANGES "WHEN THE FETCH IS FINISHED"
   useEffect(() => {
+    // MAKE AN ERROR RESPONSE
+    if (currentWeather === undefined) return;
     if (Object.keys(currentWeather).length !== 0) setLoading(false);
   }, [currentWeather]);
 
