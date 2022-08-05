@@ -77,6 +77,8 @@ const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
     if (Object.keys(currentWeather).length !== 0) setLoading(false);
   }, [currentWeather]);
 
+  console.log(currentWeather);
+
   return (
     <Box component="div" className="homepage">
       <Navbar

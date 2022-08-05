@@ -72,7 +72,6 @@ export const getWeatherInfoDaily = (lat, lon) => {
 export const getCurrentLocationInfo = () => {
   const result = axios
     .get("http://ip-api.com/json/", { headers: { accept: "Application/json" } })
-    .then((ress) => console.log(ress.data))
     .then((res) => res?.data?.city)
     .catch((err) => console.log(err));
   return result;

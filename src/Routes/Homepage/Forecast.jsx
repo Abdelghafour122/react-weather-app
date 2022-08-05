@@ -23,9 +23,6 @@ import tempIcon from "../../Assets/cloud-moon-rain-solid.svg";
 import InfoBox from "./Forecast/InfoBox";
 
 const Forecast = ({ currentWeather, loading, temperature, language }) => {
-  console.log(currentWeather);
-
-  // const countryName = new Intl.DisplayNames(["de"], { type: "region" });
   const countryName = new Intl.DisplayNames([`${language}`], {
     type: "region",
   });
@@ -43,11 +40,10 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
     else if (temperature === "Fahrenheit") return "F";
     else if (temperature === "Kelvin") return "K";
   };
-  const convertToTime = (timeStamp, offset) => {
-    const now = new Date(timeStamp * 1000);
+  const convertToTime = (offset, timeStamp) => {
+    const now = !isNaN(timeStamp) ? new Date(timeStamp * 1000) : new Date();
     const utc = now.getTime() + now.getTimezoneOffset() * 60000;
     const nd = new Date(utc + 3600000 * (offset / 3600));
-    console.log(nd);
     return `${nd
       .getHours()
       .toLocaleString("en-US", { minimumIntegerDigits: 2 })}:${nd
@@ -130,7 +126,9 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                         variant="p"
                         color="text.secondary"
                       >
-                        {`${currentHour}:${currentMinute}`}
+                        {`Current Local Time: ${convertToTime(
+                          currentWeather?.timezone
+                        )}`}
                       </Typography>
                     </Box>
                     <Box

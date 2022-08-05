@@ -8,6 +8,10 @@ i18-next, mui mui-icons are installed
 USE THE THREE DOTS AS LOADING INDICATOR UNTILL YOU FIGURE OUT HOW TO USE THE SKELETON
 run: npm uninstall react-loader-spinner
 
+ISSUES:
+CITY SEARCH IS LAGGY, CAN'T SEARCH IF THE LANGUAGE IS SET TO ARABIC
+
+
 14/7: 
 
 17/7:
