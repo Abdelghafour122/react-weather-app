@@ -19,6 +19,7 @@ import WbTwilightIcon from "@mui/icons-material/WbTwilight";
 import { ThreeDots } from "react-loader-spinner";
 
 import InfoBox from "./Forecast/InfoBox";
+import CurrentTime from "./Forecast/CurrentTime";
 
 const Forecast = ({ currentWeather, loading, temperature, language }) => {
   const countryName = new Intl.DisplayNames([`${language}`], {
@@ -31,36 +32,18 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
     else if (temperature === "Kelvin") return "K";
   };
   const convertToTime = (offset, timeStamp) => {
-    const now = !isNaN(timeStamp) ? new Date(timeStamp * 1000) : new Date();
+    const now =
+      timeStamp === undefined ? new Date() : new Date(timeStamp * 1000);
     const utc = now.getTime() + now.getTimezoneOffset() * 60000;
-    const nd = new Date(utc + 3600000 * (offset / 3600));
+    const inp = Number(utc) + 3600000 * (Number(offset) / 3600);
+    const nd = new Date(inp);
+
     return `${nd
       .getHours()
       .toLocaleString("en-US", { minimumIntegerDigits: 2 })}:${nd
       .getMinutes()
       .toLocaleString("en-US", { minimumIntegerDigits: 2 })}`;
   };
-
-  const time = new Date();
-
-  const [localTime, setLocalTime] = useState(
-    loading
-      ? `${time.getHours()}:${time.getMinutes()}`
-      : convertToTime(currentWeather?.timezone)
-  );
-
-  const handleChangeLocalTime = useCallback(() => {
-    setLocalTime(convertToTime(currentWeather?.timezone));
-  }, [currentWeather?.timezone]);
-
-  useEffect(() => {
-    if (loading === false) handleChangeLocalTime();
-  }, [loading, handleChangeLocalTime]);
-
-  console.log(localTime);
-  setInterval(() => {
-    handleChangeLocalTime();
-  }, 60000);
 
   return (
     <Box
@@ -123,13 +106,10 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                       >
                         CURRENT WEATHER
                       </Typography>
-                      <Typography
-                        component="p"
-                        variant="p"
-                        color="text.secondary"
-                      >
-                        {`Current Local Time: ${localTime}`}
-                      </Typography>
+                      <CurrentTime
+                        currentOffset={currentWeather?.timezone}
+                        convertToTime={convertToTime}
+                      />
                     </Box>
                     <Box
                       className="right"
@@ -279,8 +259,8 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                       <InfoBox
                         unit={"SUNRISE"}
                         info={`${convertToTime(
-                          currentWeather?.sys?.sunrise,
-                          currentWeather?.timezone
+                          currentWeather?.timezone,
+                          currentWeather?.sys?.sunrise
                         )}`}
                         IconName={WbTwilightIcon}
                       />
@@ -289,8 +269,8 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                       <InfoBox
                         unit={"SUNSET"}
                         info={`${convertToTime(
-                          currentWeather?.sys?.sunset,
-                          currentWeather?.timezone
+                          currentWeather?.timezone,
+                          currentWeather?.sys?.sunset
                         )}`}
                         IconName={NightsStayIcon}
                       />
