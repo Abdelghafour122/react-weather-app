@@ -80,7 +80,7 @@ export const getCurrentLocationInfo = () => {
 export const getCities = (value, lang) => {
   const result = axios
     .get(
-      `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&minPopulation=500000&namePrefix=${value}&namePrefixDefaultLangResults=true&languageCode=${lang}`,
+      `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?limit=10&minPopulation=500000&namePrefix=${value}`, //&namePrefixDefaultLangResults=true&languageCode=${lang}
       {
         headers: {
           "X-RapidAPI-Key":
