@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     const localLanguage = localStorage.getItem("i18nextLng");
     localLanguage === null
-      ? localStorage.setItem("i18nextLng", "en")
+      ? localStorage.setItem("i18nextLng", "en-GB")
       : handleChangeLanguage(localLanguage);
   }, []);
 
@@ -39,7 +39,7 @@ function App() {
 
   // CHANGE LANGUAGE FUNCTION
   const handleChangeLanguage = (choice) => {
-    setLanguage(choice);
+    setLanguage(choice.split("").splice(0, 2).join(""));
   };
 
   useEffect(() => {

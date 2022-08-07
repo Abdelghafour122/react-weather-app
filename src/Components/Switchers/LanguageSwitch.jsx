@@ -6,10 +6,10 @@ import ToggleButton from "@mui/material/ToggleButton";
 import Flag from "react-world-flags";
 
 const LANGUAGES = [
-  { name: "English", flagCode: "gb", code: "en" },
-  { name: "Deutsch", flagCode: "de", code: "de" },
-  { name: "Français", flagCode: "fr", code: "fr" },
-  { name: "العربية", flagCode: "sa", code: "ar" },
+  { name: "English", flagCode: "gb", code: "en-GB" },
+  { name: "Deutsch", flagCode: "de", code: "de-DE" },
+  { name: "Français", flagCode: "fr", code: "fr-FR" },
+  { name: "العربية", flagCode: "sa", code: "ar-SA" },
 ];
 
 const LanguageSwitch = ({ handleChangeLanguage }) => {

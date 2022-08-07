@@ -18,8 +18,9 @@ import NightsStayIcon from "@mui/icons-material/NightsStay";
 import WbTwilightIcon from "@mui/icons-material/WbTwilight";
 import { ThreeDots } from "react-loader-spinner";
 
-import InfoBox from "./Forecast/InfoBox";
-import CurrentTime from "./Forecast/CurrentTime";
+import InfoBox from "./Forecast/Forecast _Card/InfoBox";
+import CurrentTime from "./Forecast/Forecast _Card/CurrentTime";
+import CurrentDate from "./Forecast/Forecast _Card/CurrentDate";
 
 const Forecast = ({ currentWeather, loading, temperature, language }) => {
   const countryName = new Intl.DisplayNames([`${language}`], {
@@ -38,11 +39,16 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
     const inp = Number(utc) + 3600000 * (Number(offset) / 3600);
     const nd = new Date(inp);
 
-    return `${nd
-      .getHours()
-      .toLocaleString("en-US", { minimumIntegerDigits: 2 })}:${nd
-      .getMinutes()
-      .toLocaleString("en-US", { minimumIntegerDigits: 2 })}`;
+    // return `${nd
+    //   .getHours()
+    //   .toLocaleString("en-US", { minimumIntegerDigits: 2 })}:${nd
+    //   .getMinutes()
+    //   .toLocaleString("en-US", { minimumIntegerDigits: 2 })}`;
+    return nd;
+  };
+
+  const formatNum = (num) => {
+    return `${num.toLocaleString("en-US", { minimumIntegerDigits: 2 })}`;
   };
 
   return (
@@ -109,6 +115,8 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                       <CurrentTime
                         currentOffset={currentWeather?.timezone}
                         convertToTime={convertToTime}
+                        formatNum={formatNum}
+                        language={language}
                       />
                     </Box>
                     <Box
@@ -117,24 +125,39 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
+                        gap: "20px",
                       }}
                     >
-                      <PlaceIcon />
-                      <Typography
-                        variant="p"
-                        component="p"
-                        color="text.secondary"
+                      {/* EXTRACT THIS AS A COMPONENT */}
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
                       >
-                        {`${
-                          currentWeather?.name !== ""
-                            ? currentWeather?.name
-                            : "Unknown Location"
-                        }, ${
-                          currentWeather?.sys?.hasOwnProperty("country")
-                            ? countryName.of(currentWeather?.sys?.country)
-                            : "Unknown country"
-                        }.`}
-                      </Typography>
+                        <PlaceIcon />
+                        <Typography
+                          variant="p"
+                          component="p"
+                          color="text.secondary"
+                        >
+                          {`${
+                            currentWeather?.name !== ""
+                              ? currentWeather?.name
+                              : "Unknown Location"
+                          }, ${
+                            currentWeather?.sys?.hasOwnProperty("country")
+                              ? countryName.of(currentWeather?.sys?.country)
+                              : "Unknown country"
+                          }.`}
+                        </Typography>
+                      </Box>
+                      <CurrentDate
+                        currentOffset={currentWeather?.timezone}
+                        convertToTime={convertToTime}
+                        language={language}
+                      />
                     </Box>
                   </Box>
                   <Box
@@ -258,9 +281,16 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                     <Grid item xs={2} sm={3} lg={3}>
                       <InfoBox
                         unit={"SUNRISE"}
-                        info={`${convertToTime(
-                          currentWeather?.timezone,
-                          currentWeather?.sys?.sunrise
+                        info={`${formatNum(
+                          convertToTime(
+                            currentWeather?.timezone,
+                            currentWeather?.sys?.sunrise
+                          ).getHours()
+                        )}:${formatNum(
+                          convertToTime(
+                            currentWeather?.timezone,
+                            currentWeather?.sys?.sunrise
+                          ).getMinutes()
                         )}`}
                         IconName={WbTwilightIcon}
                       />
@@ -268,9 +298,16 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                     <Grid item xs={2} sm={3} lg={3}>
                       <InfoBox
                         unit={"SUNSET"}
-                        info={`${convertToTime(
-                          currentWeather?.timezone,
-                          currentWeather?.sys?.sunset
+                        info={`${formatNum(
+                          convertToTime(
+                            currentWeather?.timezone,
+                            currentWeather?.sys?.sunset
+                          ).getHours()
+                        )}:${formatNum(
+                          convertToTime(
+                            currentWeather?.timezone,
+                            currentWeather?.sys?.sunset
+                          ).getMinutes()
                         )}`}
                         IconName={NightsStayIcon}
                       />
