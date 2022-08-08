@@ -62,7 +62,7 @@ function App() {
           handleChangeLanguage={handleChangeLanguage}
           language={language}
         />
-        <Random />
+        {/* <Random /> */}
         <Attribution />
       </Box>
     </ThemeProvider>

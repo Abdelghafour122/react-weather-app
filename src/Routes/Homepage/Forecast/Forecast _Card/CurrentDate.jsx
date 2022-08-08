@@ -1,15 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
+import { getWeatherInfoHourly } from "../../../../Api/requests";
 
-const CurrentDate = ({ currentOffset, convertToTime, language }) => {
-  const [currentDate, setCurrentDate] = useState("");
+const CurrentDate = ({ lat, lon, language }) => {
+  const currentDate = new Date();
+  const [currentTimezone, setCurrentTimezone] = useState(
+    Intl.DateTimeFormat().resolvedOptions().timeZone
+  );
   useEffect(() => {
-    setCurrentDate(() => convertToTime(currentOffset));
-    console.log("date reset");
-  }, [convertToTime, currentOffset]);
+    const getCurrentTimezone = async () => {
+      setCurrentTimezone(
+        await getWeatherInfoHourly(lat, lon, language).then(
+          (res) => res.timezone
+        )
+      );
+    };
+    getCurrentTimezone();
+  }, [lat, lon, language]);
 
   const formatter = new Intl.DateTimeFormat(`${language}`, {
-    timeZoneName: "short",
+    timeZone: currentTimezone,
+    timeZoneName: "shortOffset",
     year: "numeric",
     month: "long",
     weekday: "long",

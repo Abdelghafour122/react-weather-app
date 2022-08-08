@@ -14,8 +14,6 @@ import {
 
 const Random = () => {
   const [weather, setWeather] = useState({});
-  const [icon, setIcon] = useState(Number);
-  const [name, setName] = useState("");
 
   const [location, setLocation] = useState({});
 
@@ -23,20 +21,17 @@ const Random = () => {
     // const result = await getWeatherInfoCoor(20, 29, "de", "fahrenheit");
     const resulta = await getWeatherInfoName("london", "en", "");
     // const result = await getWeatherInfoDaily(48.2085, 16.3721);
-    const result = await getWeatherInfoHourly(48.2085, 16.3721, "de");
+    const result = await getWeatherInfoHourly(
+      48.2085,
+      16.3721,
+      "en",
+      "celcius"
+    );
     // const result = await getCurrentLocationInfo();
 
     // setLocation(result);
 
     setWeather(result);
-    const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
-
-    setName(regionNames.of(resulta.sys.country));
-    setIcon(resulta.weather[0].icon);
-
-    // setLocation(await getCities("boston", "en"));
-
-    // console.log(weather.daily.length);
   };
 
   useEffect(() => {
@@ -55,9 +50,7 @@ const Random = () => {
       <br />
       <pre>{JSON.stringify(location, null, 2)}</pre>; */}
 
-      {/* <pre>{JSON.stringify(weather, null, 2)}</pre> */}
-
-      {/* <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="" /> */}
+      <pre>{JSON.stringify(weather, null, 2)}</pre>
     </>
   );
 };

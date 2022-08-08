@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
@@ -21,6 +21,7 @@ import { ThreeDots } from "react-loader-spinner";
 import InfoBox from "./Forecast/Forecast _Card/InfoBox";
 import CurrentTime from "./Forecast/Forecast _Card/CurrentTime";
 import CurrentDate from "./Forecast/Forecast _Card/CurrentDate";
+import HourlyForecast from "./Forecast/Hourly/HourlyForecast";
 
 const Forecast = ({ currentWeather, loading, temperature, language }) => {
   const countryName = new Intl.DisplayNames([`${language}`], {
@@ -39,11 +40,6 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
     const inp = Number(utc) + 3600000 * (Number(offset) / 3600);
     const nd = new Date(inp);
 
-    // return `${nd
-    //   .getHours()
-    //   .toLocaleString("en-US", { minimumIntegerDigits: 2 })}:${nd
-    //   .getMinutes()
-    //   .toLocaleString("en-US", { minimumIntegerDigits: 2 })}`;
     return nd;
   };
 
@@ -154,8 +150,10 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                         </Typography>
                       </Box>
                       <CurrentDate
-                        currentOffset={currentWeather?.timezone}
-                        convertToTime={convertToTime}
+                        lat={currentWeather?.coord?.lat}
+                        lon={currentWeather?.coord?.lon}
+                        // currentOffset={currentWeather?.timezone}
+                        // convertToTime={convertToTime}
                         language={language}
                       />
                     </Box>
@@ -333,13 +331,13 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                 >
                   Hourly Forecast:
                 </Typography>
-                <Card
-                  sx={{
-                    width: "100%",
-                    backgroundColor: (theme) =>
-                      theme.palette.custom.secondBgColor,
-                  }}
-                ></Card>
+                <HourlyForecast
+                  locationLat={currentWeather?.coord?.lat}
+                  locationLon={currentWeather?.coord?.lon}
+                  language={language}
+                  temperature={temperature}
+                  convertToTime={convertToTime}
+                />
               </Box>
             </Box>
             <pre>{JSON.stringify(currentWeather, null, 2)}</pre>

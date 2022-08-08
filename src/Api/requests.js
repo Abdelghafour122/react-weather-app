@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // FETCH BY COORDINATES
-export const getWeatherInfoCoor = (coords, lang = "en", unit = "celsius") => {
+export const getWeatherInfoCoor = (coords, lang = "en", unit = "celcius") => {
   const result = axios
     .get(
       `https://api.openweathermap.org/data/2.5/weather?lat=${coords.lat}&lon=${
@@ -24,7 +24,7 @@ const determineTemp = (value) => {
 };
 
 // FETCH BY NAME
-export const getWeatherInfoName = (cityName, lang = "en", unit = "celsius") => {
+export const getWeatherInfoName = (cityName, lang = "en", unit = "celcius") => {
   const result = axios
     .get(
       `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${
@@ -42,7 +42,7 @@ export const getWeatherInfoHourly = (
   lat,
   lon,
   lang = "en",
-  unit = "celsius"
+  unit = "celcius"
 ) => {
   const result = axios
     .get(
@@ -52,6 +52,7 @@ export const getWeatherInfoHourly = (
       }&units=${determineTemp(unit)}&lang=${lang}`,
       { headers: { accept: "Application/json" } }
     )
+    .then((res) => res.data)
     .catch((err) => console.log(err));
   return result;
 };
