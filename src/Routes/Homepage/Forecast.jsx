@@ -22,6 +22,7 @@ import InfoBox from "./Forecast/Forecast _Card/InfoBox";
 import CurrentTime from "./Forecast/Forecast _Card/CurrentTime";
 import CurrentDate from "./Forecast/Forecast _Card/CurrentDate";
 import HourlyForecast from "./Forecast/Hourly/HourlyForecast";
+import DailyForecast from "./Forecast/Daily/DailyForecast";
 
 const Forecast = ({ currentWeather, loading, temperature, language }) => {
   const countryName = new Intl.DisplayNames([`${language}`], {
@@ -311,6 +312,7 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                   </Grid>
                 </CardContent>
               </Card>
+              {/* BREAK THIS INTO A COMPONENT */}
               <Box
                 sx={{
                   width: "100%",
@@ -327,9 +329,36 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                   color="text.primary"
                   sx={{ fontWeight: 700 }}
                 >
-                  Hourly Forecast:
+                  Hourly Forecast: (next 12 hours)
                 </Typography>
                 <HourlyForecast
+                  locationLat={currentWeather?.coord?.lat}
+                  locationLon={currentWeather?.coord?.lon}
+                  language={language}
+                  temperature={temperature}
+                  convertToTime={convertToTime}
+                  getTempUnit={getTempUnit}
+                />
+              </Box>
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  justifyContent: "space-between",
+                  gap: "20px",
+                }}
+              >
+                <Typography
+                  component="p"
+                  variant="p"
+                  color="text.primary"
+                  sx={{ fontWeight: 700 }}
+                >
+                  Daily Forecast: (next 8 days)
+                </Typography>
+                <DailyForecast
                   locationLat={currentWeather?.coord?.lat}
                   locationLon={currentWeather?.coord?.lon}
                   language={language}

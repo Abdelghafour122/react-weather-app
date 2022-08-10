@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Zoom from "@mui/material/Zoom";
-import Card from "@mui/material/Card";
 import { ThreeDots } from "react-loader-spinner";
 
 import { getWeatherInfoHourly } from "../../../../Api/requests";
@@ -37,32 +36,12 @@ const HourlyForecast = ({
     getHourlyForecast();
   }, [locationLat, locationLon, language, temperature]);
 
-  const getCurrentHour = () => {
-    const date = convertToTime(
-      hourlyWeather?.timezone_offset,
-      hourlyWeather?.hourly[6].dt
-    );
-
-    return date.toLocaleString(`${language}`, {
-      timeStyle: "short",
-    });
-  };
-
   return (
-    <Box className="hourly-forecast">
+    <Box className="hourly-forecast" sx={{ width: "100%" }}>
       {loading === true ? (
         <ThreeDots width="100" />
       ) : (
         <React.Fragment>
-          <p> {hourlyWeather?.hourly?.length} units </p>
-          <p> {getCurrentHour()} </p>
-          <p>
-            {" "}
-            {new Date().toLocaleDateString("en-US", {
-              timeZone: hourlyWeather?.timezone,
-              timeZoneName: "short",
-            })}{" "}
-          </p>
           <Box
             sx={{
               width: "100%",
@@ -70,29 +49,33 @@ const HourlyForecast = ({
               alignItems: "center",
               justifyContent: "space-between",
               flexWrap: "wrap",
+              rowGap: "15px",
             }}
           >
             {hourlyWeather?.hourly.map((hourData, index) => {
-              //   console.log(hourData);
-              return (
-                <Zoom
-                  key={index}
-                  in={true}
-                  style={{ transitionDelay: `${index * 1}00ms` }}
-                >
-                  <Box>
-                    <HourlyPaper
-                      data={hourData}
-                      time={index + 1}
-                      convertToTime={convertToTime}
-                      getTempUnit={getTempUnit}
-                    />
-                  </Box>
-                </Zoom>
-              );
+              if (index >= 12) return null;
+              else
+                return (
+                  <Zoom
+                    key={index}
+                    in={true}
+                    style={{ transitionDelay: `${index * 1}00ms` }}
+                  >
+                    <Box>
+                      <HourlyPaper
+                        data={hourData}
+                        time={hourData.dt}
+                        convertToTime={convertToTime}
+                        getTempUnit={getTempUnit}
+                        language={language}
+                        timezone={hourlyWeather?.timezone}
+                      />
+                    </Box>
+                  </Zoom>
+                );
             })}
           </Box>
-          <pre> {JSON.stringify(hourlyWeather, null, 2)} </pre>
+          {/* <pre> {JSON.stringify(hourlyWeather, null, 2)} </pre> */}
         </React.Fragment>
       )}
     </Box>

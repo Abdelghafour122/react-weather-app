@@ -58,10 +58,17 @@ export const getWeatherInfoHourly = (
 };
 
 // DAILY FORECAST 8 DAYS
-export const getWeatherInfoDaily = (lat, lon) => {
+export const getWeatherInfoDaily = (
+  lat,
+  lon,
+  lang = "en",
+  unit = "celcius"
+) => {
   const result = axios
     .get(
-      `https://api.openweathermap.org/data/2.5/onecall?&lat=${lat}&lon=${lon}&exclude=current,minutely,hourly,alerts&appid=1fa9ff4126d95b8db54f3897a208e91c&units=metric`,
+      `https://api.openweathermap.org/data/2.5/onecall?&lat=${lat}&lon=${lon}&exclude=current,minutely,hourly,alerts&appid=${
+        process.env.REACT_APP_API_KEY
+      }&&units=${determineTemp(unit)}&lang=${lang}`,
       { headers: { accept: "Application/json" } }
     )
     .then((res) => res.data)

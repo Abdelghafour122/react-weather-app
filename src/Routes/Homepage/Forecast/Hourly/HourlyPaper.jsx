@@ -3,7 +3,14 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 
-const HourlyPaper = ({ data, time, convertToTime, language, getTempUnit }) => {
+const HourlyPaper = ({
+  data,
+  time,
+  convertToTime,
+  language,
+  getTempUnit,
+  timezone,
+}) => {
   return (
     <Paper
       variant="outlined"
@@ -15,6 +22,14 @@ const HourlyPaper = ({ data, time, convertToTime, language, getTempUnit }) => {
         backgroundColor: (theme) => theme.palette.custom.secondBgColor,
       }}
     >
+      <Typography component="p" variant="body1">
+        {`${new Date(time * 1000).toLocaleDateString(`${language}`, {
+          weekday: "short",
+          day: "numeric",
+          month: "numeric",
+        })}`}
+      </Typography>
+      <Divider sx={{ width: "100%" }} />
       <img
         src={`http://openweathermap.org/img/wn/${data?.weather[0].icon}@2x.png`}
         alt="Hourly Forecast icon"
@@ -27,11 +42,11 @@ const HourlyPaper = ({ data, time, convertToTime, language, getTempUnit }) => {
       </Typography>
       <Divider sx={{ width: "100%" }} />
       <Typography component="p" variant="body1">
-        {time >= 24
-          ? `${(time - 24).toLocaleString("en-US", {
-              minimumIntegerDigits: 2,
-            })}:00`
-          : `${time.toLocaleString("en-US", { minimumIntegerDigits: 2 })}:00`}
+        {new Date(time * 1000).toLocaleString("en-US", {
+          minimumIntegerDigits: 2,
+          timeZone: timezone,
+          timeStyle: "short",
+        })}
       </Typography>
     </Paper>
   );
