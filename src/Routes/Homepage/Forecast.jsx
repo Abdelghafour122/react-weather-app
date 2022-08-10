@@ -152,8 +152,6 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                       <CurrentDate
                         lat={currentWeather?.coord?.lat}
                         lon={currentWeather?.coord?.lon}
-                        // currentOffset={currentWeather?.timezone}
-                        // convertToTime={convertToTime}
                         language={language}
                       />
                     </Box>
@@ -337,6 +335,7 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                   language={language}
                   temperature={temperature}
                   convertToTime={convertToTime}
+                  getTempUnit={getTempUnit}
                 />
               </Box>
             </Box>
