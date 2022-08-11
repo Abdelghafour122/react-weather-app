@@ -42,7 +42,7 @@ const HourlyPaper = ({
       </Typography>
       <Divider sx={{ width: "100%" }} />
       <Typography component="p" variant="body1">
-        {new Date(time * 1000).toLocaleString("en-US", {
+        {new Date(time * 1000).toLocaleString(`${language}`, {
           minimumIntegerDigits: 2,
           timeZone: timezone,
           timeStyle: "short",
