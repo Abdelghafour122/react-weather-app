@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import Zoom from "@mui/material/Zoom";
 import { ThreeDots } from "react-loader-spinner";
 
@@ -42,15 +43,10 @@ const HourlyForecast = ({
         <ThreeDots width="100" />
       ) : (
         <React.Fragment>
-          <Box
-            sx={{
-              width: "100%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-              rowGap: "15px",
-            }}
+          <Grid
+            container
+            spacing={{ xs: 3, sm: 3, md: 2, lg: 1 }}
+            columns={{ xs: 2, sm: 3, md: 6, lg: 12 }}
           >
             {hourlyWeather?.hourly.map((hourData, index) => {
               if (index >= 12) return null;
@@ -61,7 +57,7 @@ const HourlyForecast = ({
                     in={true}
                     style={{ transitionDelay: `${index * 1}00ms` }}
                   >
-                    <Box>
+                    <Grid item xs={2} sm={1} md={1} lg={1}>
                       <HourlyPaper
                         data={hourData}
                         time={hourData.dt}
@@ -70,11 +66,11 @@ const HourlyForecast = ({
                         language={language}
                         timezone={hourlyWeather?.timezone}
                       />
-                    </Box>
+                    </Grid>
                   </Zoom>
                 );
             })}
-          </Box>
+          </Grid>
           {/* <pre> {JSON.stringify(hourlyWeather, null, 2)} </pre> */}
         </React.Fragment>
       )}

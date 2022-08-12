@@ -5,6 +5,7 @@ import Divider from "@mui/material/Divider";
 import Box from "@mui/material/Box";
 import AirIcon from "@mui/icons-material/Air";
 import OpacityIcon from "@mui/icons-material/Opacity";
+import NavigationIcon from "@mui/icons-material/Navigation";
 
 const DailyPaper = ({ data, time, getTempUnit, language, timezone }) => {
   return (
@@ -30,7 +31,11 @@ const DailyPaper = ({ data, time, getTempUnit, language, timezone }) => {
       <Typography
         component="p"
         variant="h5"
-        sx={{ textTransform: "capitalize", marginTop: "15px" }}
+        sx={{
+          textTransform: "capitalize",
+          marginTop: "15px",
+          textAlign: "center",
+        }}
       >
         {data.weather[0].description}
       </Typography>
@@ -81,6 +86,10 @@ const DailyPaper = ({ data, time, getTempUnit, language, timezone }) => {
           <Typography component="p" variant="subtitle1">
             {`${Math.floor(data.wind_speed)}km/h`}
           </Typography>
+          <NavigationIcon
+            fontSize="small"
+            sx={{ transform: `rotate(${data.wind_deg}deg)` }}
+          />
         </Box>
       </Box>
     </Paper>
