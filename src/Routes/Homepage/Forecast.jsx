@@ -198,8 +198,9 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                         component="p"
                         variant="p"
                         color="text.primary"
+                        sx={{ textTransform: "capitalize" }}
                       >
-                        {currentWeather?.weather[0]?.main}
+                        {currentWeather?.weather[0]?.description}
                       </Typography>
                       <Typography
                         component="p"

@@ -1,0 +1,12 @@
+{
+  "App_title": "W-Weather: see the weather forecast",
+  "Navbar": {
+    "logo": "W-Weather",
+    "search": "Search-by:",
+    "Buttons": {
+      "name": "City Name",
+      "coords": "Coordinates"
+    },
+    "tooltip": "Settings"
+  }
+}

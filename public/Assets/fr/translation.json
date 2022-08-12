@@ -1,0 +1,12 @@
+{
+  "App_title": "M-Météo: consultez la météo",
+  "Navbar": {
+    "logo": "M-Météo",
+    "search": "Chercher par:",
+    "Buttons": {
+      "name": "Nom de Ville",
+      "coords": "Coordonnés"
+    },
+    "tooltip": "Paramètres"
+  }
+}

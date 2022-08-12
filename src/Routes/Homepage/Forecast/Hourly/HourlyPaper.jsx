@@ -37,8 +37,17 @@ const HourlyPaper = ({
       <Typography component="p" variant="body1">
         {`${Math.floor(data.temp)}°${getTempUnit()}`}
       </Typography>
-      <Typography component="p" variant="subtitle1">
-        {data.weather[0].main}
+      <Typography
+        component="p"
+        variant="body1"
+        sx={{
+          textAlign: "center",
+          lineHeight: 1,
+          margin: "10px 0",
+          textTransform: "capitalize",
+        }}
+      >
+        {data.weather[0].description}
       </Typography>
       <Divider sx={{ width: "100%" }} />
       <Typography component="p" variant="body1">
