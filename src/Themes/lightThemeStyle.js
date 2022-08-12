@@ -5,8 +5,8 @@ const lightTheme = createTheme({
   palette: {
     mode: "light",
     custom: {
-      firstBgColor: "hsl(0, 0%, 100%)",
-      secondBgColor: "hsl(210, 33%, 96%)",
+      firstBgColor: "hsl(174.5, 16.9%, 87.3%)",
+      secondBgColor: "hsl(173, 23%, 80%)",
       navbarBgColor: "hsla(0, 0%, 100%, 0.845)",
     },
   },

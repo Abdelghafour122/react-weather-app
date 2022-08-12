@@ -3,9 +3,11 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Box from "@mui/material/Box";
+import Tooltip from "@mui/material/Tooltip";
 import AirIcon from "@mui/icons-material/Air";
 import OpacityIcon from "@mui/icons-material/Opacity";
 import NavigationIcon from "@mui/icons-material/Navigation";
+import WbIncandescentRoundedIcon from "@mui/icons-material/WbIncandescentRounded";
 
 const DailyPaper = ({ data, time, getTempUnit, language, timezone }) => {
   return (
@@ -42,10 +44,19 @@ const DailyPaper = ({ data, time, getTempUnit, language, timezone }) => {
       <img
         src={`http://openweathermap.org/img/wn/${data?.weather[0].icon}@2x.png`}
         alt="Daily Forecast icon"
+        height="115px"
       />
-      <Typography variant="h5" component="p">
-        {`${Math.floor(data.temp.day)}°${getTempUnit()}`}
-      </Typography>
+      <Box
+        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+      >
+        <Typography variant="h5" component="p">
+          {`${Math.ceil(data.temp.max)}°${getTempUnit()} |`}
+        </Typography>
+        &nbsp;
+        <Typography variant="h5" component="p" color="text.secondary">
+          {` ${Math.floor(data.temp.min)}°${getTempUnit()}`}
+        </Typography>
+      </Box>
       <Typography component="p" variant="subtitle1" color="text.secondary">
         {`Feels like: ${Math.floor(data.feels_like.day)}°${getTempUnit()}`}
       </Typography>
@@ -59,38 +70,58 @@ const DailyPaper = ({ data, time, getTempUnit, language, timezone }) => {
           marginTop: "15px",
         }}
       >
-        <Box
-          className="day-humidity"
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-start",
-            gap: "10px",
-          }}
-        >
-          <OpacityIcon fontSize="small" />
-          <Typography component="p" variant="subtitle1">
-            {`${data.humidity}%`}
-          </Typography>
-        </Box>
-        <Box
-          className="day-wind"
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-start",
-            gap: "10px",
-          }}
-        >
-          <AirIcon fontSize="small" />
-          <Typography component="p" variant="subtitle1">
-            {`${Math.floor(data.wind_speed)}km/h`}
-          </Typography>
-          <NavigationIcon
-            fontSize="small"
-            sx={{ transform: `rotate(${data.wind_deg}deg)` }}
-          />
-        </Box>
+        <Tooltip title="Humidity" placement="left">
+          <Box
+            className="day-humidity"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-start",
+              gap: "10px",
+            }}
+          >
+            <OpacityIcon fontSize="small" />
+            <Typography component="p" variant="subtitle1">
+              {`${data.humidity}%`}
+            </Typography>
+          </Box>
+        </Tooltip>
+        <Tooltip title="Wind" placement="left">
+          <Box
+            className="day-wind"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-start",
+              gap: "10px",
+            }}
+          >
+            <AirIcon fontSize="small" />
+            <Typography component="p" variant="subtitle1">
+              {`${Math.floor(data.wind_speed)}km/h`}
+            </Typography>
+            <NavigationIcon
+              fontSize="small"
+              sx={{ transform: `rotate(${data.wind_deg}deg)` }}
+            />
+          </Box>
+        </Tooltip>
+        <Tooltip title="UV Index" placement="left">
+          <Box
+            className="day-uvindex"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-start",
+              gap: "10px",
+            }}
+          >
+            <WbIncandescentRoundedIcon fontSize="small" />
+            <Typography component="p" variant="subtitle1">
+              {`${Math.ceil(data.uvi)}`}
+            </Typography>
+          </Box>
+        </Tooltip>
       </Box>
     </Paper>
   );
