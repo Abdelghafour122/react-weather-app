@@ -7,6 +7,27 @@
       "name": "Stadtname",
       "coords": "Koordinaten"
     },
-    "tooltip": "Einstellungen"
+    "tooltip": "Einstellungen",
+    "Backdrop": {
+      "Top": {
+        "title": "Einstellungen",
+        "tooltip": "Schließen"
+      },
+      "Mode": {
+        "title": "Modus",
+        "system": "System",
+        "dark": "Dunkel",
+        "light": "Hell"
+      },
+      "Language": {
+        "title": "Sprache"
+      },
+      "temperature": {
+        "title": "Temperatur",
+        "kelvin": "Kelvin",
+        "fahrenheit": "Fahrenheit",
+        "celcius": "Celcius"
+      }
+    }
   }
 }

@@ -7,6 +7,27 @@
       "name": "اسم المدينة",
       "coords": "الاحداثيات"
     },
-    "tooltip": "الاعدادات"
+    "tooltip": "الاعدادات",
+    "Backdrop": {
+      "Top": {
+        "title": "الاعدادات",
+        "tooltip": "اغلاق"
+      },
+      "Mode": {
+        "title": "الوضع",
+        "system": "النظام",
+        "dark": "مظلم",
+        "light": "منير"
+      },
+      "Language": {
+        "title": "اللغة"
+      },
+      "temperature": {
+        "title": "درجة الحرارة",
+        "kelvin": "الكلفن",
+        "fahrenheit": "الفهرنهايت",
+        "celcius": "درجة مئوية"
+      }
+    }
   }
 }
