@@ -12,7 +12,6 @@ const HourlyForecast = ({
   locationLon,
   language,
   temperature,
-  convertToTime,
   getTempUnit,
 }) => {
   const [hourlyWeather, setHourlyWeather] = useState(Object);
@@ -61,7 +60,6 @@ const HourlyForecast = ({
                       <HourlyPaper
                         data={hourData}
                         time={hourData.dt}
-                        convertToTime={convertToTime}
                         getTempUnit={getTempUnit}
                         language={language}
                         timezone={hourlyWeather?.timezone}
@@ -71,7 +69,6 @@ const HourlyForecast = ({
                 );
             })}
           </Grid>
-          {/* <pre> {JSON.stringify(hourlyWeather, null, 2)} </pre> */}
         </React.Fragment>
       )}
     </Box>

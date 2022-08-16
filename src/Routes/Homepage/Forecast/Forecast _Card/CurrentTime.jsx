@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Typography } from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 const CurrentTime = ({ currentOffset, convertToTime, language }) => {
   const [localTime, setLocalTime] = useState(() =>

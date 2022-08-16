@@ -261,6 +261,7 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                   alignItems: "flex-start",
                   justifyContent: "space-between",
                   gap: "20px",
+                  marginTop: "50px",
                 }}
               >
                 <Typography
@@ -288,6 +289,7 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                   alignItems: "flex-start",
                   justifyContent: "space-between",
                   gap: "20px",
+                  marginTop: "50px",
                 }}
               >
                 <Typography
@@ -308,7 +310,6 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                 />
               </Box>
             </Box>
-            {/* <pre>{JSON.stringify(currentWeather, null, 2)}</pre> */}
           </React.Fragment>
         )}
       </Container>

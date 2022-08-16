@@ -10,7 +10,6 @@ const DailyForecast = ({
   locationLon,
   language,
   temperature,
-  convertToTime,
   getTempUnit,
 }) => {
   const [dailyWeather, setDailyWeather] = useState(Object);
@@ -67,7 +66,6 @@ const DailyForecast = ({
               );
             })}
           </Grid>
-          {/* <pre> {JSON.stringify(dailyWeather.daily[0], null, 2)} </pre> */}
         </React.Fragment>
       )}
     </Box>

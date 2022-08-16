@@ -3,7 +3,6 @@ import "./Dist/App.css";
 import ThemeProvider from "@mui/system/ThemeProvider";
 import Box from "@mui/material/Box";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import Random from "./Components/Random";
 import Attribution from "./Components/Attribution";
 import Homepage from "./Routes/Homepage";
 
@@ -62,7 +61,6 @@ function App() {
           handleChangeLanguage={handleChangeLanguage}
           language={language}
         />
-        {/* <Random /> */}
         <Attribution />
       </Box>
     </ThemeProvider>

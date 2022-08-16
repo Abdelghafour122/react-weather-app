@@ -3,14 +3,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 
-const HourlyPaper = ({
-  data,
-  time,
-  convertToTime,
-  language,
-  getTempUnit,
-  timezone,
-}) => {
+const HourlyPaper = ({ data, time, language, getTempUnit, timezone }) => {
   return (
     <Paper
       variant="outlined"

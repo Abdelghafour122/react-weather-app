@@ -17,6 +17,7 @@ const Attribution = () => {
           justifyContent: "center",
           width: "100%",
           padding: "5px 0",
+          marginTop: "30px",
         }}
       >
         Coded with &nbsp; <FavoriteIcon color="error" />
