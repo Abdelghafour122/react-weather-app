@@ -8,7 +8,7 @@
       "coords": "Coordonnés"
     },
     "tooltip": "Paramètres",
-    "Backdrop": {
+    "Settings_Backdrop": {
       "Top": {
         "title": "Paramètres",
         "tooltip": "Fermer"
@@ -29,5 +29,25 @@
         "celcius": "Celcius"
       }
     }
-  }
+  },
+  "Forecast_Card": {
+    "feels_like": "Se sent comme",
+    "cur_weather": "Météo actuelle",
+    "cur_time": "Heure locale actuelle",
+    "weather_desc": {
+      "high": "la température la plus élevée sera de",
+      "low": "et la plus basse de",
+      "end": "."
+    },
+    "weather_details": {
+      "wind": "Le vent",
+      "humid": "L'humidité",
+      "visib": "La visibilité",
+      "press": "La pression",
+      "rise": "Lever du soleil",
+      "set": "Coucher du soleil"
+    }
+  },
+  "hourly": "Prévisions horaires : (prochaines 12 heures)",
+  "daily": "Prévisions quotidiennes : (8 prochains jours)"
 }

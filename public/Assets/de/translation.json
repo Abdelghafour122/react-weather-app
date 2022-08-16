@@ -8,7 +8,7 @@
       "coords": "Koordinaten"
     },
     "tooltip": "Einstellungen",
-    "Backdrop": {
+    "Settings_Backdrop": {
       "Top": {
         "title": "Einstellungen",
         "tooltip": "Schließen"
@@ -28,6 +28,43 @@
         "fahrenheit": "Fahrenheit",
         "celcius": "Celcius"
       }
+    },
+    "Search_Backdrop": {
+      "Title": {
+        "name": "Geben Sie einen gültigen Städtenamen ein",
+        "coords": "Geben Sie gültige Koordinaten ein",
+        "lat": "",
+        "lon": "",
+        "name_helper": "",
+        "coords_helper": {
+          "lat": "",
+          "lon": ""
+        }
+      },
+      "Buttons": {
+        "search": "Suchen",
+        "cancel": "Abbrechen"
+      }
     }
-  }
+  },
+  "Forecast_Card": {
+    "cur_weather": "Aktuelle Wetterlage",
+    "cur_time": "Aktuelle Ortszeit",
+    "weather_desc": {
+      "feels_like": "Fühlt sich an wie",
+      "high": "die höchste Temperatur wird",
+      "low": "und das niedrigste wird",
+      "end": "sein."
+    },
+    "weather_details": {
+      "wind": "Wind",
+      "humid": "Feuchtigkeit",
+      "visib": "Sichtbarkeit",
+      "press": "Druck",
+      "rise": "Sonnenaufgang",
+      "set": "Sonnenuntergang"
+    }
+  },
+  "hourly": "Stündliche Vorhersage: (nächste 12 Stunden)",
+  "daily": "Tagesvorhersage: (nächste 8 Tage)"
 }
