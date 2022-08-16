@@ -28,6 +28,23 @@
         "fahrenheit": "Fahrenheit",
         "celcius": "Celcius"
       }
+    },
+    "Search_Backdrop": {
+      "Title": {
+        "name": "Entrez un nom de ville valide",
+        "coords": "Entrez des coordonnées valides",
+        "lat": "latitude",
+        "lon": "longitude",
+        "name_helper": "écris quelque chose",
+        "coords_helper": {
+          "lat": "Latitude entre -90 et 90",
+          "lon": "Longitude entre -180 et 180"
+        }
+      },
+      "Buttons": {
+        "search": "Chercher",
+        "cancel": "Annuler"
+      }
     }
   },
   "Forecast_Card": {

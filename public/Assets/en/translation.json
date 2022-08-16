@@ -37,8 +37,8 @@
         "lon": "Longitude",
         "name_helper": "Type something",
         "coords_helper": {
-          "lat": "",
-          "lon": ""
+          "lat": "Latitude between -90 and 90",
+          "lon": "Longitude between -180 and 180"
         }
       },
       "Buttons": {

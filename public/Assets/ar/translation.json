@@ -28,6 +28,23 @@
         "fahrenheit": "الفهرنهايت",
         "celcius": "درجة مئوية"
       }
+    },
+    "Search_Backdrop": {
+      "Title": {
+        "name": "أدخل اسم المدينة",
+        "coords": "أدخل الإحداثيات",
+        "lat": "خط العرض",
+        "lon": "خط الطول",
+        "name_helper": "أكتب شيئا",
+        "coords_helper": {
+          "lat": "خط العرض بين -90 و 90",
+          "lon": "خط الطول بين -180 و 180"
+        }
+      },
+      "Buttons": {
+        "search": "بحث",
+        "cancel": "إلغاء"
+      }
     }
   },
   "Forecast_Card": {
