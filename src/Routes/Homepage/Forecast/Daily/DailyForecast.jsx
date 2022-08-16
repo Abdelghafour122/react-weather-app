@@ -67,7 +67,7 @@ const DailyForecast = ({
               );
             })}
           </Grid>
-          <pre> {JSON.stringify(dailyWeather.daily[0], null, 2)} </pre>
+          {/* <pre> {JSON.stringify(dailyWeather.daily[0], null, 2)} </pre> */}
         </React.Fragment>
       )}
     </Box>

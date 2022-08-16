@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Typography } from "@mui/material";
 
-const CurrentTime = ({ currentOffset, convertToTime, formatNum, language }) => {
+const CurrentTime = ({ currentOffset, convertToTime, language }) => {
   const [localTime, setLocalTime] = useState(() =>
     convertToTime(currentOffset)
   );
@@ -12,7 +12,6 @@ const CurrentTime = ({ currentOffset, convertToTime, formatNum, language }) => {
 
   return (
     <Typography component="p" variant="p" color="text.secondary">
-      {/* JUST INCASE ${formatNum(localTime.getHours())}:${formatNum(localTime.getMinutes())} */}
       {`Current Local Time: 
        ${localTime.toLocaleString(`${language}`, {
          timeStyle: "short",

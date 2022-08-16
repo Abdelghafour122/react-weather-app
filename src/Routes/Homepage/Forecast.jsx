@@ -3,12 +3,9 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Tooltip from "@mui/material/Tooltip";
-import Badge from "@mui/material/Badge";
-import PlaceIcon from "@mui/icons-material/Place";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import OpacityIcon from "@mui/icons-material/Opacity";
 import AirIcon from "@mui/icons-material/Air";
@@ -23,6 +20,10 @@ import CurrentTime from "./Forecast/Forecast _Card/CurrentTime";
 import CurrentDate from "./Forecast/Forecast _Card/CurrentDate";
 import HourlyForecast from "./Forecast/Hourly/HourlyForecast";
 import DailyForecast from "./Forecast/Daily/DailyForecast";
+import CurrentLocation from "./Forecast/Forecast _Card/CurrentLocation";
+import Temperature from "./Forecast/Forecast _Card/Temperature";
+import Description from "./Forecast/Forecast _Card/Description";
+import SubDescription from "./Forecast/Forecast _Card/SubDescription";
 
 const Forecast = ({ currentWeather, loading, temperature, language }) => {
   const countryName = new Intl.DisplayNames([`${language}`], {
@@ -112,7 +113,6 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                       <CurrentTime
                         currentOffset={currentWeather?.timezone}
                         convertToTime={convertToTime}
-                        formatNum={formatNum}
                         language={language}
                       />
                     </Box>
@@ -125,31 +125,18 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                         gap: "20px",
                       }}
                     >
-                      {/* EXTRACT THIS AS A COMPONENT */}
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                        }}
-                      >
-                        <PlaceIcon />
-                        <Typography
-                          variant="p"
-                          component="p"
-                          color="text.secondary"
-                        >
-                          {`${
-                            currentWeather?.name !== ""
-                              ? currentWeather?.name
-                              : "Unknown Location"
-                          }, ${
-                            currentWeather?.sys?.hasOwnProperty("country")
-                              ? countryName.of(currentWeather?.sys?.country)
-                              : "Unknown country"
-                          }.`}
-                        </Typography>
-                      </Box>
+                      <CurrentLocation
+                        cityName={
+                          currentWeather?.name !== ""
+                            ? currentWeather?.name
+                            : "Unknown Location"
+                        }
+                        countryName={
+                          currentWeather?.sys?.hasOwnProperty("country")
+                            ? countryName.of(currentWeather?.sys?.country)
+                            : "Unknown country"
+                        }
+                      />
                       <CurrentDate
                         lat={currentWeather?.coord?.lat}
                         lon={currentWeather?.coord?.lon}
@@ -161,69 +148,21 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                     className="main-info"
                     sx={{ display: "flex", alignItems: "center", gap: "30px" }}
                   >
-                    <Box
-                      className="temp-holder"
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "30px",
-                      }}
-                    >
-                      <CardMedia
-                        component="img"
-                        src={`http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`}
-                        height="190px"
-                        alt="Weather icon"
-                      />
-                      <Tooltip
-                        placement="top"
-                        title="Temperature unit can be changed in Settings! 👉"
-                      >
-                        <Badge badgeContent={"i"} color="warning">
-                          <Typography
-                            component="p"
-                            variant="p"
-                            color="text.primary"
-                            sx={{ fontSize: "90px" }}
-                          >
-                            {`${Math.floor(
-                              currentWeather?.main?.temp
-                            )}°${getTempUnit()}`}
-                          </Typography>
-                        </Badge>
-                      </Tooltip>
-                    </Box>
-                    <Box className="description-holder">
-                      <Typography
-                        component="p"
-                        variant="p"
-                        color="text.primary"
-                        sx={{ textTransform: "capitalize" }}
-                      >
-                        {currentWeather?.weather[0]?.description}
-                      </Typography>
-                      <Typography
-                        component="p"
-                        variant="subtitle1"
-                        color="text.secondary"
-                      >
-                        {`FEELS LIKE ${Math.floor(
-                          currentWeather?.main?.feels_like
-                        )}°`}
-                      </Typography>
-                    </Box>
+                    <Temperature
+                      image={`http://openweathermap.org/img/wn/${currentWeather?.weather[0].icon}@2x.png`}
+                      temp={Math.floor(currentWeather?.main?.temp)}
+                      unit={getTempUnit()}
+                    />
+                    <Description
+                      description={currentWeather?.weather[0]?.description}
+                      feelsLike={Math.floor(currentWeather?.main?.feels_like)}
+                    />
                   </Box>
-                  <Box className="sub-description">
-                    <Typography component="p" variant="p" color="text.primary">
-                      {`${
-                        currentWeather.weather[0].description
-                      }, the highest temperature will be ${Math.ceil(
-                        currentWeather?.main?.temp_max
-                      )}°, and the lowest will be ${Math.floor(
-                        currentWeather?.main?.temp_min
-                      )}°.`}
-                    </Typography>
-                  </Box>
+                  <SubDescription
+                    description={currentWeather.weather[0].description}
+                    tempHigh={Math.ceil(currentWeather?.main?.temp_max)}
+                    tempLow={Math.floor(currentWeather?.main?.temp_min)}
+                  />
                   <Grid
                     container
                     spacing={3}
@@ -369,7 +308,7 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                 />
               </Box>
             </Box>
-            <pre>{JSON.stringify(currentWeather, null, 2)}</pre>
+            {/* <pre>{JSON.stringify(currentWeather, null, 2)}</pre> */}
           </React.Fragment>
         )}
       </Container>
