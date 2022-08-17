@@ -41,7 +41,7 @@ const Random = () => {
   }, []);
 
   const { t } = useTranslation();
-
+  let a = 900;
   return (
     <>
       {/* <pre>{JSON.stringify(weather, null, 2)}</pre>;
@@ -54,7 +54,14 @@ const Random = () => {
 
       {/* <pre>{JSON.stringify(weather, null, 2)}</pre> */}
 
-      <p style={{ color: "white" }}> {t("App_title")} </p>
+      <p style={{ color: "white" }}>
+        {" "}
+        {t("Forecast_Card.weather_desc", {
+          weather_desc: "watchu sayin cuz",
+          high_temp: 40,
+          low_temp: 10,
+        })}{" "}
+      </p>
     </>
   );
 };

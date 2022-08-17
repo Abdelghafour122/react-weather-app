@@ -9,7 +9,15 @@ import OpacityIcon from "@mui/icons-material/Opacity";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import WbIncandescentRoundedIcon from "@mui/icons-material/WbIncandescentRounded";
 
-const DailyPaper = ({ data, time, getTempUnit, language, timezone }) => {
+const DailyPaper = ({ data, time, getTempUnit, language }) => {
+  const getUVIndexState = (uvIndexValue) => {
+    if (uvIndexValue >= 1 && uvIndexValue <= 2) return "Low";
+    else if (uvIndexValue >= 3 && uvIndexValue <= 5) return "Moderate";
+    else if (uvIndexValue >= 6 && uvIndexValue <= 7) return "High";
+    else if (uvIndexValue >= 7 && uvIndexValue <= 10) return "Very High";
+    else if (uvIndexValue >= 11) return "Extreme";
+    else return;
+  };
   return (
     <Paper
       variant="outlined"
@@ -106,7 +114,10 @@ const DailyPaper = ({ data, time, getTempUnit, language, timezone }) => {
             />
           </Box>
         </Tooltip>
-        <Tooltip title="UV Index" placement="left">
+        <Tooltip
+          title={`UV Index (${getUVIndexState(Math.ceil(data.uvi))})`}
+          placement="left"
+        >
           <Box
             className="day-uvindex"
             sx={{

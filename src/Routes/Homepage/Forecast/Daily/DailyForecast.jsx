@@ -59,7 +59,6 @@ const DailyForecast = ({
                       time={dayData.dt}
                       getTempUnit={getTempUnit}
                       language={language}
-                      timezone={dailyWeather?.timezone}
                     />
                   </Grid>
                 </Zoom>
