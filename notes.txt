@@ -4,36 +4,14 @@ React-router is installed
 
 i18-next, mui mui-icons are installed
 
-
-USE THE THREE DOTS AS LOADING INDICATOR UNTILL YOU FIGURE OUT HOW TO USE THE SKELETON
-run: npm uninstall react-loader-spinner
-
 ISSUES:
 CITY SEARCH IS LAGGY, CAN'T SEARCH IF THE LANGUAGE IS SET TO ARABIC
 
-
-14/7: 
-
-17/7:
-FIX ALL AutoComplete bugs/errors/warnings
-TRY REVISING THE LOGIC, MAKE THE NAME SEARCH BETTER
-
-19/7:
-TRY MAKING THE RESPONSIVE STYLES
-
-20/7:
-FINISH PREVIOUS PLANS
-MAKE THE LOADING SKELETON IN FORECAST PAGE
-
-
-TRY ADD A BOX-SHADOW TO THE NAVBAR
-0px 1px 1px 0px rgba(0,0,0,0.14),0px 1px 3px 0px rgba(0,0,0,0.12)
-
-
-
-CHANGE THE DAILY CARDS LAYOUT TO GRID
-
 MAKE AN ERROR PAGE FOR INTERNET ERRORS AND FOR FETCH ERRORS
 
-
-hsl(173deg 23% 80%)
+Next Steps: 
+.Finish the transaltion
+.Make the search better (city search) and the AutoComplete
+.Try make the loading skeleton
+.Make responsive styles
+.Make an error page if data is undefined (if data === undefined it will not stop loading)
