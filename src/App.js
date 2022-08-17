@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import "./Dist/App.css";
+import "./translation";
 import ThemeProvider from "@mui/system/ThemeProvider";
 import Box from "@mui/material/Box";
 import useMediaQuery from "@mui/material/useMediaQuery";

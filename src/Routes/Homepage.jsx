@@ -8,6 +8,8 @@ import {
 } from "../Api/requests";
 import Forecast from "./Homepage/Forecast";
 
+import Random from "../Components/Random";
+
 const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
   const [currentCityName, setCurrentCityName] = useState(String);
   const [coordinates, setCoordinates] = useState({});
@@ -96,7 +98,7 @@ const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
         temperature={temperature}
         language={language}
       />
-      {/* <Random /> */}
+      <Random />
     </Box>
   );
 };

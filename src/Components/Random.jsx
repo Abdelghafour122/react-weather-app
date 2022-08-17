@@ -9,6 +9,8 @@ import {
   getCities,
 } from "../Api/requests";
 
+import { useTranslation } from "react-i18next";
+
 // "lon": 16.3721,
 // "lat": 48.2085
 
@@ -38,7 +40,7 @@ const Random = () => {
     getInfo();
   }, []);
 
-  // console.log("first");
+  const { t } = useTranslation();
 
   return (
     <>
@@ -50,7 +52,9 @@ const Random = () => {
       <br />
       <pre>{JSON.stringify(location, null, 2)}</pre>; */}
 
-      <pre>{JSON.stringify(weather, null, 2)}</pre>
+      {/* <pre>{JSON.stringify(weather, null, 2)}</pre> */}
+
+      <p style={{ color: "white" }}> {t("App_title")} </p>
     </>
   );
 };
