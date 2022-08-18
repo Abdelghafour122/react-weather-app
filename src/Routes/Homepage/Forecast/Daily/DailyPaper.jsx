@@ -9,6 +9,8 @@ import OpacityIcon from "@mui/icons-material/Opacity";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import WbIncandescentRoundedIcon from "@mui/icons-material/WbIncandescentRounded";
 
+import { useTranslation } from "react-i18next";
+
 const DailyPaper = ({ data, time, getTempUnit, language }) => {
   const getUVIndexState = (uvIndexValue) => {
     if (uvIndexValue >= 1 && uvIndexValue <= 2) return "Low";
@@ -18,6 +20,9 @@ const DailyPaper = ({ data, time, getTempUnit, language }) => {
     else if (uvIndexValue >= 11) return "Extreme";
     else return;
   };
+
+  const { t } = useTranslation();
+
   return (
     <Paper
       variant="outlined"
@@ -66,7 +71,9 @@ const DailyPaper = ({ data, time, getTempUnit, language }) => {
         </Typography>
       </Box>
       <Typography component="p" variant="subtitle1" color="text.secondary">
-        {`Feels like: ${Math.floor(data.feels_like.day)}°${getTempUnit()}`}
+        {t("Forecast_Card.feels_like", {
+          feels_like_temp: `${Math.floor(data.feels_like.day)}`,
+        })}
       </Typography>
       <Box
         sx={{

@@ -11,25 +11,23 @@ import Homepage from "./Routes/Homepage";
 import lightThemeStyle from "./Themes/lightThemeStyle";
 import darkThemeStyle from "./Themes/darkThemeStyle";
 import i18next from "i18next";
-import { useTranslation } from "react-i18next";
 
 function App() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const [customTheme, setCustomTheme] = useState(
     prefersDarkMode ? darkThemeStyle : lightThemeStyle
   );
-  const { t } = useTranslation();
   const handleChangeTheme = useCallback(
     (choice) => {
-      choice === t("Navbar.Settings_Backdrop.Mode.system")
+      choice === "System"
         ? prefersDarkMode
           ? setCustomTheme(darkThemeStyle)
           : setCustomTheme(lightThemeStyle)
-        : choice === t("Navbar.Settings_Backdrop.Mode.dark")
+        : choice === "Dark"
         ? setCustomTheme(darkThemeStyle)
         : setCustomTheme(lightThemeStyle);
     },
-    [prefersDarkMode, t]
+    [prefersDarkMode]
   );
 
   useEffect(() => {

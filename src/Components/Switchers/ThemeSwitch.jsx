@@ -13,11 +13,25 @@ import { useTranslation } from "react-i18next";
 const ThemeSwitch = ({ handleChangeTheme }) => {
   const theme = localStorage.getItem("color-theme");
   const [mode, setMode] = useState(theme);
-  const handleChange = (e, mode) => {
-    if (mode !== null) {
-      setMode(mode);
-      handleChangeTheme(mode);
-      localStorage.setItem("color-theme", `${mode}`);
+
+  const handleChange = (buttonIndex) => {
+    switch (buttonIndex) {
+      case 0:
+        setMode(t("Navbar.Settings_Backdrop.Mode.system"));
+        handleChangeTheme("System");
+        localStorage.setItem("color-theme", `${"System"}`);
+        break;
+      case 1:
+        setMode(t("Navbar.Settings_Backdrop.Mode.dark"));
+        handleChangeTheme("Dark");
+        localStorage.setItem("color-theme", `${"Dark"}`);
+        break;
+      case 2:
+        setMode(t("Navbar.Settings_Backdrop.Mode.light"));
+        handleChangeTheme("Light");
+        localStorage.setItem("color-theme", `${"Light"}`);
+        break;
+      default:
     }
   };
 
@@ -64,7 +78,6 @@ const ThemeSwitch = ({ handleChangeTheme }) => {
       <ToggleButtonGroup
         exclusive
         value={mode}
-        onChange={handleChange}
         sx={{ width: "100%", justifyContent: "center" }}
       >
         {THEMES.map((theme, ind) => {
@@ -74,6 +87,7 @@ const ThemeSwitch = ({ handleChangeTheme }) => {
               value={theme.name}
               sx={{ flex: 1, gap: "5px" }}
               aria-label={`${theme.name}-mode`}
+              onClick={() => handleChange(ind)}
             >
               {theme.name}
               <theme.icon />

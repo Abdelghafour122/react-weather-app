@@ -9,11 +9,25 @@ import { useTranslation } from "react-i18next";
 const TemperatureSwitch = ({ handleChangeTemperature }) => {
   const temperature = localStorage.getItem("temp-unit");
   const [temp, setTemp] = useState(temperature);
-  const handleChange = (e, temp) => {
-    if (temp !== null) {
-      setTemp(temp);
-      handleChangeTemperature(temp);
-      localStorage.setItem("temp-unit", `${temp}`);
+
+  const handleChange = (buttonIndex) => {
+    switch (buttonIndex) {
+      case 0:
+        setTemp(t("Navbar.Settings_Backdrop.temperature.celcius"));
+        handleChangeTemperature("Celcius");
+        localStorage.setItem("temp-unit", `${"Celcius"}`);
+        break;
+      case 1:
+        setTemp(t("Navbar.Settings_Backdrop.temperature.fahrenheit"));
+        handleChangeTemperature("Fahrenheit");
+        localStorage.setItem("temp-unit", `${"Fahrenheit"}`);
+        break;
+      case 2:
+        setTemp(t("Navbar.Settings_Backdrop.temperature.kelvin"));
+        handleChangeTemperature("Kelvin");
+        localStorage.setItem("temp-unit", `${"Kelvin"}`);
+        break;
+      default:
     }
   };
 
@@ -51,7 +65,6 @@ const TemperatureSwitch = ({ handleChangeTemperature }) => {
       <ToggleButtonGroup
         exclusive
         value={temp}
-        onChange={handleChange}
         sx={{ width: "100%", justifyContent: "center" }}
       >
         {TEMPERATURES.map((temperature, ind) => (
@@ -60,6 +73,7 @@ const TemperatureSwitch = ({ handleChangeTemperature }) => {
             value={temperature}
             sx={{ flex: 1, gap: "5px" }}
             aria-label={`${temperature}`}
+            onClick={() => handleChange(ind)}
           >
             {temperature}
           </ToggleButton>
