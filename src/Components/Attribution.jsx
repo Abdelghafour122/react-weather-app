@@ -18,6 +18,7 @@ const Attribution = () => {
           width: "100%",
           padding: "5px 0",
           marginTop: "30px",
+          direction: "ltr",
         }}
       >
         Coded with &nbsp; <FavoriteIcon color="error" />

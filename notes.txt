@@ -10,8 +10,11 @@ CITY SEARCH IS LAGGY, CAN'T SEARCH IF THE LANGUAGE IS SET TO ARABIC
 MAKE AN ERROR PAGE FOR INTERNET ERRORS AND FOR FETCH ERRORS
 
 Next Steps: 
-.Finish the transaltion
 .Make the search better (city search) and the AutoComplete
 .Try make the loading skeleton
 .Make responsive styles
 .Make an error page if data is undefined (if data === undefined it will not stop loading)
+
+Fixed the themeswitch temporarily
+(IN ALL SWITCHERS):
+Use a index switcher instead of the name (the name changes but not the number)

@@ -5,30 +5,31 @@ import ThemeProvider from "@mui/system/ThemeProvider";
 import Box from "@mui/material/Box";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Attribution from "./Components/Attribution";
+import Random from "./Components/Random";
 import Homepage from "./Routes/Homepage";
 
 import lightThemeStyle from "./Themes/lightThemeStyle";
 import darkThemeStyle from "./Themes/darkThemeStyle";
 import i18next from "i18next";
-import Random from "./Components/Random";
+import { useTranslation } from "react-i18next";
 
 function App() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const [customTheme, setCustomTheme] = useState(
     prefersDarkMode ? darkThemeStyle : lightThemeStyle
   );
-
+  const { t } = useTranslation();
   const handleChangeTheme = useCallback(
     (choice) => {
-      choice === "System"
+      choice === t("Navbar.Settings_Backdrop.Mode.system")
         ? prefersDarkMode
           ? setCustomTheme(darkThemeStyle)
           : setCustomTheme(lightThemeStyle)
-        : choice === "Dark"
+        : choice === t("Navbar.Settings_Backdrop.Mode.dark")
         ? setCustomTheme(darkThemeStyle)
         : setCustomTheme(lightThemeStyle);
     },
-    [prefersDarkMode]
+    [prefersDarkMode, t]
   );
 
   useEffect(() => {
