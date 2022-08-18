@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ToggleButton from "@mui/material/ToggleButton";
 
-const TEMPERATURES = ["Celcius", "Fahrenheit", "Kelvin"];
+import { useTranslation } from "react-i18next";
 
 const TemperatureSwitch = ({ handleChangeTemperature }) => {
   const temperature = localStorage.getItem("temp-unit");
@@ -16,6 +16,15 @@ const TemperatureSwitch = ({ handleChangeTemperature }) => {
       localStorage.setItem("temp-unit", `${temp}`);
     }
   };
+
+  const { t } = useTranslation();
+
+  const TEMPERATURES = [
+    t("Navbar.Settings_Backdrop.temperature.celcius"),
+    t("Navbar.Settings_Backdrop.temperature.fahrenheit"),
+    t("Navbar.Settings_Backdrop.temperature.kelvin"),
+  ];
+
   return (
     <Box
       sx={{
@@ -31,9 +40,13 @@ const TemperatureSwitch = ({ handleChangeTemperature }) => {
         component="p"
         variant="body2"
         color="text.secondary"
-        sx={{ letterSpacing: "3px", fontWeight: 700 }}
+        sx={{
+          letterSpacing: "3px",
+          fontWeight: 700,
+          textTransform: "uppercase",
+        }}
       >
-        TEMPERATURE
+        {t("Navbar.Settings_Backdrop.temperature.title")}
       </Typography>
       <ToggleButtonGroup
         exclusive

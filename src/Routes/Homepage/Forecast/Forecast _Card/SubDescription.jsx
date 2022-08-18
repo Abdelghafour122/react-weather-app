@@ -1,12 +1,18 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { useTranslation } from "react-i18next";
 
 const SubDescription = ({ description, tempHigh, tempLow }) => {
+  const { t } = useTranslation();
   return (
     <Box className="sub-description">
       <Typography component="p" variant="p" color="text.primary">
-        {`${description}, the highest temperature will be ${tempHigh}°, and the lowest will be ${tempLow}°.`}
+        {t("Forecast_Card.weather_desc", {
+          weather_desc: description,
+          high_temp: tempHigh,
+          low_temp: tempLow,
+        })}
       </Typography>
     </Box>
   );

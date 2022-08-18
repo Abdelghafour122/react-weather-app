@@ -14,7 +14,7 @@ i18n
   .use(HttpApi)
   .init({
     debug: true,
-    fallbackLng: "en-GB",
+    fallbackLng: "en",
     detection: {
       order: ["localStorage", "cookie", "htmlTag", "path", "subdomain"],
       // stores in a cookie, delete later
@@ -23,7 +23,7 @@ i18n
     backend: {
       loadPath: process.env.PUBLIC_URL + "/Assets/{{lng}}/translation.json",
     },
-    react: { useSuspense: false },
+    // react: { useSuspense: false },
   });
 
 export default i18n;

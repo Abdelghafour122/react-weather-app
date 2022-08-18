@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import Typography from "@mui/material/Typography";
+import { useTranslation } from "react-i18next";
 
 const CurrentTime = ({ currentOffset, convertToTime, language }) => {
   const [localTime, setLocalTime] = useState(() =>
     convertToTime(currentOffset)
   );
+
+  const { t } = useTranslation();
 
   setInterval(() => {
     setLocalTime(() => convertToTime(currentOffset));
@@ -12,10 +15,11 @@ const CurrentTime = ({ currentOffset, convertToTime, language }) => {
 
   return (
     <Typography component="p" variant="p" color="text.secondary">
-      {`Current Local Time: 
-       ${localTime.toLocaleString(`${language}`, {
-         timeStyle: "short",
-       })}`}
+      {t("Forecast_Card.cur_time", {
+        current_time: localTime.toLocaleString(`${language}`, {
+          timeStyle: "short",
+        }),
+      })}
     </Typography>
   );
 };

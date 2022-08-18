@@ -10,18 +10,23 @@ const InfoBox = ({ unit, info, IconName }) => {
       sx={{
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between",
+        justifyContent: "flex-start",
+        gap: "10px",
         padding: "5px",
         backgroundColor: (theme) => theme.palette.custom.secondBgColor,
       }}
     >
-      {IconName && <IconName sx={{ fontSize: "3rem" }} />}
+      {IconName && <IconName sx={{ fontSize: "2.5rem" }} />}
       <Box className="text">
         <Typography
           component="p"
           variant="body1"
           color="text.secondary"
-          sx={{ fontWeight: 700, letterSpacing: "3px" }}
+          sx={{
+            fontWeight: 700,
+            textTransform: "uppercase",
+            wordBreak: "break-word",
+          }}
         >
           {unit}
         </Typography>

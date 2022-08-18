@@ -98,7 +98,7 @@ const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
         temperature={temperature}
         language={language}
       />
-      <Random />
+      {/* <Random /> */}
     </Box>
   );
 };

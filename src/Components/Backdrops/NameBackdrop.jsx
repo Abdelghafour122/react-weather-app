@@ -15,6 +15,8 @@ import SearchOffRoundedIcon from "@mui/icons-material/SearchOffRounded";
 import DefaultSnackbar from "../Snackbars/DefaultSnackbar";
 import { getCities } from "../../Api/requests";
 
+import { useTranslation } from "react-i18next";
+
 const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
   const [localCityName, setLocalCityName] = useState(String);
   const [openNote, setOpenNote] = useState(false);
@@ -69,6 +71,8 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
     handleCloseName();
   };
 
+  const { t } = useTranslation();
+
   return (
     <Backdrop
       sx={{
@@ -102,9 +106,13 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
             color="text.primary"
             fontWeight="700"
           >
-            Enter a valid city name
+            {t("Navbar.Search_Backdrop.Title.name")}
           </Typography>
-          <Tooltip title="Close" enterDelay={500} leaveDelay={200}>
+          <Tooltip
+            title={t("Navbar.Settings_Backdrop.Top.tooltip")}
+            enterDelay={500}
+            leaveDelay={200}
+          >
             <IconButton color="primary" onClick={handleCloseName}>
               <ClearIcon />
             </IconButton>
@@ -146,7 +154,11 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
                 <TextField
                   {...params}
                   placeholder="City name..."
-                  helperText={showHelperText ? "Type something" : ""}
+                  helperText={
+                    showHelperText
+                      ? t("Navbar.Search_Backdrop.Title.name_helper")
+                      : ""
+                  }
                   value={localCityName}
                   InputProps={{
                     ...params.InputProps,
@@ -178,7 +190,7 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
             disableElevation
             onClick={handleSubmit}
           >
-            Search
+            {t("Navbar.Search_Backdrop.Buttons.search")}
           </Button>
           <Button
             variant="contained"
@@ -187,7 +199,7 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
             disableElevation
             onClick={handleCancelSearch}
           >
-            Cancel
+            {t("Navbar.Search_Backdrop.Buttons.cancel")}
           </Button>
         </Box>
       </Box>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
@@ -25,6 +25,8 @@ import Temperature from "./Forecast/Forecast _Card/Temperature";
 import Description from "./Forecast/Forecast _Card/Description";
 import SubDescription from "./Forecast/Forecast _Card/SubDescription";
 
+import { useTranslation } from "react-i18next";
+
 const Forecast = ({ currentWeather, loading, temperature, language }) => {
   const countryName = new Intl.DisplayNames([`${language}`], {
     type: "region",
@@ -49,6 +51,7 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
     return `${num.toLocaleString("en-US", { minimumIntegerDigits: 2 })}`;
   };
 
+  const { t } = useTranslation();
   return (
     <Box
       bgcolor="custom.firstBgColor"
@@ -106,9 +109,13 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                         component="p"
                         variant="p"
                         color="text.primary"
-                        sx={{ fontWeight: 700, letterSpacing: "3px" }}
+                        sx={{
+                          fontWeight: 700,
+                          letterSpacing: "3px",
+                          textTransform: "uppercase",
+                        }}
                       >
-                        CURRENT WEATHER
+                        {t("Forecast_Card.cur_weather")}
                       </Typography>
                       <CurrentTime
                         currentOffset={currentWeather?.timezone}
@@ -165,13 +172,13 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                   />
                   <Grid
                     container
-                    spacing={3}
+                    spacing={1}
                     columns={{ xs: 2, sm: 9, lg: 18 }}
                     sx={{ width: "100%", alignSelf: "center" }}
                   >
                     <Grid item xs={2} sm={3} lg={3}>
                       <InfoBox
-                        unit={"WIND"}
+                        unit={t("Forecast_Card.weather_details.wind")}
                         IconName={AirIcon}
                         info={
                           <>
@@ -194,14 +201,14 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                     </Grid>
                     <Grid item xs={2} sm={3} lg={3}>
                       <InfoBox
-                        unit={"HUMIDITY"}
+                        unit={t("Forecast_Card.weather_details.humid")}
                         info={`${Math.floor(currentWeather?.main?.humidity)}%`}
                         IconName={OpacityIcon}
                       />
                     </Grid>
                     <Grid item xs={2} sm={3} lg={3}>
                       <InfoBox
-                        unit={"VISIBILITY"}
+                        unit={t("Forecast_Card.weather_details.visib")}
                         info={`${Math.floor(
                           currentWeather?.visibility / 1000
                         )}km`}
@@ -210,14 +217,14 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                     </Grid>
                     <Grid item xs={2} sm={3} lg={3}>
                       <InfoBox
-                        unit={"PRESSURE"}
+                        unit={t("Forecast_Card.weather_details.press")}
                         info={`${Math.floor(currentWeather?.main?.pressure)}mb`}
                         IconName={CompressIcon}
                       />
                     </Grid>
                     <Grid item xs={2} sm={3} lg={3}>
                       <InfoBox
-                        unit={"SUNRISE"}
+                        unit={t("Forecast_Card.weather_details.rise")}
                         info={`${formatNum(
                           convertToTime(
                             currentWeather?.timezone,
@@ -234,7 +241,7 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                     </Grid>
                     <Grid item xs={2} sm={3} lg={3}>
                       <InfoBox
-                        unit={"SUNSET"}
+                        unit={t("Forecast_Card.weather_details.set")}
                         info={`${formatNum(
                           convertToTime(
                             currentWeather?.timezone,
@@ -270,7 +277,7 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                   color="text.primary"
                   sx={{ fontWeight: 700 }}
                 >
-                  Hourly Forecast: (next 12 hours)
+                  {t("hourly")}
                 </Typography>
                 <HourlyForecast
                   locationLat={currentWeather?.coord?.lat}
@@ -298,7 +305,7 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                   color="text.primary"
                   sx={{ fontWeight: 700 }}
                 >
-                  Daily Forecast: (next 8 days)
+                  {t("daily")}
                 </Typography>
                 <DailyForecast
                   locationLat={currentWeather?.coord?.lat}

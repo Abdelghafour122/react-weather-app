@@ -4,12 +4,14 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
+import Tooltip from "@mui/material/Tooltip";
 import ClearIcon from "@mui/icons-material/Clear";
 
-import LanguageSwitch from "./Switchers/LanguageSwitch";
-import ThemeSwitch from "./Switchers/ThemeSwitch";
-import Tooltip from "@mui/material/Tooltip";
-import TemperatureSwitch from "./Switchers/TemperatureSwitch";
+import LanguageSwitch from "../../../Components/Switchers/LanguageSwitch";
+import ThemeSwitch from "../../../Components/Switchers/ThemeSwitch";
+import TemperatureSwitch from "../../../Components/Switchers/TemperatureSwitch";
+
+import { useTranslation } from "react-i18next";
 
 const SettingsDrawer = ({
   openDrawer,
@@ -18,6 +20,7 @@ const SettingsDrawer = ({
   handleChangeLanguage,
   handleChangeTemperature,
 }) => {
+  const { t } = useTranslation();
   return (
     <Drawer
       anchor="right"
@@ -44,9 +47,13 @@ const SettingsDrawer = ({
           }}
         >
           <Typography component="p" variant="p" fontWeight="700">
-            Settings
+            {t("Navbar.Settings_Backdrop.Top.title")}
           </Typography>
-          <Tooltip title="Close" enterDelay={500} leaveDelay={200}>
+          <Tooltip
+            title={t("Navbar.Settings_Backdrop.Top.tooltip")}
+            enterDelay={500}
+            leaveDelay={200}
+          >
             <IconButton
               onClick={() => {
                 setOpenDrawer(false);

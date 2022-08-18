@@ -5,8 +5,10 @@ import Tooltip from "@mui/material/Tooltip";
 import Box from "@mui/material/Box";
 import Container from "@mui/system/Container";
 import TuneRoundedIcon from "@mui/icons-material/TuneRounded";
-import Search from "../../Components/Search";
-import SettingsDrawer from "../../Components/SettingsDrawer";
+import Search from "./Navbar/Search";
+import SettingsDrawer from "./Navbar/SettingsDrawer";
+
+import { useTranslation } from "react-i18next";
 
 const Navbar = ({
   handleChangeTheme,
@@ -16,6 +18,7 @@ const Navbar = ({
   handleChangeCoordinates,
 }) => {
   const [openDrawer, setOpenDrawer] = useState(false);
+  const { t } = useTranslation();
   return (
     <Box
       component="nav"
@@ -39,13 +42,13 @@ const Navbar = ({
           color="text.primary"
           fontWeight="700"
         >
-          W-Weather
+          {t("Navbar.logo")}
         </Typography>
         <Search
           handleChangeCurrentName={handleChangeCurrentName}
           handleChangeCoordinates={handleChangeCoordinates}
         />
-        <Tooltip title="Settings" enterDelay={500} leaveDelay={200}>
+        <Tooltip title={t("Navbar.tooltip")} enterDelay={500} leaveDelay={200}>
           <IconButton
             onClick={() => {
               setOpenDrawer(!openDrawer);

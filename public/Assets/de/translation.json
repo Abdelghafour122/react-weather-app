@@ -48,10 +48,10 @@
     }
   },
   "Forecast_Card": {
-    "feels_like": "Fühlt sich an wie {{feels_like_temp}}",
+    "feels_like": "Fühlt sich an wie {{feels_like_temp}}°",
     "cur_weather": "Aktuelle Wetterlage",
-    "cur_time": "Aktuelle Ortszeit",
-    "weather_desc": "{{weather_desc}}, die höchste Temperatur wird {{high_temp}}, und die niedrigste wird {{low_temp}} sein.",
+    "cur_time": "Aktuelle Ortszeit: {{current_time}}",
+    "weather_desc": "{{weather_desc}}, die höchste Temperatur wird {{high_temp}}°, und die niedrigste wird {{low_temp}}° sein.",
     "weather_details": {
       "wind": "Wind",
       "humid": "Feuchtigkeit",

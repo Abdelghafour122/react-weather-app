@@ -12,6 +12,8 @@ import SearchOffRoundedIcon from "@mui/icons-material/SearchOffRounded";
 
 import DefaultSnackbar from "../Snackbars/DefaultSnackbar";
 
+import { useTranslation } from "react-i18next";
+
 const CoordinatesBackdrop = ({
   onOpen,
   handleCloseCoordinates,
@@ -52,6 +54,9 @@ const CoordinatesBackdrop = ({
     setLon(0);
     handleCloseCoordinates();
   };
+
+  const { t } = useTranslation();
+
   return (
     <Backdrop
       sx={{
@@ -85,9 +90,13 @@ const CoordinatesBackdrop = ({
             color="text.primary"
             fontWeight="700"
           >
-            Enter valid coordinates
+            {t("Navbar.Search_Backdrop.Title.coords")}
           </Typography>
-          <Tooltip title="Close" enterDelay={500} leaveDelay={200}>
+          <Tooltip
+            title={t("Navbar.Settings_Backdrop.Top.tooltip")}
+            enterDelay={500}
+            leaveDelay={200}
+          >
             <IconButton color="primary" onClick={handleCloseCoordinates}>
               <ClearIcon />
             </IconButton>
@@ -103,9 +112,9 @@ const CoordinatesBackdrop = ({
         >
           <TextField
             variant="outlined"
-            placeholder="Longtitude"
+            placeholder={t("Navbar.Search_Backdrop.Title.lon")}
             type="number"
-            helperText="Longtitude between -180 and 180"
+            helperText={t("Navbar.Search_Backdrop.Title.coords_helper.lon")}
             value={lon === 0 ? "" : lon}
             inputProps={{ min: -180, max: 180 }}
             onChange={(e) => setLon(Number(e.target.value))}
@@ -113,9 +122,9 @@ const CoordinatesBackdrop = ({
           />
           <TextField
             variant="outlined"
-            placeholder="Latitude"
+            placeholder={t("Navbar.Search_Backdrop.Title.lat")}
             type="number"
-            helperText="Latitude between -90 and 90"
+            helperText={t("Navbar.Search_Backdrop.Title.coords_helper.lat")}
             value={lat === 0 ? "" : lat}
             inputProps={{ min: -90, max: 90 }}
             onChange={(e) => setLat(Number(e.target.value))}
@@ -135,7 +144,7 @@ const CoordinatesBackdrop = ({
             onClick={handleSubmit}
             disableElevation
           >
-            Search
+            {t("Navbar.Search_Backdrop.Buttons.search")}
           </Button>
           <Button
             variant="contained"
@@ -144,7 +153,7 @@ const CoordinatesBackdrop = ({
             disableElevation
             onClick={handleCancelSearch}
           >
-            Cancel
+            {t("Navbar.Search_Backdrop.Buttons.cancel")}
           </Button>
         </Box>
       </Box>

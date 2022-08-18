@@ -5,6 +5,8 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ToggleButton from "@mui/material/ToggleButton";
 import Flag from "react-world-flags";
 
+import { useTranslation } from "react-i18next";
+
 const LANGUAGES = [
   { name: "English", flagCode: "gb", code: "en-GB" },
   { name: "Deutsch", flagCode: "de", code: "de-DE" },
@@ -22,6 +24,9 @@ const LanguageSwitch = ({ handleChangeLanguage }) => {
       localStorage.setItem("i18nextLng", `${lang}`);
     }
   };
+
+  const { t } = useTranslation();
+
   return (
     <Box
       sx={{
@@ -37,9 +42,13 @@ const LanguageSwitch = ({ handleChangeLanguage }) => {
         component="p"
         variant="body2"
         color="text.secondary"
-        sx={{ letterSpacing: "3px", fontWeight: 700 }}
+        sx={{
+          letterSpacing: "3px",
+          fontWeight: 700,
+          textTransform: "uppercase",
+        }}
       >
-        LANGUAGE
+        {t("Navbar.Settings_Backdrop.Language.title")}
       </Typography>
       <ToggleButtonGroup
         exclusive

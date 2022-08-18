@@ -8,17 +8,7 @@ import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import SettingsBrightnessRoundedIcon from "@mui/icons-material/SettingsBrightnessRounded";
 
-const THEMES = [
-  {
-    name: "System",
-    icon: SettingsBrightnessRoundedIcon,
-  },
-  {
-    name: "Dark",
-    icon: DarkModeRoundedIcon,
-  },
-  { name: "Light", icon: LightModeRoundedIcon },
-];
+import { useTranslation } from "react-i18next";
 
 const ThemeSwitch = ({ handleChangeTheme }) => {
   const theme = localStorage.getItem("color-theme");
@@ -30,6 +20,24 @@ const ThemeSwitch = ({ handleChangeTheme }) => {
       localStorage.setItem("color-theme", `${mode}`);
     }
   };
+
+  const { t } = useTranslation();
+
+  const THEMES = [
+    {
+      name: t("Navbar.Settings_Backdrop.Mode.system"),
+      icon: SettingsBrightnessRoundedIcon,
+    },
+    {
+      name: t("Navbar.Settings_Backdrop.Mode.dark"),
+      icon: DarkModeRoundedIcon,
+    },
+    {
+      name: t("Navbar.Settings_Backdrop.Mode.light"),
+      icon: LightModeRoundedIcon,
+    },
+  ];
+
   return (
     <Box
       sx={{
@@ -45,9 +53,13 @@ const ThemeSwitch = ({ handleChangeTheme }) => {
         component="p"
         variant="body2"
         color="text.secondary"
-        sx={{ letterSpacing: "3px", fontWeight: 700 }}
+        sx={{
+          letterSpacing: "3px",
+          fontWeight: 700,
+          textTransform: "uppercase",
+        }}
       >
-        MODE
+        {t("Navbar.Settings_Backdrop.Mode.title")}
       </Typography>
       <ToggleButtonGroup
         exclusive

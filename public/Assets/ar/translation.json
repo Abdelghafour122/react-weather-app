@@ -48,10 +48,10 @@
     }
   },
   "Forecast_Card": {
-    "feels_like": "{{feels_like_temp}} تشعر وكأنها",
+    "feels_like": "تشعر وكأنها {{feels_like_temp}}°",
     "cur_weather": "الطقس الحالي",
-    "cur_time": "الوقت المحلي",
-    "weather_desc": "{{weather_desc}}, اعلى درجة اليوم هي {{high_temp}}, و الادنى هي {{low_temp}}.",
+    "cur_time": "الوقت المحلي: {{current_time}}",
+    "weather_desc": "{{weather_desc}}, اعلى درجة اليوم هي {{high_temp}}°, و الادنى هي {{low_temp}}°.",
     "weather_details": {
       "wind": "الرياح",
       "humid": "الرطوبة",

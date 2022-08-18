@@ -1,22 +1,13 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import SearchMethod from "./SearchMethod";
+import SearchMethod from "../../../Components/SearchMethod";
 import LocationCityRoundedIcon from "@mui/icons-material/LocationCityRounded";
 import EditLocationAltRoundedIcon from "@mui/icons-material/EditLocationAltRounded";
-import NameBackdrop from "./Backdrops/NameBackdrop";
-import CoordinatesBackdrop from "./Backdrops/CoordinatesBackdrop";
+import NameBackdrop from "../../../Components/Backdrops/NameBackdrop";
+import CoordinatesBackdrop from "../../../Components/Backdrops/CoordinatesBackdrop";
 
-const SEARCH_METHODS = [
-  {
-    name: "City name",
-    icon: LocationCityRoundedIcon,
-  },
-  {
-    name: "Coordinates",
-    icon: EditLocationAltRoundedIcon,
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const Search = ({ handleChangeCurrentName, handleChangeCoordinates }) => {
   const [openNameBackdrop, setOpenNameBackdrop] = useState(false);
@@ -36,6 +27,18 @@ const Search = ({ handleChangeCurrentName, handleChangeCoordinates }) => {
     setOpenCoordinatesBackdrop(true);
   };
 
+  const { t } = useTranslation();
+  const SEARCH_METHODS = [
+    {
+      name: t("Navbar.Buttons.name"),
+      icon: LocationCityRoundedIcon,
+    },
+    {
+      name: t("Navbar.Buttons.coords"),
+      icon: EditLocationAltRoundedIcon,
+    },
+  ];
+
   return (
     <Box
       sx={{
@@ -46,7 +49,7 @@ const Search = ({ handleChangeCurrentName, handleChangeCoordinates }) => {
       }}
     >
       <Typography component="p" variant="p" color="text.primary">
-        Search By:&nbsp;
+        {t("Navbar.search")} &nbsp;
       </Typography>
       <Box
         sx={{ display: "flex", justifyContent: "space-between", gap: "10px" }}
@@ -58,7 +61,7 @@ const Search = ({ handleChangeCurrentName, handleChangeCoordinates }) => {
               name={method.name}
               Icon={method.icon}
               openBackdrop={
-                method.name === "Coordinates"
+                method.name === t("Navbar.Buttons.coords")
                   ? handleToggleCoordinates
                   : handleToggleName
               }
