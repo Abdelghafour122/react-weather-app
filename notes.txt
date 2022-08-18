@@ -14,7 +14,3 @@ Next Steps:
 .Try make the loading skeleton
 .Make responsive styles
 .Make an error page if data is undefined (if data === undefined it will not stop loading)
-
-Fixed the themeswitch temporarily
-(IN ALL SWITCHERS):
-Use a index switcher instead of the name (the name changes but not the number)

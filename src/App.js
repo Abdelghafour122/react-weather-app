@@ -54,9 +54,9 @@ function App() {
   useEffect(() => {
     i18next.changeLanguage(language);
     document.documentElement.lang = language;
-    language === "ar"
-      ? (document.body.dir = "rtl")
-      : (document.body.dir = "ltr");
+    // language === "ar"
+    //   ? (document.body.dir = "rtl")
+    //   : (document.body.dir = "ltr");
   }, [language]);
 
   return (

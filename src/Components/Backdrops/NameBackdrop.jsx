@@ -48,12 +48,14 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
           (resultData) =>
             resultData &&
             setCitiesList([
-              ...resultData.data.map((opt) => ({
-                id: opt.id,
-                city: opt.city,
-                region: opt.region,
-                country: opt.country,
-              })),
+              ...resultData.data
+                .filter((opt) => opt.type === "CITY")
+                .map((opt) => ({
+                  id: opt.id,
+                  city: opt.city,
+                  region: opt.region,
+                  country: opt.country,
+                })),
             ])
         )
         .then(() => setLoading(false))
@@ -65,6 +67,8 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
   const handleSubmit = async () => {
     handleChangeCurrentName(localCityName);
     setOpenNote(true);
+    handleCloseName();
+    setLocalCityName("");
   };
 
   const handleCancelSearch = () => {
@@ -159,7 +163,7 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
                       ? t("Navbar.Search_Backdrop.Title.name_helper")
                       : ""
                   }
-                  value={localCityName}
+                  // value={localCityName}
                   InputProps={{
                     ...params.InputProps,
                     endAdornment: (
@@ -167,7 +171,6 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
                         {loading ? (
                           <CircularProgress color="inherit" size={20} />
                         ) : null}
-                        {/* <CircularProgress color="inherit" size={20} /> */}
                         {params.InputProps.endAdornment}
                       </React.Fragment>
                     ),

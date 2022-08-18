@@ -11,7 +11,6 @@ const LANGUAGES = [
   { name: "English", flagCode: "gb", code: "en-GB" },
   { name: "Deutsch", flagCode: "de", code: "de-DE" },
   { name: "Français", flagCode: "fr", code: "fr-FR" },
-  { name: "العربية", flagCode: "sa", code: "ar-SA" },
 ];
 
 const LanguageSwitch = ({ handleChangeLanguage }) => {
