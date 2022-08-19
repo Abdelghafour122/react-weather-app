@@ -15,7 +15,6 @@ import CompressIcon from "@mui/icons-material/Compress";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
 import WbTwilightIcon from "@mui/icons-material/WbTwilight";
-import { ThreeDots } from "react-loader-spinner";
 
 import InfoBox from "./Forecast/Forecast _Card/InfoBox";
 import CurrentTime from "./Forecast/Forecast _Card/CurrentTime";
@@ -180,14 +179,17 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                   >
                     <Grid item xs={2} sm={3} lg={3}>
                       <InfoBox
-                        unit={t("Forecast_Card.weather_details.wind")}
+                        unit={t("Forecast_Card.weather_details.wind.name")}
                         IconName={AirIcon}
                         info={
                           <>
                             {`${Math.ceil(currentWeather?.wind?.speed)}km/h`}{" "}
                             &nbsp; &nbsp;
                             <Tooltip
-                              title={`Wind Angle ${currentWeather?.wind?.deg}°`}
+                              title={t(
+                                "Forecast_Card.weather_details.wind.tooltip",
+                                { wind_angle: currentWeather?.wind?.deg }
+                              )}
                               enterDelay={500}
                               leaveDelay={200}
                             >

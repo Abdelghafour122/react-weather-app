@@ -53,7 +53,10 @@
     "cur_time": "Heure locale actuelle: {{current_time}}",
     "weather_desc": "{{weather_desc}}, la température la plus élevée sera de {{high_temp}}°, et la plus basse de {{low_temp}}°.",
     "weather_details": {
-      "wind": "Le vent",
+      "wind": {
+        "name": "Le vent",
+        "tooltip": "Angle du vent {{wind_angle}}°"
+      },
       "humid": "L'humidité",
       "visib": "La visibilité",
       "press": "La pression",

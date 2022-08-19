@@ -53,7 +53,10 @@
     "cur_time": "Current local time: {{current_time}}",
     "weather_desc": "{{weather_desc}}, the highest temperature will be {{high_temp}}°, and the lowest will be {{low_temp}}°.",
     "weather_details": {
-      "wind": "wind",
+      "wind": {
+        "name": "wind",
+        "tooltip": "Wind angle {{wind_angle}}°"
+      },
       "humid": "humidity",
       "visib": "visibility",
       "press": "pressure",

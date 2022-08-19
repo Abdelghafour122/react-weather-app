@@ -110,7 +110,7 @@ const DailyPaper = ({ data, time, getTempUnit, language }) => {
           </Box>
         </Tooltip>
         <Tooltip
-          title={t("Forecast_Card.weather_details.wind")}
+          title={t("Forecast_Card.weather_details.wind.name")}
           placement="left"
         >
           <Box

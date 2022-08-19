@@ -53,7 +53,10 @@
     "cur_time": "Aktuelle Ortszeit: {{current_time}}",
     "weather_desc": "{{weather_desc}}, die höchste Temperatur wird {{high_temp}}°, und die niedrigste wird {{low_temp}}° sein.",
     "weather_details": {
-      "wind": "Wind",
+      "wind": {
+        "name": "wind",
+        "tooltip": "Windwinkel {{wind_angle}}°"
+      },
       "humid": "Feuchtigkeit",
       "visib": "Sichtbarkeit",
       "press": "Druck",
