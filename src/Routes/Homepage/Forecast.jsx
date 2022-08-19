@@ -6,6 +6,8 @@ import CardContent from "@mui/material/CardContent";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Tooltip from "@mui/material/Tooltip";
+import Skeleton from "@mui/material/Skeleton";
+
 import NavigationIcon from "@mui/icons-material/Navigation";
 import OpacityIcon from "@mui/icons-material/Opacity";
 import AirIcon from "@mui/icons-material/Air";
@@ -67,7 +69,7 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
         }}
       >
         {loading ? (
-          <ThreeDots width="100" />
+          <Skeleton variant="rounded" width="100%" height={450} />
         ) : (
           <React.Fragment>
             <Box

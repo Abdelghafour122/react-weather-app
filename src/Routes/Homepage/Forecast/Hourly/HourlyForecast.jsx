@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Zoom from "@mui/material/Zoom";
-import { ThreeDots } from "react-loader-spinner";
 
 import { getWeatherInfoHourly } from "../../../../Api/requests";
 import HourlyPaper from "./HourlyPaper";
+import Loading from "./Loading";
 
 const HourlyForecast = ({
   locationLat,
@@ -39,7 +39,7 @@ const HourlyForecast = ({
   return (
     <Box className="hourly-forecast" sx={{ width: "100%" }}>
       {loading === true ? (
-        <ThreeDots width="100" />
+        <Loading />
       ) : (
         <React.Fragment>
           <Grid

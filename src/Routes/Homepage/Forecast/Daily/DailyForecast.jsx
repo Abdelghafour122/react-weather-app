@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import { ThreeDots } from "react-loader-spinner";
+import Zoom from "@mui/material/Zoom";
 import { getWeatherInfoDaily } from "../../../../Api/requests";
 import DailyPaper from "./DailyPaper";
-import { Zoom } from "@mui/material";
+import Loading from "./Loading";
 const DailyForecast = ({
   locationLat,
   locationLon,
@@ -37,7 +37,7 @@ const DailyForecast = ({
   return (
     <Box className="daily-forecast" sx={{ width: "100%" }}>
       {loading === true ? (
-        <ThreeDots width="100" />
+        <Loading />
       ) : (
         <React.Fragment>
           <Grid
