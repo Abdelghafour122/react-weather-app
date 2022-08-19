@@ -67,7 +67,6 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
   const handleSubmit = async () => {
     handleChangeCurrentName(localCityName);
     setOpenNote(true);
-    handleCloseName();
     setLocalCityName("");
   };
 
@@ -211,7 +210,7 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
           handleClose={handleClose}
           open={openNote}
           severity={"success"}
-          text={"Request issued. "}
+          text={t("success_note")}
         />
       }
     </Backdrop>

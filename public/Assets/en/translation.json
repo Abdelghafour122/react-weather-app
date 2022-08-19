@@ -58,9 +58,17 @@
       "visib": "visibility",
       "press": "pressure",
       "rise": "sunrise",
-      "set": "sunset"
+      "set": "sunset",
+      "UVI": {
+        "low": "Low",
+        "moderate": "Moderate",
+        "high": "High",
+        "vhigh": "Very High",
+        "extreme": "Extreme"
+      }
     }
   },
   "hourly": "Hourly Forecast: (next 12 hours)",
-  "daily": "Daily Forecast: (next 8 days)"
+  "daily": "Daily Forecast: (next 8 days)",
+  "success_note": "Request issued."
 }

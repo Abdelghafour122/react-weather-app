@@ -58,9 +58,17 @@
       "visib": "Sichtbarkeit",
       "press": "Druck",
       "rise": "Sonnenaufgang",
-      "set": "Sonnenuntergang"
+      "set": "Sonnenuntergang",
+      "UVI": {
+        "low": "Niedrig",
+        "moderate": "Mittel",
+        "high": "Hoch",
+        "vhigh": "Sehr hoch",
+        "extreme": "Extrem"
+      }
     }
   },
   "hourly": "Stündliche Vorhersage: (nächste 12 Stunden)",
-  "daily": "Tagesvorhersage: (nächste 8 Tage)"
+  "daily": "Tagesvorhersage: (nächste 8 Tage)",
+  "success_note": "Anfrage ausgestellt."
 }

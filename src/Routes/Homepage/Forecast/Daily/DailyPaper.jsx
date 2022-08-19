@@ -13,11 +13,16 @@ import { useTranslation } from "react-i18next";
 
 const DailyPaper = ({ data, time, getTempUnit, language }) => {
   const getUVIndexState = (uvIndexValue) => {
-    if (uvIndexValue >= 1 && uvIndexValue <= 2) return "Low";
-    else if (uvIndexValue >= 3 && uvIndexValue <= 5) return "Moderate";
-    else if (uvIndexValue >= 6 && uvIndexValue <= 7) return "High";
-    else if (uvIndexValue >= 7 && uvIndexValue <= 10) return "Very High";
-    else if (uvIndexValue >= 11) return "Extreme";
+    if (uvIndexValue >= 1 && uvIndexValue <= 2)
+      return t("Forecast_Card.weather_details.UVI.low");
+    else if (uvIndexValue >= 3 && uvIndexValue <= 5)
+      return t("Forecast_Card.weather_details.UVI.moderate");
+    else if (uvIndexValue >= 6 && uvIndexValue <= 7)
+      return t("Forecast_Card.weather_details.UVI.high");
+    else if (uvIndexValue >= 7 && uvIndexValue <= 10)
+      return t("Forecast_Card.weather_details.UVI.vhigh");
+    else if (uvIndexValue >= 11)
+      return t("Forecast_Card.weather_details.UVI.extreme");
     else return;
   };
 
@@ -85,7 +90,10 @@ const DailyPaper = ({ data, time, getTempUnit, language }) => {
           marginTop: "15px",
         }}
       >
-        <Tooltip title="Humidity" placement="left">
+        <Tooltip
+          title={t("Forecast_Card.weather_details.humid")}
+          placement="left"
+        >
           <Box
             className="day-humidity"
             sx={{
@@ -101,7 +109,10 @@ const DailyPaper = ({ data, time, getTempUnit, language }) => {
             </Typography>
           </Box>
         </Tooltip>
-        <Tooltip title="Wind" placement="left">
+        <Tooltip
+          title={t("Forecast_Card.weather_details.wind")}
+          placement="left"
+        >
           <Box
             className="day-wind"
             sx={{
