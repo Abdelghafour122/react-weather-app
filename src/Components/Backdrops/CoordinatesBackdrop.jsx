@@ -41,15 +41,12 @@ const CoordinatesBackdrop = ({
     checkValidCoordinates();
   }, [lon, lat, checkValidCoordinates]);
 
-  // FIX THIS FUNC, THE INFO SACKBAR MUST APPEAR IF lat === lon === 0
-  // REQUEST VALID && SUCCESS SNACKBAR
   const handleSubmit = () => {
     setOpenNote(true);
     handleChangeCoordinates(localCoordinates);
   };
 
   const handleCancelSearch = () => {
-    setLocalCoordinates({});
     setLat(0);
     setLon(0);
     handleCloseCoordinates();

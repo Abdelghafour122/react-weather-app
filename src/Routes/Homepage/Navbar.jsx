@@ -16,6 +16,7 @@ const Navbar = ({
   handleChangeTemperature,
   handleChangeCurrentName,
   handleChangeCoordinates,
+  handleChangeCurrentCountryCode,
 }) => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const { t } = useTranslation();
@@ -47,6 +48,7 @@ const Navbar = ({
         <Search
           handleChangeCurrentName={handleChangeCurrentName}
           handleChangeCoordinates={handleChangeCoordinates}
+          handleChangeCurrentCountryCode={handleChangeCurrentCountryCode}
         />
         <Tooltip title={t("Navbar.tooltip")} enterDelay={500} leaveDelay={200}>
           <IconButton

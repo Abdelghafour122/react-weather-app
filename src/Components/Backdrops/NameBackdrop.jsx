@@ -17,13 +17,20 @@ import { getCities } from "../../Api/requests";
 
 import { useTranslation } from "react-i18next";
 
-const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
+const NameBackdrop = ({
+  onOpen,
+  handleCloseName,
+  handleChangeCurrentName,
+  handleChangeCurrentCountryCode,
+}) => {
   const [localCityName, setLocalCityName] = useState(String);
+  const [localCountryCode, setLocalCountryCode] = useState(String);
   const [openNote, setOpenNote] = useState(false);
   const [openList, setOpenList] = useState(false);
   const [loading, setLoading] = useState(false);
   const [citiesList, setCitiesList] = useState([]);
   const [showHelperText, setShowHelperText] = useState(true);
+  const [validLocationInfo, setValidLocationInfo] = useState(false);
 
   const handleClose = () => {
     setOpenNote(false);
@@ -44,9 +51,9 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
       setLoading(true);
       setShowHelperText(false);
       handleFetchCities(localCityName)
-        .then(
-          (resultData) =>
-            resultData &&
+        .then((resultData) => {
+          console.log(resultData);
+          resultData !== undefined &&
             setCitiesList([
               ...resultData.data
                 .filter((opt) => opt.type === "CITY")
@@ -55,9 +62,10 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
                   city: opt.city,
                   region: opt.region,
                   country: opt.country,
+                  countryCode: opt.countryCode,
                 })),
-            ])
-        )
+            ]);
+        })
         .then(() => setLoading(false))
         .catch(() => console.log("resultData was undefined"));
     }
@@ -67,12 +75,22 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
   const handleSubmit = async () => {
     handleChangeCurrentName(localCityName);
     setOpenNote(true);
-    setLocalCityName("");
+    handleChangeCurrentCountryCode(localCountryCode);
+    // setLocalCityName("");
   };
 
   const handleCancelSearch = () => {
     handleCloseName();
   };
+
+  useEffect(() => {
+    localCityName === "" ||
+    localCityName === undefined ||
+    localCountryCode === "" ||
+    localCountryCode === undefined
+      ? setValidLocationInfo(false)
+      : setValidLocationInfo(true);
+  }, [localCityName, localCountryCode]);
 
   const { t } = useTranslation();
 
@@ -127,18 +145,30 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
             onOpen={() => setOpenList(true)}
             onClose={() => setOpenList(false)}
             options={citiesList}
-            isOptionEqualToValue={(option, value) => option.city === value.city}
-            getOptionLabel={(option) => option.city}
-            // inputValue={localCityName === "" ? "" : localCityName}
-            inputValue={localCityName}
+            isOptionEqualToValue={(option, value) =>
+              option?.city?.toString().toLowerCase() ===
+              value?.city?.toString().toLowerCase()
+            }
+            getOptionLabel={(option) => `${option.city}, ${option.country}`}
+            // getOptionLabel={(option) => option.id.toString()}
+
+            // inputValue={localCityName}
             onInputChange={(event, newInputValue) => {
-              console.log(newInputValue);
+              // // console.log("input val: ", newInputValue);
+              // // console.log("event", event);
               setLocalCityName(newInputValue);
+            }}
+            autoComplete={true}
+            clearOnBlur={true}
+            onChange={(ev, val, re, de) => {
+              setLocalCityName(val?.city);
+              setLocalCountryCode(val?.countryCode);
             }}
             renderOption={(props, option) => {
               return (
                 <Box
                   component="li"
+                  key={option.id}
                   sx={{
                     display: "flex",
                     width: "100%",
@@ -146,9 +176,7 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
                   }}
                   {...props}
                 >
-                  {option.city}, {option.region}
-                  &nbsp; &nbsp;
-                  {option.country}
+                  {option.city}, {option.region}, {option.country}
                 </Box>
               );
             }}
@@ -162,7 +190,7 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
                       ? t("Navbar.Search_Backdrop.Title.name_helper")
                       : ""
                   }
-                  // value={localCityName}
+                  value={localCityName}
                   InputProps={{
                     ...params.InputProps,
                     endAdornment: (
@@ -187,7 +215,7 @@ const NameBackdrop = ({ onOpen, handleCloseName, handleChangeCurrentName }) => {
         >
           <Button
             variant="contained"
-            disabled={localCityName === "" ? true : false}
+            disabled={validLocationInfo === false ? true : false}
             endIcon={<SearchRoundedIcon />}
             disableElevation
             onClick={handleSubmit}

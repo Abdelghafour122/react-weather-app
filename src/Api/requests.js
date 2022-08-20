@@ -24,10 +24,15 @@ const determineTemp = (value) => {
 };
 
 // FETCH BY NAME
-export const getWeatherInfoName = (cityName, lang = "en", unit = "celcius") => {
+export const getWeatherInfoName = (
+  cityName,
+  countryCode,
+  lang = "en",
+  unit = "celcius"
+) => {
   const result = axios
     .get(
-      `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${
+      `https://api.openweathermap.org/data/2.5/weather?q=${cityName},${countryCode}&appid=${
         process.env.REACT_APP_API_KEY
       }&units=${determineTemp(unit)}&lang=${lang}`,
       { headers: { accept: "Application/json" } }
@@ -80,7 +85,9 @@ export const getWeatherInfoDaily = (
 export const getCurrentLocationInfo = () => {
   const result = axios
     .get("http://ip-api.com/json/", { headers: { accept: "Application/json" } })
-    .then((res) => res?.data?.city)
+    .then((res) => {
+      return { city: res?.data?.city, countryCode: res?.data?.countryCode };
+    })
     .catch((err) => console.log(err));
   return result;
 };

@@ -12,6 +12,7 @@ import Random from "../Components/Random";
 
 const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
   const [currentCityName, setCurrentCityName] = useState(String);
+  const [currentCountryCode, setCurrentCountryCode] = useState(String);
   const [coordinates, setCoordinates] = useState({});
   const [currentWeather, setCurrentWeather] = useState(Object);
   const [temperature, setTemperature] = useState("Celcius");
@@ -36,6 +37,11 @@ const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
     setCurrentCityName(newCityName);
   };
 
+  // CHANGE COUNTRY CODE
+  const handleChangeCurrentCountryCode = (newCountryCode) => {
+    setCurrentCountryCode(newCountryCode);
+  };
+
   // CHANGE COORDINATES
   const handleChangeCoordinates = (newCoordinates) => {
     setCoordinates(newCoordinates);
@@ -43,21 +49,29 @@ const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
 
   // FETCHING THE CURRENT LOCATION ON PAGELOAD, WITHOUT SEARCHING
   useEffect(() => {
-    const getCurrentCity = async () => {
-      handleChangeCurrentName(await getCurrentLocationInfo());
+    const getCurrentCityInfo = async () => {
+      await getCurrentLocationInfo().then((res) => {
+        handleChangeCurrentName(res.city);
+        handleChangeCurrentCountryCode(res.countryCode);
+      });
     };
-    getCurrentCity();
+    getCurrentCityInfo();
   }, []);
 
   // GET WEATHER WHENEVER THE NAME CHANGES, ALSO ON PAGELOAD WITH CURRENT LOCATION
   useEffect(() => {
     const getWeatherByName = async () => {
       setCurrentWeather(
-        await getWeatherInfoName(currentCityName, language, temperature)
+        await getWeatherInfoName(
+          currentCityName,
+          currentCountryCode,
+          language,
+          temperature
+        )
       );
     };
-    currentCityName && getWeatherByName();
-  }, [currentCityName, language, temperature]);
+    currentCityName && currentCountryCode && getWeatherByName();
+  }, [currentCityName, currentCountryCode, language, temperature]);
 
   // GET WEATHER WHENEVER THE COORDINATES CHANGE
   useEffect(() => {
@@ -72,7 +86,7 @@ const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
   // SET LOADING TO TRUE WHENEVER THE COORDINATES OR NAME CHANGE
   useEffect(() => {
     setLoading(true);
-  }, [coordinates, currentCityName]);
+  }, [coordinates, currentCityName, currentCountryCode]);
 
   // SET LOADING TO FALSE WHENEVER THE CURRENTWEATHER CHANGES "WHEN THE FETCH IS FINISHED"
   useEffect(() => {
@@ -90,6 +104,7 @@ const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
         handleChangeLanguage={handleChangeLanguage}
         handleChangeTemperature={handleChangeTemperature}
         handleChangeCurrentName={handleChangeCurrentName}
+        handleChangeCurrentCountryCode={handleChangeCurrentCountryCode}
         handleChangeCoordinates={handleChangeCoordinates}
       />
       <Forecast
@@ -98,7 +113,6 @@ const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
         temperature={temperature}
         language={language}
       />
-      {/* <Random /> */}
     </Box>
   );
 };

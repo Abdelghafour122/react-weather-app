@@ -9,7 +9,11 @@ import CoordinatesBackdrop from "../../../Components/Backdrops/CoordinatesBackdr
 
 import { useTranslation } from "react-i18next";
 
-const Search = ({ handleChangeCurrentName, handleChangeCoordinates }) => {
+const Search = ({
+  handleChangeCurrentName,
+  handleChangeCoordinates,
+  handleChangeCurrentCountryCode,
+}) => {
   const [openNameBackdrop, setOpenNameBackdrop] = useState(false);
   const [openCoordinatesBackdrop, setOpenCoordinatesBackdrop] = useState(false);
 
@@ -74,6 +78,7 @@ const Search = ({ handleChangeCurrentName, handleChangeCoordinates }) => {
         handleCloseName={handleCloseName}
         onOpen={openNameBackdrop}
         handleChangeCurrentName={handleChangeCurrentName}
+        handleChangeCurrentCountryCode={handleChangeCurrentCountryCode}
       />
       <CoordinatesBackdrop
         handleCloseCoordinates={handleCloseCoordinates}

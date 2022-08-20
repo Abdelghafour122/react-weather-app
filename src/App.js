@@ -5,7 +5,6 @@ import ThemeProvider from "@mui/system/ThemeProvider";
 import Box from "@mui/material/Box";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Attribution from "./Components/Attribution";
-import Random from "./Components/Random";
 import Homepage from "./Routes/Homepage";
 
 import lightThemeStyle from "./Themes/lightThemeStyle";
@@ -54,9 +53,6 @@ function App() {
   useEffect(() => {
     i18next.changeLanguage(language);
     document.documentElement.lang = language;
-    // language === "ar"
-    //   ? (document.body.dir = "rtl")
-    //   : (document.body.dir = "ltr");
   }, [language]);
 
   return (
