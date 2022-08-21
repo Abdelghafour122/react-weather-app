@@ -150,12 +150,7 @@ const NameBackdrop = ({
               value?.city?.toString().toLowerCase()
             }
             getOptionLabel={(option) => `${option.city}, ${option.country}`}
-            // getOptionLabel={(option) => option.id.toString()}
-
-            // inputValue={localCityName}
             onInputChange={(event, newInputValue) => {
-              // // console.log("input val: ", newInputValue);
-              // // console.log("event", event);
               setLocalCityName(newInputValue);
             }}
             autoComplete={true}

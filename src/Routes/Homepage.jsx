@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Navbar from "./Homepage/Navbar";
 import {
@@ -17,6 +18,8 @@ const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
   const [currentWeather, setCurrentWeather] = useState(Object);
   const [temperature, setTemperature] = useState("Celcius");
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   // CHANGE TEMPERATURE FUNCTION
   const handleChangeTemperature = (temperature) => {
@@ -90,10 +93,12 @@ const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
 
   // SET LOADING TO FALSE WHENEVER THE CURRENTWEATHER CHANGES "WHEN THE FETCH IS FINISHED"
   useEffect(() => {
-    // MAKE AN ERROR RESPONSE
-    if (currentWeather === undefined) return;
+    if (currentWeather === undefined) {
+      navigate("/error");
+      return;
+    }
     if (Object.keys(currentWeather).length !== 0) setLoading(false);
-  }, [currentWeather]);
+  }, [currentWeather, navigate]);
 
   console.log(currentWeather);
 

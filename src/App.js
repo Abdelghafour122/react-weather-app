@@ -1,4 +1,5 @@
 import { Suspense, useCallback, useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import "./Dist/App.css";
 import "./translation";
 import ThemeProvider from "@mui/system/ThemeProvider";
@@ -10,6 +11,7 @@ import Homepage from "./Routes/Homepage";
 import lightThemeStyle from "./Themes/lightThemeStyle";
 import darkThemeStyle from "./Themes/darkThemeStyle";
 import i18next from "i18next";
+import ErrorPage from "./Routes/ErrorPage";
 
 function App() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -64,12 +66,22 @@ function App() {
           bgcolor="custom.firstBgColor"
           sx={{ minHeight: "100vh" }}
         >
-          <Homepage
-            handleChangeTheme={handleChangeTheme}
-            handleChangeLanguage={handleChangeLanguage}
-            language={language}
-          />
-          <Attribution />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Homepage
+                    handleChangeTheme={handleChangeTheme}
+                    handleChangeLanguage={handleChangeLanguage}
+                    language={language}
+                  />
+                  <Attribution />
+                </>
+              }
+            ></Route>
+            <Route path="/error" element={<ErrorPage />}></Route>
+          </Routes>
         </Box>
       </Suspense>
     </ThemeProvider>
