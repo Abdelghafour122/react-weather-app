@@ -73,5 +73,10 @@
   },
   "hourly": "Stündliche Vorhersage: (nächste 12 Stunden)",
   "daily": "Tagesvorhersage: (nächste 8 Tage)",
-  "success_note": "Anfrage ausgestellt."
+  "success_note": "Anfrage ausgestellt.",
+  "Error_page": {
+    "title": "Ein Fehler ist aufgetreten",
+    "message": "Die Vorhersage für den gewünschten Ort ist nicht verfügbar. Sie können versuchen, erneut mit Koordinaten zu suchen, um ein genaueres Ergebnis zu erhalten.",
+    "button": "Zurück zur Startseite"
+  }
 }

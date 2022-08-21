@@ -73,5 +73,10 @@
   },
   "hourly": "Prévisions horaires : (prochaines 12 heures)",
   "daily": "Prévisions quotidiennes : (8 prochains jours)",
-  "success_note": "Requête émise."
+  "success_note": "Requête émise.",
+  "Error_page": {
+    "title": "Une erreur s'est produite",
+    "message": "Les prévisions pour l'emplacement que vous souhaitez ne sont pas disponibles. Vous pouvez essayer de rechercher à nouveau en utilisant les coordonnées pour un résultat plus précis.",
+    "button": "Retour à l'accueil"
+  }
 }

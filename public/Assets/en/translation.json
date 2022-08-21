@@ -73,5 +73,10 @@
   },
   "hourly": "Hourly Forecast: (next 12 hours)",
   "daily": "Daily Forecast: (next 8 days)",
-  "success_note": "Request issued."
+  "success_note": "Request issued.",
+  "Error_page": {
+    "title": "An error has occured",
+    "message": "The forecast for the requested location is unavailable. You can try searching again using coordinates for a more accurate result.",
+    "button": "Back to homepage"
+  }
 }
