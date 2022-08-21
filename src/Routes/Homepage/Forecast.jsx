@@ -266,7 +266,6 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                   </Grid>
                 </CardContent>
               </Card>
-              {/* BREAK THIS INTO A COMPONENT */}
               <Box
                 sx={{
                   width: "100%",

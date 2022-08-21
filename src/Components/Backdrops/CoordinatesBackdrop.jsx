@@ -23,7 +23,7 @@ const CoordinatesBackdrop = ({
   const [lon, setLon] = useState(0);
   const [localCoordinates, setLocalCoordinates] = useState({ lon, lat });
   const [validCoords, setValidCoords] = useState(false);
-  const [openNote, setOpenNote] = useState(false); //false
+  const [openNote, setOpenNote] = useState(false);
 
   const handleClose = () => {
     setOpenNote(false);
@@ -34,7 +34,6 @@ const CoordinatesBackdrop = ({
       ? setValidCoords(false)
       : setValidCoords(true);
     setLocalCoordinates({ lon, lat });
-    console.log({ lon, lat });
   }, [lon, lat]);
 
   useEffect(() => {

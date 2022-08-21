@@ -18,6 +18,8 @@ function App() {
   const [customTheme, setCustomTheme] = useState(
     prefersDarkMode ? darkThemeStyle : lightThemeStyle
   );
+
+  // CHANGE COLOR THEME FUNCTION
   const handleChangeTheme = useCallback(
     (choice) => {
       choice === "System"

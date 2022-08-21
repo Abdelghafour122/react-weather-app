@@ -2,14 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Navbar from "./Homepage/Navbar";
+import Forecast from "./Homepage/Forecast";
 import {
   getCurrentLocationInfo,
   getWeatherInfoCoor,
   getWeatherInfoName,
 } from "../Api/requests";
-import Forecast from "./Homepage/Forecast";
-
-import Random from "../Components/Random";
 
 const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
   const [currentCityName, setCurrentCityName] = useState(String);
@@ -99,8 +97,6 @@ const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
     }
     if (Object.keys(currentWeather).length !== 0) setLoading(false);
   }, [currentWeather, navigate]);
-
-  console.log(currentWeather);
 
   return (
     <Box component="div" className="homepage">

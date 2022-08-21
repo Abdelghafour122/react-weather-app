@@ -35,7 +35,7 @@ const NameBackdrop = ({
   const handleClose = () => {
     setOpenNote(false);
   };
-  // FIX THE FETCH, AVOID THE UNDEFINED rawData BUG
+
   const handleFetchCities = useCallback(async (cityName) => {
     const rawData = await getCities(
       cityName,
@@ -52,7 +52,6 @@ const NameBackdrop = ({
       setShowHelperText(false);
       handleFetchCities(localCityName)
         .then((resultData) => {
-          console.log(resultData);
           resultData !== undefined &&
             setCitiesList([
               ...resultData.data
@@ -71,12 +70,10 @@ const NameBackdrop = ({
     }
   }, [localCityName, handleFetchCities]);
 
-  // MAKE THE SUCCESS SNACKBAR APPEAR IF THE REQUEST IS VALID
   const handleSubmit = async () => {
     handleChangeCurrentName(localCityName);
     setOpenNote(true);
     handleChangeCurrentCountryCode(localCountryCode);
-    // setLocalCityName("");
   };
 
   const handleCancelSearch = () => {
@@ -111,6 +108,7 @@ const NameBackdrop = ({
           display: "flex",
           flexDirection: "column",
           gap: "30px",
+          margin: "0 20px",
         }}
       >
         <Box

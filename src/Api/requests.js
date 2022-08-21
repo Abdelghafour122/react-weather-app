@@ -51,7 +51,6 @@ export const getWeatherInfoHourly = (
 ) => {
   const result = axios
     .get(
-      //1fa9ff4126d95b8db54f3897a208e91c
       `https://api.openweathermap.org/data/2.5/onecall?&lat=${lat}&lon=${lon}&exclude=current,minutely,daily,alerts&appid=${
         process.env.REACT_APP_API_KEY
       }&units=${determineTemp(unit)}&lang=${lang}`,
@@ -92,6 +91,7 @@ export const getCurrentLocationInfo = () => {
   return result;
 };
 
+// FETCH CITIES FOR NAME SEARCH
 export const getCities = (value, lang) => {
   let langCode = lang.split("").splice(0, 2).join("");
   const result = axios
@@ -107,7 +107,7 @@ export const getCities = (value, lang) => {
       }
     )
     .then((res) => res.data)
-    .catch(() => console.log("The city name is invalid"));
+    .catch((err) => console.log(err));
 
   return result;
 };
