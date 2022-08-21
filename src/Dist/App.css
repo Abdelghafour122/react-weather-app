@@ -7,8 +7,10 @@ body {
     font-size: 1.5rem;
   }
 }
-.homepage .nav p {
-  display: none;
+@media (max-width: 35.9375rem) {
+  .homepage .nav p {
+    display: none;
+  }
 }
 @media (max-width: 35.9375rem) {
   .homepage .forecast .forecast-card .dates {

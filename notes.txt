@@ -4,5 +4,8 @@ React-router is installed
 
 i18-next, mui mui-icons are installed
 
-Next Steps: 
-.Make responsive styles
+Next Steps: (finished)
+.Clean the app
+.Depoloy & try
+.Make the repository, add pics, write description
+.Remove the api keys

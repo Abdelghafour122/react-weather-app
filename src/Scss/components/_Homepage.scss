@@ -6,7 +6,9 @@
       }
     }
     & p {
-      display: none;
+      @include breakpoint-down(small) {
+        display: none;
+      }
     }
   }
   & .forecast {
