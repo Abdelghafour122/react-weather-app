@@ -1,2 +1,56 @@
 .homepage {
+  & .nav {
+    & h4 {
+      @include breakpoint-down(small) {
+        font-size: 1.5rem;
+      }
+    }
+    & p {
+      display: none;
+    }
+  }
+  & .forecast {
+    & .forecast-card {
+      & .dates {
+        @include breakpoint-down(small) {
+          flex-direction: column;
+        }
+      }
+      & .main-info {
+        @include breakpoint-down(small) {
+          flex-direction: column;
+          align-items: center;
+          align-self: center;
+          gap: 15px;
+        }
+        & .temp-holder {
+          @include breakpoint-down(small) {
+            align-items: center;
+          }
+          & img {
+            @include breakpoint-down(small) {
+              height: 120px;
+            }
+          }
+          & p {
+            @include breakpoint-down(small) {
+              font-size: 4.375rem;
+            }
+          }
+        }
+        & .description-holder {
+          @include breakpoint-down(small) {
+            text-align: center;
+          }
+        }
+      }
+      & .sub-description {
+        & p {
+          @include breakpoint-down(small) {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
 }

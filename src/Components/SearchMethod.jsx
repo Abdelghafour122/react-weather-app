@@ -6,6 +6,7 @@ const SearchMethod = ({ name, Icon, openBackdrop }) => {
     <Button
       variant="contained"
       color="info"
+      size="small"
       endIcon={<Icon />}
       disableElevation
       onClick={openBackdrop}

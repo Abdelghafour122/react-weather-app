@@ -1,3 +1,50 @@
 body {
   margin: 0;
+}
+
+@media (max-width: 35.9375rem) {
+  .homepage .nav h4 {
+    font-size: 1.5rem;
+  }
+}
+.homepage .nav p {
+  display: none;
+}
+@media (max-width: 35.9375rem) {
+  .homepage .forecast .forecast-card .dates {
+    flex-direction: column;
+  }
+}
+@media (max-width: 35.9375rem) {
+  .homepage .forecast .forecast-card .main-info {
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    gap: 15px;
+  }
+}
+@media (max-width: 35.9375rem) {
+  .homepage .forecast .forecast-card .main-info .temp-holder {
+    align-items: center;
+  }
+}
+@media (max-width: 35.9375rem) {
+  .homepage .forecast .forecast-card .main-info .temp-holder img {
+    height: 120px;
+  }
+}
+@media (max-width: 35.9375rem) {
+  .homepage .forecast .forecast-card .main-info .temp-holder p {
+    font-size: 4.375rem;
+  }
+}
+@media (max-width: 35.9375rem) {
+  .homepage .forecast .forecast-card .main-info .description-holder {
+    text-align: center;
+  }
+}
+@media (max-width: 35.9375rem) {
+  .homepage .forecast .forecast-card .sub-description p {
+    text-align: center;
+  }
 }/*# sourceMappingURL=App.css.map */

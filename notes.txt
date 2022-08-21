@@ -4,12 +4,5 @@ React-router is installed
 
 i18-next, mui mui-icons are installed
 
-ISSUES:
-CITY SEARCH IS LAGGY
-
-MAKE AN ERROR PAGE FOR INTERNET ERRORS AND FOR FETCH ERRORS
-
 Next Steps: 
-.Make the search better (city search) and the AutoComplete
 .Make responsive styles
-.Make an error page if data is undefined (if data === undefined it will not stop loading)

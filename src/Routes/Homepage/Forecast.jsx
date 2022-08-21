@@ -55,6 +55,7 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
   const { t } = useTranslation();
   return (
     <Box
+      className="forecast"
       bgcolor="custom.firstBgColor"
       sx={{ minHeight: "100vh", marginTop: "30px" }}
     >
@@ -82,6 +83,7 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
               }}
             >
               <Card
+                className="forecast-card"
                 sx={{
                   width: "100%",
                   backgroundColor: (theme) =>
@@ -98,6 +100,7 @@ const Forecast = ({ currentWeather, loading, temperature, language }) => {
                   }}
                 >
                   <Box
+                    className="dates"
                     sx={{
                       display: "flex",
                       alignItems: "flex-start",

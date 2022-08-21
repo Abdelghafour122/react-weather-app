@@ -71,6 +71,7 @@ const CoordinatesBackdrop = ({
           display: "flex",
           flexDirection: "column",
           gap: "30px",
+          margin: "0 20px",
         }}
       >
         <Box

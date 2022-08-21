@@ -22,13 +22,12 @@ const Navbar = ({
   const { t } = useTranslation();
   return (
     <Box
-      component="nav"
+      className="nav"
       bgcolor="custom.secondBgColor"
       sx={{
-        padding: "15px",
+        padding: "15px 0",
       }}
     >
-      {/* TRY USING AN APP-BAR */}
       <Container
         maxWidth="xl"
         sx={{
