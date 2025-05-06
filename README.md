@@ -15,7 +15,7 @@ The user should be able to:
 ## Usage:
 
 1. Clone the repository.
-2. Run `npm install` to install the dependencies.
+2. Run `pnpm install` to install the dependencies.
 3. Get an API-KEY from [OpenWeatherMap.org](https://openweathermap.org/).
 4. Make a `.env` file in the src folder & use your API-KEY as an environment variable.
 

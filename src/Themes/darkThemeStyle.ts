@@ -33,5 +33,7 @@ const darkTheme = createTheme({
     },
   },
 });
+const a = 10;
 
+export { a };
 export default darkTheme;

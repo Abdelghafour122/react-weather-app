@@ -17,7 +17,7 @@ export const getWeatherInfoCoor = (coords, lang = "en", unit = "celcius") => {
 };
 
 // DETERMINE TEMPERATURE
-const determineTemp = (value) => {
+const determineTemp = (value: String) => {
   if (value.toString().toLowerCase() === "fahrenheit") return "imperial";
   else if (value.toString().toLowerCase() === "celcius") return "metric";
   else return "default";
@@ -80,16 +80,24 @@ export const getWeatherInfoDaily = (
   return result;
 };
 
-// ON PAGE-LOAD POSITION FETCH
-export const getCurrentLocationInfo = () => {
-  const result = axios
-    .get("http://ip-api.com/json/", { headers: { accept: "Application/json" } })
-    .then((res) => {
-      return { city: res?.data?.city, countryCode: res?.data?.countryCode };
-    })
-    .catch((err) => console.log(err));
-  return result;
+export type LocationType = {
+  city: string;
+  countryCode: string;
 };
+
+// ON PAGE-LOAD POSITION FETCH
+export const getCurrentLocationInfo =
+  async (): Promise<void | LocationType> => {
+    const result = await axios
+      .get("http://ip-api.com/json/", {
+        headers: { accept: "Application/json" },
+      })
+      .then((res) => {
+        return { city: res?.data?.city, countryCode: res?.data?.countryCode };
+      })
+      .catch((err) => console.log(err));
+    return result;
+  };
 
 // FETCH CITIES FOR NAME SEARCH
 export const getCities = (value, lang) => {

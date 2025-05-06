@@ -9,37 +9,51 @@ import {
   getWeatherInfoName,
 } from "../Api/requests";
 
-const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
+type Props = {
+  handleChangeTheme: string;
+  handleChangeLanguage: string;
+  language: string;
+};
+
+type TemperatureType = "Celcius" | "Fahrenheit" | "Kelvin";
+
+const Homepage = ({
+  handleChangeLanguage,
+  handleChangeTheme,
+  language,
+}: Props) => {
   const [currentCityName, setCurrentCityName] = useState(String);
   const [currentCountryCode, setCurrentCountryCode] = useState(String);
   const [coordinates, setCoordinates] = useState({});
   const [currentWeather, setCurrentWeather] = useState(Object);
-  const [temperature, setTemperature] = useState("Celcius");
+  const [temperature, setTemperature] = useState<TemperatureType>("Celcius");
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
   // CHANGE TEMPERATURE FUNCTION
-  const handleChangeTemperature = (temperature) => {
+  const handleChangeTemperature = (temperature: TemperatureType) => {
     setTemperature(temperature);
   };
 
   // SETTING THE TEMPERATURE UNIT FROM LOCALSTORAGE ON PAGE LOAD IF IT EXISTS
   // ELSE WE SAVE THE DEFAULT "Celcius"
   useEffect(() => {
-    const localTemperature = localStorage.getItem("temp-unit");
+    const localTemperature = localStorage.getItem(
+      "temp-unit"
+    ) as TemperatureType;
     localTemperature === null
       ? localStorage.setItem("temp-unit", "Celcius")
       : handleChangeTemperature(localTemperature);
   }, []);
 
   // CHANGE COUNTRY NAME
-  const handleChangeCurrentName = (newCityName) => {
+  const handleChangeCurrentName = (newCityName: string) => {
     setCurrentCityName(newCityName);
   };
 
   // CHANGE COUNTRY CODE
-  const handleChangeCurrentCountryCode = (newCountryCode) => {
+  const handleChangeCurrentCountryCode = (newCountryCode: string) => {
     setCurrentCountryCode(newCountryCode);
   };
 
@@ -51,9 +65,11 @@ const Homepage = ({ handleChangeTheme, handleChangeLanguage, language }) => {
   // FETCHING THE CURRENT LOCATION ON PAGELOAD, WITHOUT SEARCHING
   useEffect(() => {
     const getCurrentCityInfo = async () => {
+      // const res = await getCurrentLocationInfo().then((res)=> console.log(res) );
+
       await getCurrentLocationInfo().then((res) => {
-        handleChangeCurrentName(res.city);
-        handleChangeCurrentCountryCode(res.countryCode);
+        handleChangeCurrentName(res.city as string);
+        handleChangeCurrentCountryCode(res.countryCode as string);
       });
     };
     getCurrentCityInfo();

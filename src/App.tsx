@@ -8,10 +8,12 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Attribution from "./Components/Attribution";
 import Homepage from "./Routes/Homepage";
 
-import lightThemeStyle from "./Themes/lightThemeStyle";
-import darkThemeStyle from "./Themes/darkThemeStyle";
+import lightThemeStyle from "@/Themes/lightThemeStyle";
+import darkThemeStyle from "@/Themes/darkThemeStyle";
+
 import i18next from "i18next";
 import ErrorPage from "./Routes/ErrorPage";
+import React from "react";
 
 function App() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
