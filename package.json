@@ -54,6 +54,7 @@
     ]
   },
   "devDependencies": {
-    "@mui/types": "^7.2.18"
+    "@mui/types": "^7.2.18",
+    "@types/node": "^22.15.13"
   }
 }
